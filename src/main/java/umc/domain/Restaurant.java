@@ -3,6 +3,7 @@ package umc.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -55,4 +56,8 @@ public class Restaurant extends BaseEntity {
 	@OneToMany(mappedBy = "restaurant")
 	@Builder.Default
 	private List<Mission> missionList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "restaurant", orphanRemoval = true, cascade = CascadeType.REMOVE)
+	@Builder.Default
+	private List<RestaurantTime> restaurantTimeList = new ArrayList<>();
 }

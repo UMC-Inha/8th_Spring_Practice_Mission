@@ -8,6 +8,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -80,7 +81,11 @@ public class User {
 	private Boolean replyAlarmAccepted;
 	private Boolean inquiryAlarmAccepted;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.REMOVE)
+	@Builder.Default
+	private List<Alarm> alarmList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.REMOVE)
 	@Builder.Default
 	private List<UserTerm> userTermList = new ArrayList<>();
 

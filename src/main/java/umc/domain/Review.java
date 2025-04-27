@@ -40,7 +40,7 @@ public class Review extends BaseEntity {
 	@JoinColumn(name = "restaurant_id")
 	private Restaurant restaurant;
 
-	@OneToOne(mappedBy = "review", cascade = CascadeType.REMOVE)
+	@OneToOne(mappedBy = "review", orphanRemoval = true, cascade = CascadeType.REMOVE)
 	private Reply reply;
 
 	@Column(nullable = false)
