@@ -15,10 +15,10 @@ public class InquiryAnswer {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name ="title", nullable = false)
+    @Column(name ="title", nullable = false, length = 100)
     private String title;
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

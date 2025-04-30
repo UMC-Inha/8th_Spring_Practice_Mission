@@ -22,22 +22,22 @@ public class Store extends BaseTimeEntity {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "store_name", nullable = false)
+    @Column(name = "store_name", nullable = false, length = 50)
     private String storeName;
 
-    @Column(name = "store_info", nullable = false)
+    @Column(name = "store_info", nullable = false, columnDefinition = "TEXT")
     private String storeInfo;
 
-    @Column(name = "state", nullable = false)
+    @Column(name = "state", nullable = false, length = 20)
     private String state;
 
-    @Column(name = "address_line1", nullable = false)
+    @Column(name = "address_line1", nullable = false, length = 100)
     private String addressLine1;
 
-    @Column(name = "address_line2", nullable = false)
+    @Column(name = "address_line2", nullable = false, length = 100)
     private String addressLine2;
 
-    @Column(name = "location", nullable = false)
+    @Column(name = "location", nullable = false, length = 20)
     private String location;
 
     @Builder.Default

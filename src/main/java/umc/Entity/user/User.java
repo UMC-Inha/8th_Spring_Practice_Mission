@@ -17,19 +17,18 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "user")
 @Builder
-
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true, length = 50)
     private String email;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true, length = 30)
     private String name;
 
-    @Column(name = "pw", nullable = false)
+    @Column(name = "pw", nullable = false, length = 100)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -46,7 +45,7 @@ public class User extends BaseTimeEntity {
     private Integer point = 0;
 
     @Builder.Default
-    @Column(name = "phone_num")
+    @Column(name = "phone_num", nullable = false, length = 20)
     private String phoneNum = " ";
 
     @Builder.Default
