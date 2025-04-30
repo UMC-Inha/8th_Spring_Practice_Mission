@@ -1,9 +1,9 @@
-package umc.domain.mission;
+package umc.Entity.mission;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.domain.BaseTimeEntity;
-import umc.domain.store.Store;
+import umc.Entity.BaseTimeEntity;
+import umc.Entity.store.Store;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package umc.domain.inquiry;
+package umc.Entity.inquiry;
 
 
 import jakarta.persistence.*;

@@ -1,13 +1,12 @@
-package umc.domain.mission;
+package umc.Entity.mission;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import umc.domain.BaseTimeEntity;
-import umc.domain.category.Category;
-import umc.domain.user.User;
+import umc.Entity.BaseTimeEntity;
+import umc.Entity.user.User;
 
 @Entity
 @Builder
@@ -16,7 +15,7 @@ import umc.domain.user.User;
 @Table(name = "user_mission")
 public class UserMission extends BaseTimeEntity {
     @EmbeddedId
-    private UserMissionId id;
+    private UserMissionPK id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId("userId")                       // id.storeId 컬럼과 매핑

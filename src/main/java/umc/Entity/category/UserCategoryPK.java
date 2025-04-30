@@ -1,8 +1,7 @@
-package umc.domain.category;
+package umc.Entity.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,10 +14,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class StoreCategoryId implements Serializable {
+public class UserCategoryPK implements Serializable {
 
-    @Column(name = "store_id")
-    private Long storeId;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "category_id")
     private Long categoryId;

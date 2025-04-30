@@ -1,4 +1,4 @@
-package umc.domain.store;
+package umc.Entity.store;
 
 
 import jakarta.persistence.*;

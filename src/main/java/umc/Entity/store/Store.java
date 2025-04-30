@@ -1,11 +1,11 @@
-package umc.domain.store;
+package umc.Entity.store;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.domain.BaseTimeEntity;
-import umc.domain.category.StoreCategory;
-import umc.domain.mission.Mission;
-import umc.domain.review.Review;
+import umc.Entity.BaseTimeEntity;
+import umc.Entity.category.StoreCategory;
+import umc.Entity.mission.Mission;
+import umc.Entity.review.Review;
 
 import java.util.HashSet;
 import java.util.Set;

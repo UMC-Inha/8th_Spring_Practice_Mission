@@ -1,12 +1,12 @@
-package umc.domain.user;
+package umc.Entity.user;
 
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.domain.BaseTimeEntity;
-import umc.domain.category.UserCategory;
-import umc.domain.mission.UserMission;
-import umc.domain.review.Review;
+import umc.Entity.BaseTimeEntity;
+import umc.Entity.category.UserCategory;
+import umc.Entity.mission.UserMission;
+import umc.Entity.review.Review;
 
 import java.util.HashSet;
 import java.util.Set;

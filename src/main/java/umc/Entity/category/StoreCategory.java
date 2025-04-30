@@ -1,8 +1,8 @@
-package umc.domain.category;
+package umc.Entity.category;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.domain.store.Store;
+import umc.Entity.store.Store;
 
 @Entity
 @Getter
@@ -13,7 +13,7 @@ import umc.domain.store.Store;
 public class StoreCategory {
 
     @EmbeddedId
-    private StoreCategoryId id;
+    private StoreCategoryPK id;
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

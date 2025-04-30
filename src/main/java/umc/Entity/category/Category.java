@@ -1,4 +1,4 @@
-package umc.domain.category;
+package umc.Entity.category;
 
 import jakarta.persistence.*;
 import lombok.*;

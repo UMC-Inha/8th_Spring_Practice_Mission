@@ -1,4 +1,4 @@
-package umc.domain.review;
+package umc.Entity.review;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package umc.domain.user;
+package umc.Entity.user;
 
 import lombok.Getter;
 

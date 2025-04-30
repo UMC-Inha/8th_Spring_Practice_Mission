@@ -1,4 +1,4 @@
-package umc.domain.category;
+package umc.Entity.mission;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -14,11 +14,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class UserCategoryId implements Serializable {
+public class UserMissionPK implements Serializable {
 
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "category_id")
-    private Long categoryId;
+    @Column(name = "mission_id")
+    private Long missionId;
 }

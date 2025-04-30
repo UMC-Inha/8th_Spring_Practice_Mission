@@ -1,4 +1,4 @@
-package umc.domain;
+package umc.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
