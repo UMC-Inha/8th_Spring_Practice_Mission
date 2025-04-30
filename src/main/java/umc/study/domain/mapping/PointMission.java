@@ -27,8 +27,4 @@ public class PointMission extends BaseTime {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "point_id")
     private Point point;
-
-
-
-
 }

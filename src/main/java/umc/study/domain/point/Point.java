@@ -3,6 +3,8 @@ package umc.study.domain.point;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.study.domain.BaseTime;
+import umc.study.domain.enums.PointStatus;
+import umc.study.domain.enums.PointType;
 
 @Entity
 @Getter
@@ -17,7 +19,4 @@ public class Point extends BaseTime {
 
     @Column(nullable = false)
     private int point;
-
-
-
 }
