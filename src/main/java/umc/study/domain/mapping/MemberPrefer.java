@@ -1,7 +1,9 @@
-package umc.study.domain;
+package umc.study.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.study.domain.FoodType;
+import umc.study.domain.Member;
 import umc.study.domain.common.BaseEntity;
 
 @Entity
@@ -9,17 +11,18 @@ import umc.study.domain.common.BaseEntity;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ReviewPicture extends BaseEntity {
+public class MemberPrefer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "review_id", nullable = false)
-    private Review review;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
-    @Column(length = 30)
-    private String url;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id")
+    private FoodType foodType;
 
 }

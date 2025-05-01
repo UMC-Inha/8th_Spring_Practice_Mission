@@ -1,34 +1,43 @@
 package umc.study.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import umc.study.domain.common.BaseEntity;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Store {
+public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 지역id, 음식종류 id
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id", nullable = false)
+    private Region region;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "food_type_id", nullable = false)
+    private FoodType foodType;
+
+    @Column(length = 10)
     private String name;
 
+    @Column(length = 10)
     private String address;
 
     private Float score;
 
-    private Float latitude; //한국이라 가정하고 위치 범위 조정
+    @Column(length = 10)
+    private Float latitude;
 
+    @Column(length = 10)
     private Float longitude;
 
+    @Column(length = 12)
     private String contact;
 
 }
