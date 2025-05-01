@@ -30,6 +30,7 @@ public class Inquiry {
     @Column(name = "answer_state", nullable = false)
     private Boolean answerState = false;
 
+    @Builder.Default
     @OneToMany(mappedBy = "inquiry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InquiryAnswer> inquiryAnswers = new ArrayList<>();
 }

@@ -23,6 +23,7 @@ public class Category {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
+    @Builder.Default
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StoreCategory> storeCategories = new ArrayList<>();
 
