@@ -4,7 +4,9 @@ package umc.Entity.inquiry;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,11 +27,9 @@ public class Inquiry {
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Builder.Default
     @Column(name = "answer_state", nullable = false)
     private Boolean answerState = false;
 
-    @Builder.Default
     @OneToMany(mappedBy = "inquiry", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<InquiryAnswer> inquiryAnswers = new HashSet<>();
+    private List<InquiryAnswer> inquiryAnswers = new ArrayList<>();
 }

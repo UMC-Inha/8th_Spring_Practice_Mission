@@ -7,7 +7,9 @@ import umc.Entity.category.StoreCategory;
 import umc.Entity.mission.Mission;
 import umc.Entity.review.Review;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -40,19 +42,15 @@ public class Store extends BaseTimeEntity {
     @Column(name = "location", nullable = false, length = 20)
     private String location;
 
-    @Builder.Default
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<StoreCategory> storeCategories = new HashSet<>();
+    private List<StoreCategory> storeCategories = new ArrayList<>();
 
-    @Builder.Default
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<StoreImage> storeImages = new HashSet<>();
+    private List<StoreImage> storeImages = new ArrayList<>();
 
-    @Builder.Default
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Mission> missions = new HashSet<>();
+    private List<Mission> missions = new ArrayList<>();
 
-    @Builder.Default
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Review> reviews = new HashSet<>();
+    private List<Review> reviews = new ArrayList<>();
 }

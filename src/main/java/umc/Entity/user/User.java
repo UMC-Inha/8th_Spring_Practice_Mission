@@ -8,7 +8,9 @@ import umc.Entity.category.UserCategory;
 import umc.Entity.mission.UserMission;
 import umc.Entity.review.Review;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -52,15 +54,12 @@ public class User extends BaseTimeEntity {
     @Column(name = "phone_auth", nullable = false)
     private Boolean phoneAuth = false;
 
-    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserCategory> userCategories = new HashSet<>();
+    private List<UserCategory> userCategories = new ArrayList<>();
 
-    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserMission> userMissions = new HashSet<>();
 
-    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Review> reviews = new HashSet<>();
+    private List<Review> reviews = new ArrayList<>();
 }
