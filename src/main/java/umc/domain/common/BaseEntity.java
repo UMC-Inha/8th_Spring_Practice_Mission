@@ -22,4 +22,18 @@ public abstract class BaseEntity {
 
 	@LastModifiedDate
 	private LocalDateTime updatedAt;
+
+	private LocalDateTime deletedAt;
+
+	public void softDelete(LocalDateTime deletedAt) {
+		this.deletedAt = deletedAt;
+	}
+
+	public void undoSoftDelete(){
+		this.deletedAt = null;
+	}
+
+	public boolean isSoftDeleted() {
+		return deletedAt != null;
+	}
 }

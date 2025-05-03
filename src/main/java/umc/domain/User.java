@@ -36,6 +36,8 @@ import umc.domain.mapping.UserTerm;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 public class User {
 
 	@Id
