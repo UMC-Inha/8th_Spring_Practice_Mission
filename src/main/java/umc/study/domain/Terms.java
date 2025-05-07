@@ -17,6 +17,7 @@ public class Terms extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "terms_id")
     private Long id;
 
     @Column(length = 10)
@@ -29,6 +30,7 @@ public class Terms extends BaseEntity {
     private Boolean isEssential;
 
     @OneToMany(mappedBy = "terms", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<MemberTerms> memberTermsList = new ArrayList<>();
 
 }
