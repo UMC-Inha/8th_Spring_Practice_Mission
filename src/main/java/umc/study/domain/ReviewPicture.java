@@ -13,6 +13,7 @@ public class ReviewPicture extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_picture_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

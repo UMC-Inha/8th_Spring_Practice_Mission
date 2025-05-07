@@ -2,6 +2,7 @@ package umc.study.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 import umc.study.domain.common.BaseEntity;
 import umc.study.domain.enums.InquiryStatus;
 import umc.study.domain.enums.InquiryType;
@@ -11,9 +12,11 @@ import umc.study.domain.enums.InquiryType;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@DynamicInsert
 public class Inquiry extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inquiry_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

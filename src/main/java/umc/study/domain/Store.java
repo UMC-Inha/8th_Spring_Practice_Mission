@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.study.domain.common.BaseEntity;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Builder
@@ -13,6 +15,7 @@ public class Store extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "store_id")
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -29,13 +32,13 @@ public class Store extends BaseEntity {
     @Column(length = 10)
     private String address;
 
-    private Float score;
+    private BigDecimal score;
 
     @Column(length = 10)
-    private Float latitude;
+    private Double latitude;
 
     @Column(length = 10)
-    private Float longitude;
+    private Double longitude;
 
     @Column(length = 12)
     private String contact;
