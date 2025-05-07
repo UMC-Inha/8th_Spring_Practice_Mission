@@ -1,28 +1,24 @@
-package umc.Entity.store;
-
+package umc.entity.review;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Entity
+@Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(name="store_image")
-public class StoreImage {
+@Entity
+@Table(name = "review_image")
+public class ReviewImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+    @JoinColumn(name = "review_id", nullable = false)
+    private Review review;
 
-    @Column(name = "store_image_url", nullable = false)
+    @Column(name = "review_image_url", nullable = false)
     private String imageUrl;
-
 }

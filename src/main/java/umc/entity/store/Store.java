@@ -1,16 +1,14 @@
-package umc.Entity.store;
+package umc.entity.store;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.Entity.BaseTimeEntity;
-import umc.Entity.category.StoreCategory;
-import umc.Entity.mission.Mission;
-import umc.Entity.review.Review;
+import umc.entity.BaseTimeEntity;
+import umc.entity.category.StoreCategory;
+import umc.entity.mission.Mission;
+import umc.entity.review.Review;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter

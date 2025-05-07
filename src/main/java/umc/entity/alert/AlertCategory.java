@@ -1,4 +1,4 @@
-package umc.Entity.alert;
+package umc.entity.alert;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,10 +1,10 @@
-package umc.Entity.review;
+package umc.entity.review;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.Entity.BaseTimeEntity;
-import umc.Entity.store.Store;
-import umc.Entity.user.User;
+import umc.entity.BaseTimeEntity;
+import umc.entity.store.Store;
+import umc.entity.user.User;
 
 import java.util.HashSet;
 import java.util.Set;

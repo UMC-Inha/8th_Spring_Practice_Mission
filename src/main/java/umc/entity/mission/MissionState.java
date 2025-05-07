@@ -1,4 +1,4 @@
-package umc.Entity.mission;
+package umc.entity.mission;
 
 import lombok.Getter;
 

@@ -1,9 +1,9 @@
-package umc.Entity.alert;
+package umc.entity.alert;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.Entity.BaseTimeEntity;
-import umc.Entity.user.User;
+import umc.entity.BaseTimeEntity;
+import umc.entity.user.User;
 
 @Builder
 @Entity

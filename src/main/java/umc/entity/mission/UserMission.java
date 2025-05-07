@@ -1,12 +1,12 @@
-package umc.Entity.mission;
+package umc.entity.mission;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import umc.Entity.BaseTimeEntity;
-import umc.Entity.user.User;
+import umc.entity.BaseTimeEntity;
+import umc.entity.user.User;
 
 @Entity
 @Builder

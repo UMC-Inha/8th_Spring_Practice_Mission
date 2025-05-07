@@ -1,8 +1,8 @@
-package umc.Entity.category;
+package umc.entity.category;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.Entity.store.Store;
+import umc.entity.store.Store;
 
 @Entity
 @Getter

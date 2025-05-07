@@ -1,4 +1,4 @@
-package umc.Entity.category;
+package umc.entity.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
