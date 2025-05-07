@@ -30,7 +30,7 @@ public class MemberMission extends BaseEntity {
     private Mission mission;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 10, columnDefinition = "VARCHAR(10) DEFAULT 'CHALLENGING'")
+    @Column(length = 11, columnDefinition = "VARCHAR(11) DEFAULT 'CHALLENGING'")
     private MissionStatus status;
 
 }
