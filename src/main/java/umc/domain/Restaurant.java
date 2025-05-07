@@ -24,7 +24,7 @@ public class Restaurant extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description; // 음식점 설명
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     private Location location;
 

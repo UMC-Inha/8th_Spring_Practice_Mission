@@ -23,6 +23,4 @@ public class Location extends BaseEntity {
 
     @Column
     private String street;
-
-
 }
