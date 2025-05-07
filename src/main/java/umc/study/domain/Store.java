@@ -18,18 +18,18 @@ public class Store extends BaseEntity {
     @Column(name = "store_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_type_id", nullable = false)
     private FoodType foodType;
 
     @Column(length = 10)
     private String name;
 
-    @Column(length = 10)
+    @Column(length = 30)
     private String address;
 
     private BigDecimal score;
@@ -42,5 +42,16 @@ public class Store extends BaseEntity {
 
     @Column(length = 12)
     private String contact;
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
+                '}';
+    }
 
 }

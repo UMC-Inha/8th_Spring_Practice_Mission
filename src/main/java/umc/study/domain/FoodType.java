@@ -19,4 +19,5 @@ public class FoodType extends BaseEntity {
     @Column(nullable = false, length = 12)
     private String name;
 
+    
 }
