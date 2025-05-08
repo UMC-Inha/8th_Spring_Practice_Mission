@@ -4,13 +4,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import umc.domain.Alarm;
 import umc.domain.User;
 import umc.dto.WithdrawUserDto;
 import umc.repository.AlarmRepository;
 import umc.repository.PreferredCategoryRepository;
-import umc.repository.ReviewRepository;
-import umc.repository.UserRepository;
+import umc.repository.ReviewRepository.ReviewRepository;
+import umc.repository.UserRepository.UserRepository;
 import umc.repository.UserTermRepository;
 
 @Service

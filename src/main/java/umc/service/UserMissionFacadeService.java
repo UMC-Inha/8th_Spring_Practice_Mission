@@ -2,11 +2,10 @@ package umc.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import umc.dto.ChallengeMissionDto;
-import umc.repository.UserMissionRepository;
+import umc.repository.UserMissionRepository.UserMissionRepository;
 
 @Service
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package umc.repository;
+package umc.repository.UserMissionRepository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import umc.domain.mapping.UserMission;
 
-public interface UserMissionRepository extends JpaRepository<UserMission, Long> {
+public interface UserMissionRepository extends JpaRepository<UserMission, Long>, UserMissionRepositoryCustom {
 
 	// 락 획득
 	@Modifying
