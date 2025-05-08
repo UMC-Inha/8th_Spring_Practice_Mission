@@ -33,7 +33,6 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom {
             MissionStatus status,
             Pageable pageable
     ) {
-        // 1) content + total 을 한 번에 가져오는 QueryResults (Querydsl 4.x)
         QueryResults<MemberMissionDto> qr = jpaQueryFactory
                 .select(Projections.constructor(
                         MemberMissionDto.class,
