@@ -1,8 +1,12 @@
 package umc.study.repository.MissionRepository;
 
+import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import umc.study.domain.QMission;
 import umc.study.domain.QRegion;
@@ -23,8 +27,14 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom {
     private final QStore qStore = QStore.store;
     private final QRegion qRegion = QRegion.region;
 
-    public List<MemberMissionDto> findByMemberAndStatus(Long memberId, MissionStatus status) {
-        return jpaQueryFactory
+    @Override
+    public Page<MemberMissionDto> findByMemberAndStatus(
+            Long memberId,
+            MissionStatus status,
+            Pageable pageable
+    ) {
+        // 1) content + total 을 한 번에 가져오는 QueryResults (Querydsl 4.x)
+        QueryResults<MemberMissionDto> qr = jpaQueryFactory
                 .select(Projections.constructor(
                         MemberMissionDto.class,
                         qMission.id,
@@ -34,16 +44,25 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom {
                         qMission.store.name,
                         qMemberMission.status.stringValue()
                 ))
-                .from(qMission)
-                .join(qMemberMission, qMemberMission)
+                .from(qMemberMission)
+                .join(qMemberMission.mission, qMission)
+                .join(qMission.store, qStore)
                 .where(qMemberMission.member.id.eq(memberId)
                         .and(qMemberMission.status.eq(status)))
                 .orderBy(qMission.deadline.asc())
-                .fetch();
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<MemberMissionDto> content = qr.getResults();
+        long total = qr.getTotal();
+
+        return new PageImpl<>(content, pageable, total);
     }
 
-    public List<RegionMissionDto> findByRegion(Long regionId) {
-        return jpaQueryFactory
+    public Page<RegionMissionDto> findByRegion(Long regionId, Pageable pageable) {
+        QueryResults<RegionMissionDto> qr;
+        qr = jpaQueryFactory
                 .select(Projections.constructor(
                         RegionMissionDto.class,
                         qMission.id,
@@ -57,6 +76,13 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom {
                 .join(qStore.region, qRegion)
                 .where(qRegion.id.eq(regionId))
                 .orderBy(qMission.deadline.asc())
-                .fetch();
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<RegionMissionDto> content = qr.getResults();
+        long total = qr.getTotal();
+
+        return new PageImpl<>(content, pageable, total);
     }
 }
