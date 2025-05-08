@@ -41,6 +41,10 @@ public class Store extends BaseTimeEntity {
     private String location;
 
     @Builder.Default
+    @Column(nullable = false)
+    private Float score = 0.0f;
+
+    @Builder.Default
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StoreCategory> storeCategories = new ArrayList<>();
 

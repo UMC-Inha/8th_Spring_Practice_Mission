@@ -25,6 +25,7 @@ public class Inquiry {
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
 
+    @Builder.Default
     @Column(name = "answer_state", nullable = false)
     private Boolean answerState = false;
 
