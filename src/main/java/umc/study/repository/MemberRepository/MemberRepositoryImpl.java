@@ -20,6 +20,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                         qMember.id,
                         qMember.name,
                         qMember.email,
+                        qMember.profileImageUrl,
                         qMember.phoneVerified,
                         qMember.phoneNumber,
                         qMember.point
@@ -27,4 +28,6 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                 .from(qMember)
                 .fetchOne();
     }
+
+
 }

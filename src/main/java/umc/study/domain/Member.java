@@ -53,6 +53,8 @@ public class Member extends BaseEntity {
 
     private Integer point;
 
+    private String profileImageUrl;
+
     private Boolean phoneVerified;
 
     private String phoneNumber;
