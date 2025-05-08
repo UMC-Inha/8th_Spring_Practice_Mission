@@ -23,9 +23,11 @@ public class Alarm extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String alarmBody;
 
+    @Builder.Default
     @Column(nullable = false)
     private Boolean optional = true;
 
+    @Builder.Default
     @OneToMany(mappedBy = "alarm", cascade = CascadeType.ALL)
     private List<MemberAgree> memberAgreeList = new ArrayList<>();
 }

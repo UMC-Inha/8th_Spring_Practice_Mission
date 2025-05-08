@@ -22,16 +22,17 @@ public class Mission extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String body;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Integer reward;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private LocalDate deadline;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
 
+    @Builder.Default
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
 }
