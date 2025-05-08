@@ -36,4 +36,15 @@ public class Restaurant extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", scoreAvg=" + scoreAvg +
+                ", location=" + (location != null ? location.getName() : "N/A") + // region의 이름 출력
+                '}';
+    }
 }
