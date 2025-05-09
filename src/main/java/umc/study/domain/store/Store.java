@@ -5,6 +5,8 @@ import lombok.*;
 import umc.study.domain.BaseTime;
 import umc.study.domain.Image;
 import umc.study.domain.enums.StoreStatus;
+import umc.study.domain.mission.Mission;
+import umc.study.domain.region.Region;
 import umc.study.domain.review.Review;
 
 import java.util.ArrayList;
@@ -16,27 +18,38 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Store extends BaseTime {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_id")
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 100)
     private String address;
 
     @Column(nullable = false)
-    private float averageRating;
+    private Float score;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Mission> missionList = new ArrayList<>();
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Image> imageList = new ArrayList<>();
-
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "DEFAULT 'CLOSE'")
-    private StoreStatus status;
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
+                '}';
+    }
 }

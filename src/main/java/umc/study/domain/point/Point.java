@@ -5,6 +5,10 @@ import lombok.*;
 import umc.study.domain.BaseTime;
 import umc.study.domain.enums.PointStatus;
 import umc.study.domain.enums.PointType;
+import umc.study.domain.mapping.PointMember;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,5 +22,8 @@ public class Point extends BaseTime {
     private Long id;
 
     @Column(nullable = false)
-    private int point;
+    private int coin;
+
+    @OneToMany(mappedBy = "point", cascade = CascadeType.ALL)
+    private List<PointMember> pointMemberList = new ArrayList<>();
 }

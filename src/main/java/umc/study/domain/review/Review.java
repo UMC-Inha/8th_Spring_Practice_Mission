@@ -18,18 +18,13 @@ import java.util.List;
 public class Review extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "review_id")
     private Long id;
 
     @Column(nullable = false)
-    private String message;
+    private String body;
 
     @Column(nullable = false)
-    private float starRating;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
