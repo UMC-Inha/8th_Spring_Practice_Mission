@@ -55,6 +55,9 @@ public class User extends BaseEntity {
 
     private Integer point;
 
+    @Column(nullable = false, length = 20)
+    private String phoneNumber;
+
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserAgree> userAgreeList = new ArrayList<>();
