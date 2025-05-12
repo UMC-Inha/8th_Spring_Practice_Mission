@@ -2,7 +2,9 @@ package umc.apiPayload.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -17,14 +19,44 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import umc.apiPayload.ApiResponse;
 import umc.apiPayload.code.ErrorReasonDTO;
 import umc.apiPayload.code.status.ErrorStatus;
+import umc.thirdParty.discord.DiscordRequestDTO;
+import umc.thirdParty.discord.DiscordWebhookService;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
+@RequiredArgsConstructor
 public class ExceptionAdvice extends ResponseEntityExceptionHandler{
+
+    private final DiscordWebhookService discordWebhookService;
+
+    @Value("${data.server}")
+    private String server;
+
+    @ExceptionHandler(Exception.class)
+    public void handle500ErrTestException(Exception ex, WebRequest request) {
+
+        ServletWebRequest servletWebRequest = (ServletWebRequest)request;
+        String requestUrl = servletWebRequest.getRequest().getRequestURI();
+        String timestamp = LocalDateTime.now().toString();
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[ERROR]\n").append("발생 시각: ").append(timestamp).append("\n")
+                .append("요청 URL: ").append(requestUrl).append("\n")
+                        .append("예외 메시지: ").append(ex.getMessage());
+
+
+        log.error(sb.toString());
+
+        if (server.equals("onService")) {
+            discordWebhookService.sendAlarmMessage(DiscordRequestDTO.RequestForAlarm.builder().content(sb.toString()).build());
+        }
+    }
 
     @ExceptionHandler
     public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
@@ -51,12 +83,12 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler{
         return handleExceptionInternalArgs(e,HttpHeaders.EMPTY,ErrorStatus.valueOf("_BAD_REQUEST"),request,errors);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<Object> exception(Exception e, WebRequest request) {
-        e.printStackTrace();
-
-        return handleExceptionInternalFalse(e, ErrorStatus._INTERNAL_SERVER_ERROR, HttpHeaders.EMPTY, ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(),request, e.getMessage());
-    }
+//    @ExceptionHandler
+//    public ResponseEntity<Object> exception(Exception e, WebRequest request) {
+//        e.printStackTrace();
+//
+//        return handleExceptionInternalFalse(e, ErrorStatus._INTERNAL_SERVER_ERROR, HttpHeaders.EMPTY, ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(),request, e.getMessage());
+//    }
 
     @ExceptionHandler(value = GeneralException.class)
     public ResponseEntity onThrowException(GeneralException generalException, HttpServletRequest request) {

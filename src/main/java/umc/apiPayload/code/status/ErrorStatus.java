@@ -1,5 +1,6 @@
 package umc.apiPayload.code.status;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -7,7 +8,7 @@ import umc.apiPayload.code.BaseErrorCode;
 import umc.apiPayload.code.ErrorReasonDTO;
 
 @Getter
-@Builder
+@AllArgsConstructor
 public enum ErrorStatus implements BaseErrorCode {
 
     // 가장 일반적인 응답
