@@ -15,6 +15,7 @@ public class MemberTerms extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_terms_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
