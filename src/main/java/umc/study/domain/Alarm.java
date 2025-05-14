@@ -33,6 +33,7 @@ public class Alarm extends BaseEntity {
     private AlarmType type;
 
     @Builder.Default
+
     @OneToMany(mappedBy = "alarm", cascade = CascadeType.ALL)
     private List<UserAlarm> memberAlarmList = new ArrayList<>();
 }

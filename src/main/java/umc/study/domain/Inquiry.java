@@ -26,12 +26,7 @@ public class Inquiry extends BaseEntity {
     private String content;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private InquiryType inquiryType;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private InquiryStatus inquiryStatus;
 
     private String inquiryReply;
     private String inquiryImageUrl;

@@ -53,4 +53,5 @@ public class Store extends BaseEntity {
                 ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
                 '}';
     }
+
 }

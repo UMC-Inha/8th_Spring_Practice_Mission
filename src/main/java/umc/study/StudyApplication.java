@@ -35,4 +35,5 @@ public class StudyApplication {
 					.forEach(System.out::println);
 		};
 	}*/
+
 }
