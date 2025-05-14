@@ -1,6 +1,6 @@
 package umc.spring.repository.StoreRepository;
 
-import domain.Store;
+import umc.spring.domain.Store;
 
 import java.util.List;
 
