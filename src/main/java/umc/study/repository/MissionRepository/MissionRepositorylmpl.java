@@ -1,5 +1,6 @@
-package umc.study.repository.MissionRepository;
+/*package umc.study.repository.MissionRepository;
 
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -68,4 +69,4 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom{
                 .fetchOne();
     }
 
-}
+}*/

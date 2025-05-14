@@ -1,4 +1,4 @@
-package umc.study.service.MissionService;
+/*package umc.study.service.MissionService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,4 +10,4 @@ import umc.study.repository.MissionRepository.MissionRepository;
 @Transactional(readOnly = true)
 public class MissionQueryServiceImpl implements MissionQueryService {
     private final MissionRepository missionRepository;
-}
+}*/

@@ -1,4 +1,4 @@
-package umc.study.service.MissionService;
+/*package umc.study.service.MissionService;
 
 public interface MissionQueryService {
-}
+}*/

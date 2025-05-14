@@ -1,4 +1,4 @@
-package umc.study.web.dto;
+/*package umc.study.web.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
@@ -21,4 +21,4 @@ public class MissionDto {
         this.point = point;
         this.status = status;
     }
-}
+}*/

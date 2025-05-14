@@ -51,7 +51,11 @@ public class UserMissionRepositoryImpl implements UserMissionRepositoryCustom {
         return pageable.getSort().stream()
                 .map(order -> {
                     Order direction = order.isAscending() ? Order.ASC : Order.DESC;
-                    PathBuilder<?> entityPath = new PathBuilder<>(entityClass, entityPathName);
+                    //PathBuilder<?> entityPath = new PathBuilder<>(entityClass, entityPathName);
+                    String entityPathName = userMissionClass.getSimpleName().toLowerCase();
+
+                    PathBuilder<?> entityPath = new PathBuilder<>(userMissionClass, entityPathName);
+
 
                     if (order.getProperty().startsWith("mission.")) {
                         PathBuilder<Mission> missionPath = new PathBuilder<>(Mission.class, "mission");
@@ -66,6 +70,7 @@ public class UserMissionRepositoryImpl implements UserMissionRepositoryCustom {
 
     @Override
     public List<UserMission> findCompletedMissionByUser(Long userId, Pageable pageable) {
+        OrderSpecifier<?>[] orderSpecifiers = getOrderSpecifiers(pageable, UserMission.class, "userMission");
         return queryFactory
                 .selectFrom(userMission)
                 .join(userMission.mission, mission).fetchJoin()
