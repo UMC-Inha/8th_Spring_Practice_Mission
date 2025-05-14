@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import umc.study.domain.common.BaseEntity;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -19,10 +21,19 @@ public class Review extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    private Float rating;
 
-    private String reviewImageUrl; //이미지 테이블...
+    @Column(nullable = false, precision = 2, scale = 1)
+    private BigDecimal rating;
+
+    private String reviewImageUrl;
+
+    // 미션 확인을 위한 라뷰 작성 여부
+    @Builder.Default
+    private boolean reviewed = false;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import umc.study.domain.common.BaseEntity;
-import umc.study.domain.enums.UserStatus;
+import umc.study.domain.enums.MissionStatus;
+
 import umc.study.domain.mapping.UserMission;
 
 import java.time.LocalDate;
@@ -22,7 +23,8 @@ public class Mission extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+   @Column(nullable = false)
+
     private Integer point;
 
     @Column(nullable = false)
@@ -31,6 +33,10 @@ public class Mission extends BaseEntity {
     @Column(nullable = false, length = 500)
     private String missionSpec;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MissionStatus status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
@@ -38,6 +44,8 @@ public class Mission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_category_id")
     private FoodCategory foodCategory;
+
+    @Builder.Default
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
     private List<UserMission> useerMissionList = new ArrayList<>();
