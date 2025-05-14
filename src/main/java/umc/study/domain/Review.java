@@ -18,9 +18,11 @@ public class Review extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(nullable = false)
     private String content;
 
+    @Setter
     @Column(nullable = false, precision = 2, scale = 1)
     private BigDecimal rating;
 
@@ -33,11 +35,14 @@ public class Review extends BaseEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
+
 }

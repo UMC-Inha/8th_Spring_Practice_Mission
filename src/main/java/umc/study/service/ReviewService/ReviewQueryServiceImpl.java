@@ -1,13 +1,20 @@
 package umc.study.service.ReviewService;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.study.domain.Review;
+import umc.study.domain.Store;
+import umc.study.domain.User;
 import umc.study.repository.ReviewRepository.ReviewRepository;
+import umc.study.repository.StoreRepository.StoreRepository;
+import umc.study.repository.UserRepository.UserRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -24,5 +31,22 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     @Override
     public List<Review> findReviewsByStore(long id) {
         return List.of();
+    }
+
+    @Transactional
+    public Review insertReview(Long userId, Long storeId, String content, BigDecimal rating) {
+        User user = UserRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
+
+        Store store = StoreRepository.findById(storeId)
+                .orElseThrow(() -> new EntityNotFoundException("Store not found with id: " + storeId));
+
+        Review review = new Review();
+        review.setUser(user);
+        review.setStore(store);
+        review.setContent(content);
+        review.setRating(rating);
+
+        return reviewRepository.save(review);
     }
 }

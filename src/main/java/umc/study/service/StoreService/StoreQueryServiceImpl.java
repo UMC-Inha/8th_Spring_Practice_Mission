@@ -1,5 +1,6 @@
 package umc.study.service.StoreService;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,8 @@ public class StoreQueryServiceImpl implements StoreQueryService{
 
     @Override
     public Optional<Store> findStore(Long id) {
-        return storeRepository.findById(id);
+        return Optional.ofNullable(storeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Store not found with id: " + id)));
     }
 
     @Override
