@@ -21,6 +21,7 @@ public class Review extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
+
     @Column(nullable = false, precision = 2, scale = 1)
     private BigDecimal rating;
 
@@ -32,6 +33,7 @@ public class Review extends BaseEntity {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

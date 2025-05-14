@@ -39,6 +39,7 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(10)")
+
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
@@ -51,6 +52,7 @@ public class User extends BaseEntity {
     private LocalDate inactiveDate;
 
     @Column(nullable = false, unique = true) // 중복 방지
+
     private String email;
 
     private Integer point;
@@ -79,6 +81,7 @@ public class User extends BaseEntity {
     private List<Inquiry> inquiryList = new ArrayList<>();
 
     @Builder.Default
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserAlarm> memberAlarmList = new ArrayList<>();
 }
