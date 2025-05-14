@@ -4,16 +4,18 @@ spring:
     username: root
     password: urabi!34570
     driver-class-name: com.mysql.cj.jdbc.Driver
-  sql:
-    init:
-      mode: never
+
   jpa:
+    hibernate:
+      ddl-auto: update # DB에 스키마 자동으로 동기화하기
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         show_sql: true
         format_sql: true
         use_sql_comments: true
-        hbm2ddl:
-          auto: update
         default_batch_fetch_size: 1000
+
+  sql:
+    init:
+      mode: never
