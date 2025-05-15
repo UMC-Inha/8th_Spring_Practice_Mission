@@ -83,7 +83,7 @@ public class User {
 	private Boolean replyAlarmAccepted;
 	private Boolean inquiryAlarmAccepted;
 
-	@OneToMany(mappedBy = "member", orphanRemoval = true, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.REMOVE)
 	@Builder.Default
 	private List<Alarm> alarmList = new ArrayList<>();
 
