@@ -17,3 +17,7 @@ spring:
         hbm2ddl:
           auto: none
         default_batch_fetch_size: 1000
+
+discord:
+  webhook:
+    url: https://discord.com/api/webhooks/1372426888278183988/DsQlUXaoj6yysZToho3eBis6h1FE-1-tey771P_eMVyKpVIqhW5iL_T2j4oX2_9cMzCR

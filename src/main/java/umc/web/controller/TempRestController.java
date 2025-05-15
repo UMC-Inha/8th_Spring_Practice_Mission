@@ -28,4 +28,10 @@ public class TempRestController {
         tempQueryService.CheckFlag(flag);
         return ApiResponse.onSuccess(TempConverter.toTempExceptionDTO(flag));
     }
+
+    @GetMapping("/test/error")
+    public void triggerError() {
+        // 500 Internal Server Error 를 강제로 발생시킵니다
+        throw new RuntimeException("💥 테스트용 500 에러 발생!");
+    }
 }
