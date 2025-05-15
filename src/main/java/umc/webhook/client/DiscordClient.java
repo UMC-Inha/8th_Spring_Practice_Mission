@@ -1,9 +1,10 @@
-package umc.webhook;
+package umc.webhook.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import umc.config.DiscordFeignConfiguration;
+import umc.webhook.DiscordMessage;
 
 
 @FeignClient(
