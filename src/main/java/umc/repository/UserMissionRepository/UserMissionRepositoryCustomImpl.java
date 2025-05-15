@@ -56,12 +56,10 @@ public class UserMissionRepositoryCustomImpl implements UserMissionRepositoryCus
 		return jpaQueryFactory
 			.select(userMission.count())
 			.from(userMission)
-			.join(userMission.mission, mission)
-			.join(mission.region, region)
 			.where(
 				userIdEq(userId),
 				statusEq(MissionStatus.COMPLETED),
-				region.name.eq(regionName)
+				userMission.mission.region.name.eq(regionName)
 			)
 			.fetchOne();
 	}
