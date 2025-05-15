@@ -5,8 +5,8 @@ import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import umc.entity.user.QUser;
-import umc.presentation.dto.user.UserProfileDto;
+import umc.persistence.entity.user.QUser;
+import umc.presentation.dto.user.UserResponse;
 
 @Repository
 @RequiredArgsConstructor
@@ -15,9 +15,9 @@ public class UserRepositoryImpl implements UserRepository{
     private final QUser qUser = QUser.user;
     private final JPAQueryFactory jpaQueryFactory;
     @Override
-    public UserProfileDto getUserProfile(Long userId){
+    public UserResponse.UserProfileDto getUserProfile(Long userId){
         return jpaQueryFactory
-                .select(Projections.constructor(UserProfileDto.class,
+                .select(Projections.constructor(UserResponse.UserProfileDto.class,
                         qUser.email,
                         qUser.name,
                         qUser.point,

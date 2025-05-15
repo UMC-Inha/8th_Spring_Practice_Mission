@@ -1,7 +1,7 @@
 package umc.persistence.repository.mission;
 
 import umc.persistence.entity.mission.Mission;
-import umc.presentation.dto.mission.MissionCardDto;
+import umc.presentation.dto.mission.MissionResponse;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface MissionRepository {
 
     Long countCompletedMissionRemainder(Long userId, String location);
 
-    List<MissionCardDto> findNotAcceptedMissions (Long userId, Integer pagingOffset);
+    List<MissionResponse.MissionCardDto> findNotAcceptedMissions (Long userId, Integer pagingOffset);
 }
