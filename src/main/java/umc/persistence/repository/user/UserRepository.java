@@ -1,7 +1,8 @@
 package umc.persistence.repository.user;
 
-import umc.presentation.dto.user.UserProfileDto;
+
+import umc.presentation.dto.user.UserResponse;
 
 public interface UserRepository {
-    UserProfileDto getUserProfile(Long userId);
+    UserResponse.UserProfileDto getUserProfile(Long userId);
 }

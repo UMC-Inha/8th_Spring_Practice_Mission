@@ -6,13 +6,14 @@ import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import umc.entity.category.QStoreCategory;
+import umc.persistence.entity.category.QStoreCategory;
 import umc.persistence.entity.mission.Mission;
 import umc.persistence.entity.mission.MissionState;
-import umc.entity.mission.QMission;
-import umc.entity.mission.QUserMission;
-import umc.entity.store.QStore;
-import umc.presentation.dto.mission.MissionCardDto;
+
+import umc.persistence.entity.mission.QMission;
+import umc.persistence.entity.mission.QUserMission;
+import umc.persistence.entity.store.QStore;
+import umc.presentation.dto.mission.MissionResponse;
 
 import java.util.List;
 
@@ -62,12 +63,12 @@ public class MissionRepositoryImpl implements MissionRepository {
     }
 
     @Override
-    public List<MissionCardDto> findNotAcceptedMissions (Long userId, Integer pagingOffset){
+    public List<MissionResponse.MissionCardDto> findNotAcceptedMissions (Long userId, Integer pagingOffset){
         QStore qStore = QStore.store;
         QStoreCategory qStoreCategory = QStoreCategory.storeCategory;
 
         return jpaQueryFactory
-                .select(Projections.constructor(MissionCardDto.class,
+                .select(Projections.constructor(MissionResponse.MissionCardDto.class,
                         qStore.storeName,
                         qStoreCategory.category,
                         qMission.content,
