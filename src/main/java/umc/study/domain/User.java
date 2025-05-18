@@ -50,7 +50,6 @@ public class User extends BaseEntity {
 
     private LocalDate inactiveDate;
 
-
     @Column(nullable = false, unique = true) // 중복 방지
     private String email;
 

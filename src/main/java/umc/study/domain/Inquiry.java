@@ -26,8 +26,6 @@ public class Inquiry extends BaseEntity {
     private String content;
 
     @Enumerated(EnumType.STRING)
-
-
     private String inquiryReply;
     private String inquiryImageUrl;
 
