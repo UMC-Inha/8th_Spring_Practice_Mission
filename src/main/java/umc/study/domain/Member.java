@@ -53,6 +53,12 @@ public class Member extends BaseEntity {
 
     private Integer point;
 
+    private String profileImageUrl;
+
+    private Boolean phoneVerified;
+
+    private String phoneNumber;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAgree> memberAgreeList = new ArrayList<>();
 
