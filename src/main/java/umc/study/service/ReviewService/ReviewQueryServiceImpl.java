@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.study.converter.ReviewConverter;
 import umc.study.domain.Review;
 import umc.study.domain.Store;
 import umc.study.domain.User;
@@ -44,12 +45,7 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new EntityNotFoundException("Store not found with id: " + storeId));
 
-        Review review = Review.builder()
-                .content(content)
-                .rating(rating)
-                .store(store)
-                .user(user)
-                .build();
+        Review review = ReviewConverter.toEntity(content, rating, store, user);
 
         return reviewRepository.save(review);
     }

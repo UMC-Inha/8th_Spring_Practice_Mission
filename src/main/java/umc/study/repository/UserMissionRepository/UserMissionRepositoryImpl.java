@@ -1,22 +1,21 @@
 package umc.study.repository.UserMissionRepository;
 
-import com.querydsl.core.QueryFactory;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.PathBuilder;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import umc.study.domain.*;
 import umc.study.domain.QMission;
-import umc.study.domain.QRegion;
 import umc.study.domain.QStore;
 import umc.study.domain.QUser;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.QUserMission;
 import umc.study.domain.mapping.UserMission;
+import umc.study.web.dto.UserMissionResponseDto;
 
 import java.util.List;
 
@@ -69,12 +68,17 @@ public class UserMissionRepositoryImpl implements UserMissionRepositoryCustom {
     }
 
     @Override
-    public List<UserMission> findCompletedMissionByUser(Long userId, Pageable pageable) {
+    public List<UserMissionResponseDto> findCompletedMissionByUser(Long userId, Pageable pageable) {
         OrderSpecifier<?>[] orderSpecifiers = getOrderSpecifiers(pageable, UserMission.class, "userMission");
+
         return queryFactory
-                .selectFrom(userMission)
-                .join(userMission.mission, mission).fetchJoin()
-                .join(mission.store, store).fetchJoin()
+                .select(Projections.constructor(UserMissionResponseDto.class,
+                        mission.id,
+                        mission.missionSpec,
+                        store.name))
+                .from(userMission)
+                .join(userMission.mission, mission)
+                .join(mission.store, store)
                 .where(userMission.user.id.eq(userId)
                         .and(userMission.status.eq(MissionStatus.COMPLETED)))
                 .orderBy(orderSpecifiers)
@@ -82,6 +86,7 @@ public class UserMissionRepositoryImpl implements UserMissionRepositoryCustom {
                 .limit(pageable.getPageSize())
                 .fetch();
     }
+
 
     @Override
     public Long countCompletedMissionByUser(Long userId, String regionName) {

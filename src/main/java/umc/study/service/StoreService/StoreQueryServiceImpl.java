@@ -8,7 +8,6 @@ import umc.study.domain.Store;
 import umc.study.repository.StoreRepository.StoreRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,9 +17,9 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     private final StoreRepository storeRepository;
 
     @Override
-    public Optional<Store> findStore(Long id) {
-        return Optional.ofNullable(storeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Store not found with id: " + id)));
+    public Store findStore(Long id) {
+        return storeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Store not found with id: " + id));
     }
 
     @Override
