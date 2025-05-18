@@ -29,7 +29,6 @@ public class Terms {
     private Boolean optional;
 
     @Builder.Default
-
     @OneToMany(mappedBy = "terms", cascade = CascadeType.ALL)
     private List<UserAgree> userAgreeList = new ArrayList<>();
 }

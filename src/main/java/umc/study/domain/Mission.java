@@ -5,7 +5,6 @@ import lombok.*;
 
 import umc.study.domain.common.BaseEntity;
 import umc.study.domain.enums.MissionStatus;
-
 import umc.study.domain.mapping.UserMission;
 
 import java.time.LocalDate;
@@ -24,7 +23,6 @@ public class Mission extends BaseEntity {
     private Long id;
 
    @Column(nullable = false)
-
     private Integer point;
 
     @Column(nullable = false)
@@ -46,7 +44,6 @@ public class Mission extends BaseEntity {
     private FoodCategory foodCategory;
 
     @Builder.Default
-
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
     private List<UserMission> useerMissionList = new ArrayList<>();
 }

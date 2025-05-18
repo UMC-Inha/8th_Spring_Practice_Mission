@@ -1,4 +1,4 @@
-package umc.study.repository.MissionRepository;
+/*package umc.study.repository.MissionRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,3 +12,4 @@ public interface MissionRepository extends JpaRepository<Mission, Long>, Mission
     // 특정 가게의 미션 목록 조회
     Page<Mission> findByStoreId(Long storeId, Pageable pageable);
 }
+*/

@@ -34,4 +34,10 @@ public class StudyApplication {
 					.forEach(System.out::println);
 		};
 	}*/
+
+
+			storeService.findStoresByNameAndScore(name, score)
+					.forEach(System.out::println);
+		};
+	}*/
 }
