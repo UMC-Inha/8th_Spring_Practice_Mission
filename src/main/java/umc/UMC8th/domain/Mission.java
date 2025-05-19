@@ -38,6 +38,10 @@ public class Mission extends BaseEntity {
     @JoinColumn(name = "store_id")
     private Store store;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private MissionStatus status; // 미션 상태 추가
+
     // MemberMission 양방향 설정
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MemberMission> memberMissions = new ArrayList<>();

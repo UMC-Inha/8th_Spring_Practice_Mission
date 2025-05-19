@@ -1,7 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '3.2.5'
-	id 'java'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'java'
 }
 
 group = 'umc'
@@ -13,10 +13,21 @@ java {
 	}
 }
 
+def generated = 'src/main/generated'
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java', generated]
+		}
+	}
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	querydsl.extendsFrom compileClasspath
 }
 
 repositories {
@@ -24,13 +35,43 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'org.hibernate.orm:hibernate-core:6.0.2.Final'
+
+	implementation 'mysql:mysql-connector-java:8.0.33'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// QueryDSL
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+	annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+	annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+	implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.9'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.register("compileQuerydsl", JavaCompile) {
+	group = "build"
+	description = "Compile QueryDSL Q-types"
+	source = sourceSets.main.java
+	classpath = configurations.compileClasspath
+	options.annotationProcessorPath = configurations.annotationProcessor
+	destinationDirectory = file(generated)
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.annotationProcessorPath = configurations.querydsl
+	// options.compilerArgs += "-parameters" 컴파일된 class 파일에 실제 파라미터 이름이 들어가도록 설정 부여
 }
 
 tasks.named('test') {

@@ -22,4 +22,8 @@ public class Notification extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private NotificationStatus status; // 알림 수신 상태
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
