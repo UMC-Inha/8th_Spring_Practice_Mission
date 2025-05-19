@@ -3,6 +3,7 @@ package umc.study.web.dto.Mission;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import umc.study.apiPayload.validation.annotation.ExistStore;
 
 import java.time.LocalDate;
 
@@ -21,7 +22,7 @@ public class MissionRequestDto {
         @NotBlank
         String missionSpec;
 
-        @NotBlank
+        @ExistStore
         Long storeId;
     }
 }

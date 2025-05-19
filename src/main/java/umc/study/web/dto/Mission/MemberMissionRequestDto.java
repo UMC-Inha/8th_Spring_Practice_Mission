@@ -2,15 +2,17 @@ package umc.study.web.dto.Mission;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import umc.study.apiPayload.validation.annotation.ExistMember;
+import umc.study.apiPayload.validation.annotation.ExistMission;
 
 public class MemberMissionRequestDto {
 
     @Getter
     public static class JoinDto{
-        @NotBlank
+        @ExistMember
         Long memberId;
 
-        @NotBlank
+        @ExistMission
         Long missionId;
     }
 }
