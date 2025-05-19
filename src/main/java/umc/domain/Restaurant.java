@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import umc.domain.common.BaseEntity;
 
 import java.awt.*;
@@ -46,5 +47,10 @@ public class Restaurant extends BaseEntity {
                 ", scoreAvg=" + scoreAvg +
                 ", location=" + (location != null ? location.getName() : "N/A") + // region의 이름 출력
                 '}';
+    }
+
+    @Transactional
+    public void updateScoreAvg(Double scoreAvg) {
+        this.scoreAvg = scoreAvg;
     }
 }
