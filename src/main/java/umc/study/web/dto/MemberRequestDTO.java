@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import umc.study.apiPayload.validation.annotation.ExistCategories;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class MemberRequestDTO {
         String address;
         @Size(min = 5, max = 12)
         String specAddress;
-        //@ExistCategories
+        @ExistCategories
         List<Long> preferCategory;
     }
 
