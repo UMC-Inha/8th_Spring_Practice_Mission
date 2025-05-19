@@ -3,6 +3,8 @@ package umc.study.service.MemberService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import umc.study.apiPayload.code.status.ErrorStatus;
+import umc.study.apiPayload.exception.handler.FoodCategoryHandler;
 import umc.study.converter.MemberConverter;
 import umc.study.converter.MemberPreferConverter;
 import umc.study.domain.FoodCategory;
