@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import umc.study.service.StoreService.StoreQueryService;
 
-
 @SpringBootApplication
 @EnableJpaAuditing
 public class StudyApplication {
@@ -30,6 +29,12 @@ public class StudyApplication {
 			System.out.println("Executing findStoresByNameAndScore with parameters:");
 			System.out.println("Name: " + name);
 			System.out.println("Score: " + score);
+
+			storeService.findStoresByNameAndScore(name, score)
+					.forEach(System.out::println);
+		};
+	}*/
+
 
 			storeService.findStoresByNameAndScore(name, score)
 					.forEach(System.out::println);

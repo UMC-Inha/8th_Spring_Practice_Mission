@@ -26,7 +26,6 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final StoreRepository storeRepository;
-
     @Override
     public Page<Review> findReview(long id) {
         return reviewRepository.findByUserId(id, Pageable.unpaged());

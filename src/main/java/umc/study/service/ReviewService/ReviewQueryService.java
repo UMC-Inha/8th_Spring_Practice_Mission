@@ -15,8 +15,8 @@ import java.util.List;
 
 public interface ReviewQueryService {
     Page<Review> findReview(long id);
-
     List<Review> findReviewsByStore(long id);
 
     Review insertReview(Long userId, Long storeId, String content, BigDecimal rating);
+
 }
