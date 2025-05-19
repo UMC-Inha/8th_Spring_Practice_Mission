@@ -19,7 +19,7 @@ public class UniqueMemberMissionValidator
     public boolean isValid(MemberMissionRequestDto.JoinDto dto,
                            ConstraintValidatorContext context) {
         if (dto.getMemberId() == null || dto.getMissionId() == null) {
-            return true; // @NotNull 등 개별 필드 제약에 맡김
+            return true;
         }
 
         boolean exists = memberMissionRepository.existsByMemberIdAndMissionId(
@@ -29,9 +29,9 @@ public class UniqueMemberMissionValidator
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(
                             "Member "+ dto.getMemberId() +
-                                    " is already registered for mission "+ dto.getMissionId()
+                                    " 가 이미 미션에 도전중입니다. missionId: "+ dto.getMissionId()
                     )
-                    .addPropertyNode("missionId")   // 또는 전체 DTO 수준: .addBeanNode()
+                    .addPropertyNode("missionId")
                     .addConstraintViolation();
             return false;
         }
