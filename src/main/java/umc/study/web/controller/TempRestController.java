@@ -10,7 +10,7 @@ import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exception.GeneralException;
 import umc.study.converter.TempConverter;
 import umc.study.service.TempService.TempQueryService;
-import umc.study.web.dto.TempResponse;
+import umc.study.web.dto.Temp.TempResponse;
 
 @RestController
 @RequestMapping("/temp")
