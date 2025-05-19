@@ -1,6 +1,6 @@
 package umc.study.web.dto;
 
-public record MemberResponseDto(
+public record MemberDetailResponseDto(
         Long memberId,
         String memberName,
         String email,
