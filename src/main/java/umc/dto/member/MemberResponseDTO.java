@@ -1,17 +1,20 @@
-package umc.thirdParty.discord;
+package umc.dto.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class DiscordRequestDTO {
+import java.time.LocalDateTime;
+
+public class MemberResponseDTO {
 
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class RequestForAlarm {
-        private String content;
+    public static class JoinResultDto {
+        Long memberId;
+        LocalDateTime createdAt;
     }
 }
