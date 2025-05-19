@@ -5,7 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import umc.study.domain.QMember;
-import umc.study.web.dto.MemberDetailResponseDto;
+import umc.study.web.dto.Member.MemberDetailResponseDto;
 
 @Repository
 @RequiredArgsConstructor

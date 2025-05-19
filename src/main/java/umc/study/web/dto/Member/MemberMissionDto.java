@@ -1,12 +1,13 @@
-package umc.study.web.dto;
-
+package umc.study.web.dto.Member;
 
 import java.time.LocalDate;
 
-public record RegionMissionDto(
+public record MemberMissionDto(
         Long missionId,
         String missionSpec,
         Integer reward,
         LocalDate deadline,
-        String storeName
-) {}
+        String storeName,
+        String status
+) {
+}
