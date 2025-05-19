@@ -13,8 +13,8 @@ import umc.study.domain.QRegion;
 import umc.study.domain.QStore;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.QMemberMission;
-import umc.study.dto.MemberMissionDto;
-import umc.study.dto.RegionMissionDto;
+import umc.study.web.dto.MemberMissionDto;
+import umc.study.web.dto.RegionMissionDto;
 
 import java.util.List;
 

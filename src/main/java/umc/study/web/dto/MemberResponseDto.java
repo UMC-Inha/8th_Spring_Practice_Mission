@@ -1,4 +1,4 @@
-package umc.study.dto;
+package umc.study.web.dto;
 
 public record MemberResponseDto(
         Long memberId,
