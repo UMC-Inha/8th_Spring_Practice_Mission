@@ -25,7 +25,7 @@ public class MemberRequestDTO {
         String address;
         @Size(min = 5, max = 12)
         String specAddress;
-        @ExistCategories
+        //@ExistCategories
         List<Long> preferCategory;
     }
 
