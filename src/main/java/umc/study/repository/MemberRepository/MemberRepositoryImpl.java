@@ -13,6 +13,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
     private final QMember qMember = QMember.member;
 
+    @Override
     public MemberDetailResponseDto findMemberDetail(Long memberId) {
         return jpaQueryFactory
                 .select(Projections.constructor(
