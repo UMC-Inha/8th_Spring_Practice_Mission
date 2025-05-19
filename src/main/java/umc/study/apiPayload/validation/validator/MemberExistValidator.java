@@ -8,8 +8,6 @@ import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.validation.annotation.ExistMember;
 import umc.study.repository.MemberRepository.MemberRepository;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class MemberExistValidator implements ConstraintValidator<ExistMember, Long> {

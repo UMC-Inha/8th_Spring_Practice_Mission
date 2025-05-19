@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exception.GeneralException;
 import umc.study.converter.MemberMissionConverter;
-import umc.study.converter.MissionConverter;
 import umc.study.domain.Member;
 import umc.study.domain.Mission;
 import umc.study.domain.mapping.MemberMission;

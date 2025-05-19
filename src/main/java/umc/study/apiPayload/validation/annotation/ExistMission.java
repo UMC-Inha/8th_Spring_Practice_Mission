@@ -3,7 +3,6 @@ package umc.study.apiPayload.validation.annotation;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import umc.study.apiPayload.validation.validator.MissionExistValidator;
-import umc.study.apiPayload.validation.validator.StoreExistValidator;
 
 import java.lang.annotation.*;
 

@@ -1,6 +1,5 @@
 package umc.study.web.dto.Mission;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import umc.study.apiPayload.validation.annotation.ExistMember;
 import umc.study.apiPayload.validation.annotation.ExistMission;
