@@ -1,6 +1,5 @@
 package umc.service;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,9 +9,9 @@ import umc.domain.Mission;
 import umc.domain.User;
 import umc.domain.mapping.UserMission;
 import umc.dto.ChallengeMissionDto;
-import umc.repository.MissionRepository;
-import umc.repository.UserMissionRepository;
-import umc.repository.UserRepository;
+import umc.repository.MissionRepository.MissionRepository;
+import umc.repository.UserMissionRepository.UserMissionRepository;
+import umc.repository.UserRepository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
