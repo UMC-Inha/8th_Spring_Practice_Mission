@@ -45,6 +45,8 @@ public class Restaurant extends BaseEntity {
 
 	private Boolean isOpened;
 
+	private Float score;
+
 	@ElementCollection
 	@Builder.Default
 	private List<String> restaurantImageList = new ArrayList<>();
@@ -60,4 +62,12 @@ public class Restaurant extends BaseEntity {
 	@OneToMany(mappedBy = "restaurant", orphanRemoval = true, cascade = CascadeType.REMOVE)
 	@Builder.Default
 	private List<RestaurantTime> restaurantTimeList = new ArrayList<>();
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 }

@@ -64,6 +64,7 @@ public class User {
 
 	private String addressDetail;
 
+	@ColumnDefault("0")
 	private Integer point;
 
 	@Enumerated(EnumType.STRING)
@@ -98,4 +99,8 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@Builder.Default
 	private List<PreferredCategory> preferredCategoryList = new ArrayList<>();
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
 }

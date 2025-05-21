@@ -33,4 +33,12 @@ public class PreferredCategory extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
+
+	public void setUser(User user) {
+		if(this.user != null) {
+			user.getUserTermList().remove(this);
+		}
+		this.user = user;
+		user.getPreferredCategoryList().add(this);
+	}
 }

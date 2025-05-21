@@ -18,4 +18,6 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long>,
 	@Modifying
 	@Query(value = "SELECT RELEASE_LOCK(:lockName)", nativeQuery = true)
 	void releaseLock(@Param("lockName") String lockName);
+
+	boolean existsByUserIdAndMissionId(Long userId, Long missionId);
 }
