@@ -2,20 +2,21 @@ package umc.web.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import umc.apiPayload.ApiResponse;
-import umc.converter.UserConverter;
+import umc.converter.user.UserConverter;
 import umc.domain.User;
 import umc.service.user.UserCommandService;
+import umc.validation.annotation.ExistMission;
+import umc.validation.annotation.ExistUser;
 import umc.web.dto.user.UserRequestDTO;
 import umc.web.dto.user.UserResponseDTO;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@Validated
 public class UserRestController {
 
     private final UserCommandService userCommandService;
@@ -26,5 +27,13 @@ public class UserRestController {
         User user = userCommandService.joinUser(request);
         return ApiResponse.onSuccess(UserConverter.toJoinResultDTO(user));
 
+    }
+
+    // TODO 하드코딩 한 User 값을 받도록 바꿔주기
+    @PostMapping("/missions/{missionId}")
+    public ApiResponse<String> challengeMission( @ExistMission @PathVariable Long missionId){
+
+        userCommandService.challengeMission(missionId);
+        return ApiResponse.onSuccess("해당 미션의 도전을 시작하셨습니다");
     }
 }

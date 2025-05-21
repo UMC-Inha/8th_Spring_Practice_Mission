@@ -6,19 +6,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.apiPayload.code.status.ErrorStatus;
 import umc.repository.foodCategory.FoodCategoryRepository;
-import umc.repository.location.LocationRepository;
-import umc.validation.annotation.ExistLocation;
+import umc.repository.user.UserRepository;
+import umc.validation.annotation.ExistCategories;
+import umc.validation.annotation.ExistUser;
 
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class LocationExistValidator implements ConstraintValidator<ExistLocation, Long> {
+public class UserExistValidator implements ConstraintValidator<ExistUser, Long> {
 
-    private final LocationRepository locationRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public void initialize(ExistLocation constraintAnnotation) {
+    public void initialize(ExistUser constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
@@ -27,14 +28,15 @@ public class LocationExistValidator implements ConstraintValidator<ExistLocation
 
         boolean isValid;
 
-
-        isValid = locationRepository.existsById(aLong);
-
-
+        if(aLong == null) {
+            isValid = false;
+        }else{
+            isValid = userRepository.existsById(aLong);
+        }
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.LOCATION_NOT_FOUND.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.USER_NOT_FOUND.toString()).addConstraintViolation();
         }
 
         return isValid;

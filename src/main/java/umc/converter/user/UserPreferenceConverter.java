@@ -1,4 +1,4 @@
-package umc.converter;
+package umc.converter.user;
 
 import umc.domain.FoodCategory;
 import umc.domain.mapping.UserPreference;

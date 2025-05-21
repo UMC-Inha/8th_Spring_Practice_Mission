@@ -7,4 +7,5 @@ public interface UserCommandService {
 
     User joinUser(UserRequestDTO.JoinDto request);
 
+    void challengeMission(Long missionId);
 }

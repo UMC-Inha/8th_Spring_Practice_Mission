@@ -5,14 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.apiPayload.ApiResponse;
-import umc.converter.UserConverter;
-import umc.domain.User;
 import umc.service.restaurant.RestaurantCommandService;
-import umc.service.restaurant.RestaurantCommandServiceImpl;
 import umc.validation.annotation.ExistLocation;
 import umc.web.dto.restaurant.RestaurantRequestDTO;
-import umc.web.dto.user.UserRequestDTO;
-import umc.web.dto.user.UserResponseDTO;
 
 @RestController
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package umc.converter;
+package umc.converter.user;
 
 import umc.domain.User;
 import umc.domain.enums.Status;
