@@ -36,7 +36,6 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom{
         Review review = Review.builder()
                 .body(requestDto.getBody())
                 .score(requestDto.getScore())
-                .store(store)
                 .imageList(requestDto.getImageList())
                 .build();
 

@@ -42,7 +42,6 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
                 .from(memberMission)
                 .join(memberMission.mission, mission)
                 .join(mission.store, store)
-                .join(mission.pointMission, pointMission)
                 .join(pointMission.point, point)
                 .where(
                         memberMission.member.id.eq(memberId),
@@ -77,7 +76,6 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
                 .from(memberMission)
                 .join(memberMission.mission, mission)
                 .join(mission.store, store)
-                .join(mission.pointMission, pointMission)
                 .join(pointMission.point, point)
                 .leftJoin(storeCategory).on(store.id.eq(storeCategory.store.id))
                 .leftJoin(category).on(storeCategory.category.id.eq(category.id))

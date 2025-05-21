@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import umc.study.domain.store.QStore;
 import umc.study.domain.store.Store;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -16,7 +17,7 @@ public class StoreRepositoryImpl implements StoreRepositoryCustom{
     private final QStore store = QStore.store;
 
     @Override
-    public List<Store> dynamicQueryWithBooleanBuilder(String name, Float score) {
+    public List<Store> dynamicQueryWithBooleanBuilder(String name, BigDecimal score) {
         BooleanBuilder predicate = new BooleanBuilder();
 
         if (name != null) {

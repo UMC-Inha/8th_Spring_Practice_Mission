@@ -7,6 +7,7 @@ import umc.study.domain.Image;
 import umc.study.domain.member.Member;
 import umc.study.domain.store.Store;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +25,14 @@ public class Review extends BaseTime {
     private String body;
 
     @Column(nullable = false)
-    private float score;
+    private BigDecimal score;
+    private List<String> imageList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
 
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
-    private List<Image> imageList = new ArrayList<>();
+    public void setStore(Store store) {
+        this.store = store;
+    }
 }

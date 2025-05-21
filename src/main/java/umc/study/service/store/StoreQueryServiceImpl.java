@@ -7,6 +7,7 @@ import umc.study.domain.store.Store;
 import umc.study.repository.store.StoreRepository;
 import umc.study.repository.store.StoreRepositoryImpl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     }
 
     @Override
-    public List<Store> findStoresByNameAndScore(String name, Float score) {
+    public List<Store> findStoresByNameAndScore(String name, BigDecimal score) {
         List<Store> filteredStores = storeRepositoryImpl.dynamicQueryWithBooleanBuilder(name, score);
         //for-each루프를 함수형 스타일로 표현한 것
         filteredStores.forEach(store -> System.out.println("Store: " + store));

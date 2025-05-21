@@ -9,6 +9,7 @@ import umc.study.domain.mission.Mission;
 import umc.study.domain.region.Region;
 import umc.study.domain.review.Review;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,17 +31,12 @@ public class Store extends BaseTime {
     private String address;
 
     @Column(nullable = false)
-    private Float score;
+    private BigDecimal score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Mission> missionList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Review> reviewList = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -51,5 +47,9 @@ public class Store extends BaseTime {
                 ", score=" + score +
                 ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
                 '}';
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 }
