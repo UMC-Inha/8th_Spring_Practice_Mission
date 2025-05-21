@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import umc.service.restaurantService.RestaurantQueryService;
+import umc.service.restaurant.RestaurantQueryService;
 
 @SpringBootApplication
 @EnableFeignClients(basePackages = "umc.webhook")

@@ -2,6 +2,8 @@ package umc.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import umc.domain.common.BaseEntity;
 import umc.domain.enums.Gender;
 import umc.domain.enums.Status;
@@ -17,6 +19,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@DynamicUpdate
+@DynamicInsert
 public class User extends BaseEntity {
 
     @Id
@@ -47,8 +51,8 @@ public class User extends BaseEntity {
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    @Column
-    private Status status;
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
+    private Status status = Status.ACTIVE;
 
     @Column
     private Integer totalPoint;
@@ -68,7 +72,7 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserPreference userPreference;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserPreference> userPreferenceList = new ArrayList<>();
 
 }
