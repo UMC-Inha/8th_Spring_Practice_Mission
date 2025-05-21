@@ -24,7 +24,7 @@ public class RestaurantRestController {
 
     @PostMapping("/location/{locationId}")
     public ApiResponse<String> createRestaurant(
-            @RequestBody @Valid RestaurantRequestDTO.createRestaurantDto request, @ExistLocation @PathVariable Long locationId) {
+            @RequestBody @Valid RestaurantRequestDTO.createRestaurantDTO request, @ExistLocation @PathVariable Long locationId) {
 
         restaurantCommandService.createRestaurant(request, locationId);
         return ApiResponse.onSuccess("식당이 등록되었습니다");

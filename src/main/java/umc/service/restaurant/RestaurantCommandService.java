@@ -6,5 +6,5 @@ import umc.web.dto.restaurant.RestaurantRequestDTO;
 public interface RestaurantCommandService {
 
 
-    void createRestaurant(RestaurantRequestDTO.createRestaurantDto request, Long locationId);
+    void createRestaurant(RestaurantRequestDTO.createRestaurantDTO request, Long locationId);
 }

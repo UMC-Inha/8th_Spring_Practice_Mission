@@ -10,7 +10,7 @@ import java.util.List;
 public class RestaurantRequestDTO {
 
     @Getter
-    public static class createRestaurantDto{
+    public static class createRestaurantDTO{
         @NotBlank
         String name;
         String description;

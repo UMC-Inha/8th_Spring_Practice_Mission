@@ -33,7 +33,7 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService{
 
     @Override
     @Transactional
-    public void createRestaurant(RestaurantRequestDTO.createRestaurantDto request, Long locationId) {
+    public void createRestaurant(RestaurantRequestDTO.createRestaurantDTO request, Long locationId) {
 
         Location location = locationRepository.findById(locationId).orElseThrow(
                 () -> new LocationHandler(ErrorStatus.LOCATION_NOT_FOUND)

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class RestaurantConverter {
 
-    public static Restaurant toRestaurant(RestaurantRequestDTO.createRestaurantDto request, Location location) {
+    public static Restaurant toRestaurant(RestaurantRequestDTO.createRestaurantDTO request, Location location) {
 
         return Restaurant.builder()
                 .name(request.getName())
