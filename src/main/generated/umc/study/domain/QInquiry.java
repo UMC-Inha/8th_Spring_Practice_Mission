@@ -33,11 +33,7 @@ public class QInquiry extends EntityPathBase<Inquiry> {
 
     public final StringPath inquiryImageUrl = createString("inquiryImageUrl");
 
-    public final StringPath inquiryReply = createString("inquiryReply");
-
-    public final EnumPath<umc.study.domain.enums.InquiryStatus> inquiryStatus = createEnum("inquiryStatus", umc.study.domain.enums.InquiryStatus.class);
-
-    public final EnumPath<umc.study.domain.enums.InquiryType> inquiryType = createEnum("inquiryType", umc.study.domain.enums.InquiryType.class);
+    public final EnumPath<umc.study.domain.enums.InquiryStatus> inquiryReply = createEnum("inquiryReply", umc.study.domain.enums.InquiryStatus.class);
 
     public final StringPath title = createString("title");
 

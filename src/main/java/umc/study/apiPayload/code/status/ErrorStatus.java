@@ -18,11 +18,24 @@ public enum ErrorStatus implements BaseErrorCode {
 
 
     // 멤버 관려 에러
-    MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "no user found."),
-    NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "nickname is required."),
+    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER4001", "no user found."),
+    NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "USER4002", "nickname is required."),
 
-    // 예시,,,
+    // 게시글 에러
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "no articles."),
+
+    // 음식 카테고리 에러
+    FOOD_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "FOOD4005", "food category not found."),
+
+    // 지역 에러
+    REGION_NOT_FOUND(HttpStatus.NOT_FOUND, "REGION4001", "region not found."),
+
+    // 식당 에러
+    STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE4001", "store not found."),
+
+    // 미션 에러
+    MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION4001", "mission not found."),
+    MISSION_ALREADY_DONE(HttpStatus.BAD_REQUEST, "MISSION4002", "already completed mission."),
 
     // For test
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001","this is test");
@@ -47,7 +60,6 @@ public enum ErrorStatus implements BaseErrorCode {
                 .code(code)
                 .isSuccess(false)
                 .httpStatus(httpStatus)
-                .build()
-                ;
+                .build();
     }
 }

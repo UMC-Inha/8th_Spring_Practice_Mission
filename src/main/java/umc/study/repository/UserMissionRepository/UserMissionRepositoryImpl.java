@@ -1,4 +1,4 @@
-package umc.study.repository.UserMissionRepository;
+/*package umc.study.repository.UserMissionRepository;
 
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
@@ -15,7 +15,7 @@ import umc.study.domain.QUser;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.QUserMission;
 import umc.study.domain.mapping.UserMission;
-import umc.study.web.dto.UserMissionResponseDto;
+import umc.study.web.dto.MissionResponseDto;
 
 import java.util.List;
 
@@ -68,11 +68,11 @@ public class UserMissionRepositoryImpl implements UserMissionRepositoryCustom {
     }
 
     @Override
-    public List<UserMissionResponseDto> findCompletedMissionByUser(Long userId, Pageable pageable) {
+    public List<MissionResponseDto> findCompletedMissionByUser(Long userId, Pageable pageable) {
         OrderSpecifier<?>[] orderSpecifiers = getOrderSpecifiers(pageable, UserMission.class, "userMission");
 
         return queryFactory
-                .select(Projections.constructor(UserMissionResponseDto.class,
+                .select(Projections.constructor(MissionResponseDto.class,
                         mission.id,
                         mission.missionSpec,
                         store.name))
@@ -100,4 +100,4 @@ public class UserMissionRepositoryImpl implements UserMissionRepositoryCustom {
                         .and(store.region.name.eq(regionName)))
                 .fetchOne();
     }
-}
+}*/

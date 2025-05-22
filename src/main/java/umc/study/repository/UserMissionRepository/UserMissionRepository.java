@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface UserMissionRepository extends JpaRepository<UserMission, Long>, UserMissionRepositoryCustom {
     // 특정 회원이 특정 미션에 도전 중인지 확인
     boolean existsByUserIdAndMissionIdAndStatus(Long userId, Long missionId, MissionStatus status);
-    boolean existsByMissionIdAndStatus(Long missionId, MissionStatus missionStatus);
+    //boolean existsByMissionIdAndStatus(Long missionId, MissionStatus missionStatus);
 
     // 회원-미션 관계 조회
     Optional<UserMission> findByUserIdAndMissionId(Long userId, Long missionId);

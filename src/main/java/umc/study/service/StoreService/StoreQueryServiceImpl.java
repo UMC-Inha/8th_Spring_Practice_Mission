@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import umc.study.domain.Store;
 import umc.study.repository.StoreRepository.StoreRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -23,8 +24,8 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     }
 
     @Override
-    public List<Store> findStoresByNameAndScore(String name, Float score) {
-        List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, score);
+    public List<Store> findStoresByNameAndScore(String name, BigDecimal rating) {
+        List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, rating);
 
         filteredStores.forEach(store -> System.out.println("Store: " + store));
 
