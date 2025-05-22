@@ -2,8 +2,8 @@ package umc.study.converter;
 
 import umc.study.domain.Member;
 import umc.study.domain.enums.Gender;
-import umc.study.web.dto.MemberRequestDTO;
-import umc.study.web.dto.MemberResponseDTO;
+import umc.study.web.dto.request.MemberRequestDTO;
+import umc.study.web.dto.response.MemberResponseDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

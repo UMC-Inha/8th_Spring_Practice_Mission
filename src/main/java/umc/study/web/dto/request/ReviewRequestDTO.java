@@ -1,4 +1,4 @@
-package umc.study.web.dto;
+package umc.study.web.dto.request;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;
