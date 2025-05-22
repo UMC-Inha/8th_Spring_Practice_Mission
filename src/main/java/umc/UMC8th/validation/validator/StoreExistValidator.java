@@ -4,17 +4,18 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import umc.UMC8th.repository.StoreRepository.StoreRepository;
-import umc.UMC8th.validation.annotation.StoreExists;
+// import umc.UMC8th.repository.StoreRepository.StoreRepository;
+import umc.UMC8th.service.StoreValidationService;
+import umc.UMC8th.validation.annotation.ExistStore;
 
 @Component
 @RequiredArgsConstructor
-public class StoreExistValidator implements ConstraintValidator<StoreExists, Long> {
+public class StoreExistValidator implements ConstraintValidator<ExistStore, Long> {
 
-    private final StoreRepository storeRepository;
+    private final StoreValidationService storeValidationService;
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
-        return value != null && storeRepository.existsById(value);
+        return value != null && storeValidationService.isStoreExist(value);
     }
 }
