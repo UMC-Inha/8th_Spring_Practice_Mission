@@ -29,7 +29,10 @@ public class MemberRestController {
 
 
         return ApiResponse.onSuccess(
-                MemberConverter.toJoinResultDto(savedMember, request.getFoodCategories()) // 일단 그냥 프론트에서 준 값을 응답에 그대로 넣어놓음
+                MemberConverter.toJoinResultDto(
+                        savedMember,
+                        request.getFoodCategories().toString() // List<Long> → String으로 변환
+                )
         );
     }
 }
