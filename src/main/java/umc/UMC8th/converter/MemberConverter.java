@@ -8,6 +8,7 @@ import umc.UMC8th.dto.MemberResponseDTO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class MemberConverter {
 
@@ -22,6 +23,7 @@ public class MemberConverter {
                 .region(request.getRegion())
                 .status(MemberStatus.ACTIVE)
                 .points(0)
+                .memberPrefers(new ArrayList<>())
                 .build();
     }
 
@@ -44,4 +46,6 @@ public class MemberConverter {
             default -> throw new IllegalArgumentException("성별을 입력하세요: " + genderString); // M,F 선택 안하면 예외 던지기
         };
     }
+
+
 }
