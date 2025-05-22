@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class MemberRequestDTO {
 
@@ -41,7 +42,7 @@ public class MemberRequestDTO {
         private String userAddress;
 
         @NotBlank
-        private String foodCategories;
+        private List<Long> foodCategories;
 
         @NotBlank
         private String region;
