@@ -14,6 +14,8 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+        hbm2ddl:
+          auto: update # DB에 수동으로 넣어야할 데이터가 있기때문에 다시 변경
         default_batch_fetch_size: 1000
 
   sql:

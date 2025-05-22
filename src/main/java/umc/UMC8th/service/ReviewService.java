@@ -20,9 +20,9 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
 
     public Review createReview(CreateReviewRequest request) {
-        Member member = memberRepository.findById(request.getMemberId())
+        Member member = memberRepository.findById(1L) // 하드코딩으로 하기
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 사용자"));
-        Store store = storeRepository.findById(request.getStoreId())
+        Store store = storeRepository.findById(1L) // 하드코딩으로 하기
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 가게"));
 
         Review review = Review.builder()
