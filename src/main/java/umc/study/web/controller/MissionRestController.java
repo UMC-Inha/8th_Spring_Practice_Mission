@@ -1,5 +1,6 @@
 package umc.study.web.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ public class MissionRestController {
     private final MissionCommandService missionCommandService;
 
     @PostMapping("/api/v1/stores/{storeId}/missions")
-    public ApiResponse<MissionResponseDTO.createResultDTO> addMission(@PathVariable @ExistStores Long storeId, @RequestBody MissionRequestDTO.createMissionDTO request) {
+    public ApiResponse<MissionResponseDTO.createResultDTO> addMission(@PathVariable @ExistStores Long storeId, @RequestBody @Valid MissionRequestDTO.createMissionDTO request) {
         Mission mission = missionCommandService.createMission(storeId, request);
         return ApiResponse.onSuccess(MissionConverter.toCreateResultDTO(mission));
     }
