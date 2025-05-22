@@ -8,7 +8,7 @@ import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.repository.MemberMissionRepository;
 import umc.study.validation.annotation.AlreadyMissionChallenge;
-import umc.study.web.dto.MemberMissionRequestDTO;
+import umc.study.web.dto.request.MemberMissionRequestDTO;
 
 @Component
 @RequiredArgsConstructor

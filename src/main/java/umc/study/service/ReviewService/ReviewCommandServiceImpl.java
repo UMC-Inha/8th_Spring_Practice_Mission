@@ -10,7 +10,7 @@ import umc.study.domain.Store;
 import umc.study.repository.ReviewPictureRepository;
 import umc.study.repository.ReviewRepository;
 import umc.study.repository.StoreRepository.StoreRepository;
-import umc.study.web.dto.ReviewRequestDTO;
+import umc.study.web.dto.request.ReviewRequestDTO;
 
 import java.util.List;
 

@@ -10,8 +10,8 @@ import umc.study.apiPayload.ApiResponse;
 import umc.study.converter.MemberMissionConverter;
 import umc.study.domain.mapping.MemberMission;
 import umc.study.service.MemberMissionService.MemberMissionCommandService;
-import umc.study.web.dto.MemberMissionRequestDTO;
-import umc.study.web.dto.MemberMissionResponseDTO;
+import umc.study.web.dto.request.MemberMissionRequestDTO;
+import umc.study.web.dto.response.MemberMissionResponseDTO;
 
 @Validated
 @RestController

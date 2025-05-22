@@ -10,7 +10,7 @@ import umc.study.domain.mapping.MemberMission;
 import umc.study.repository.MemberMissionRepository;
 import umc.study.repository.MemberRepository;
 import umc.study.repository.MissionRepository;
-import umc.study.web.dto.MemberMissionRequestDTO;
+import umc.study.web.dto.request.MemberMissionRequestDTO;
 
 @Service
 @RequiredArgsConstructor

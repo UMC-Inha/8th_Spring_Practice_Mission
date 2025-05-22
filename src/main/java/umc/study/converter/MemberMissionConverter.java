@@ -3,7 +3,7 @@ package umc.study.converter;
 import umc.study.domain.Member;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.MemberMission;
-import umc.study.web.dto.MemberMissionResponseDTO;
+import umc.study.web.dto.response.MemberMissionResponseDTO;
 
 public class MemberMissionConverter {
     public static MemberMission toMemberMission(Member member) {

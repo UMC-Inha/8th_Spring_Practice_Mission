@@ -12,8 +12,8 @@ import umc.study.converter.MissionConverter;
 import umc.study.domain.Mission;
 import umc.study.service.MissionService.MissionCommandService;
 import umc.study.validation.annotation.ExistStores;
-import umc.study.web.dto.MissionRequestDTO;
-import umc.study.web.dto.MissionResponseDTO;
+import umc.study.web.dto.request.MissionRequestDTO;
+import umc.study.web.dto.response.MissionResponseDTO;
 
 @Validated
 @RestController
