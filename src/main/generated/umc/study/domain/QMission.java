@@ -46,6 +46,8 @@ public class QMission extends EntityPathBase<Mission> {
 
     public final ListPath<umc.study.domain.mapping.UserMission, umc.study.domain.mapping.QUserMission> useerMissionList = this.<umc.study.domain.mapping.UserMission, umc.study.domain.mapping.QUserMission>createList("useerMissionList", umc.study.domain.mapping.UserMission.class, umc.study.domain.mapping.QUserMission.class, PathInits.DIRECT2);
 
+    public final QUser user;
+
     public QMission(String variable) {
         this(Mission.class, forVariable(variable), INITS);
     }
@@ -66,6 +68,7 @@ public class QMission extends EntityPathBase<Mission> {
         super(type, metadata, inits);
         this.foodCategory = inits.isInitialized("foodCategory") ? new QFoodCategory(forProperty("foodCategory")) : null;
         this.store = inits.isInitialized("store") ? new QStore(forProperty("store"), inits.get("store")) : null;
+        this.user = inits.isInitialized("user") ? new QUser(forProperty("user")) : null;
     }
 
 }

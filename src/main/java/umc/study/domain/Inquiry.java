@@ -26,7 +26,8 @@ public class Inquiry extends BaseEntity {
     private String content;
 
     @Enumerated(EnumType.STRING)
-    private String inquiryReply;
+    @Column(name = "inquiry_reply")
+    private InquiryStatus inquiryReply;
     private String inquiryImageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)

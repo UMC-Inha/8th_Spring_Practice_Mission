@@ -1,0 +1,36 @@
+package umc.study.service.UserMissionService;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import umc.study.apiPayload.code.status.ErrorStatus;
+import umc.study.apiPayload.exceptition.GeneralException;
+import umc.study.domain.Mission;
+import umc.study.domain.User;
+import umc.study.domain.mapping.UserMission;
+import umc.study.repository.MissionRepository.MissionRepository;
+import umc.study.repository.UserMissionRepository.UserMissionRepository;
+import umc.study.repository.UserRepository.UserRepository;
+import umc.study.web.dto.MissionRequestDto;
+
+@Service
+@RequiredArgsConstructor
+public class UserMissionCommandServiceImpl implements UserMissionCommandService {
+    private final UserRepository userRepository;
+    private final MissionRepository missionRepository;
+    private final UserMissionRepository userMissionRepository;
+
+    @Override
+    public UserMission createUserMission(MissionRequestDto requestDto) {
+        User user = userRepository.findById(requestDto.getUserId())
+                .orElseThrow(() -> new GeneralException(ErrorStatus.USER_NOT_FOUND));
+
+        Mission mission = missionRepository.findById(requestDto.getMissionId())
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND));
+        UserMission userMission = UserMission.builder()
+                .user(user)
+                .mission(mission)
+                .build();
+
+        return userMissionRepository.save(userMission);
+    }
+}

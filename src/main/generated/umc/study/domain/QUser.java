@@ -24,6 +24,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath address = createString("address");
 
+    public final StringPath birth = createString("birth");
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
@@ -47,10 +49,6 @@ public class QUser extends EntityPathBase<User> {
 
     public final ListPath<Review, QReview> reviewList = this.<Review, QReview>createList("reviewList", Review.class, QReview.class, PathInits.DIRECT2);
 
-    public final EnumPath<umc.study.domain.enums.SocialType> socialType = createEnum("socialType", umc.study.domain.enums.SocialType.class);
-
-    public final StringPath specAddress = createString("specAddress");
-
     public final EnumPath<umc.study.domain.enums.UserStatus> status = createEnum("status", umc.study.domain.enums.UserStatus.class);
 
     //inherited
@@ -60,7 +58,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final ListPath<umc.study.domain.mapping.UserAgree, umc.study.domain.mapping.QUserAgree> userAgreeList = this.<umc.study.domain.mapping.UserAgree, umc.study.domain.mapping.QUserAgree>createList("userAgreeList", umc.study.domain.mapping.UserAgree.class, umc.study.domain.mapping.QUserAgree.class, PathInits.DIRECT2);
 
-    public final ListPath<umc.study.domain.mapping.FoodPrefer, umc.study.domain.mapping.QFoodPrefer> userPreferList = this.<umc.study.domain.mapping.FoodPrefer, umc.study.domain.mapping.QFoodPrefer>createList("userPreferList", umc.study.domain.mapping.FoodPrefer.class, umc.study.domain.mapping.QFoodPrefer.class, PathInits.DIRECT2);
+    public final ListPath<umc.study.domain.mapping.UserPrefer, umc.study.domain.mapping.QUserPrefer> userPreferList = this.<umc.study.domain.mapping.UserPrefer, umc.study.domain.mapping.QUserPrefer>createList("userPreferList", umc.study.domain.mapping.UserPrefer.class, umc.study.domain.mapping.QUserPrefer.class, PathInits.DIRECT2);
 
     public QUser(String variable) {
         super(User.class, forVariable(variable));

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import umc.study.domain.common.BaseEntity;
-import umc.study.domain.mapping.FoodPrefer;
+import umc.study.domain.mapping.UserPrefer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +29,14 @@ public class FoodCategory extends BaseEntity {
 
     @Builder.Default
     @OneToMany(mappedBy = "foodCategory", cascade = CascadeType.ALL)
-    private List<FoodPrefer> foodPreferenceList = new ArrayList<>();
+    private List<UserPrefer> foodPreferenceList = new ArrayList<>();
 
     @Builder.Default
 
     @OneToMany(mappedBy = "foodCategory", cascade = CascadeType.PERSIST)
     private List<Mission> missionList = new ArrayList<>();
+
+    public void setStore(Store store) {
+        storeList.add(store);
+    }
 }

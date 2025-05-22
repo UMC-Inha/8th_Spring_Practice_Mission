@@ -4,6 +4,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import java.math.BigDecimal;
 import umc.study.domain.QStore;
 import umc.study.domain.Store;
 
@@ -16,15 +17,15 @@ public class StoreRepositoryImpl implements StoreRepositoryCustom{
     private final QStore store = QStore.store;
 
     @Override
-    public List<Store> dynamicQueryWithBooleanBuilder(String name, Float score) {
+    public List<Store> dynamicQueryWithBooleanBuilder(String name, BigDecimal rating) {
         BooleanBuilder predicate = new BooleanBuilder();
 
         if (name != null) {
             predicate.and(store.name.eq(name));
         }
 
-        if (score != null) {
-            predicate.and(store.score.goe(4.0f));
+        if (rating != null) {
+            predicate.and(store.rating.goe(4.0f));
         }
 
         return jpaQueryFactory

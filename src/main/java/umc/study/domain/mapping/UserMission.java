@@ -31,4 +31,11 @@ public class UserMission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
     private Mission mission;
+
+    public static UserMission create(User user, Mission mission, MissionStatus missionStatus) {
+        UserMission userMission = new UserMission();
+        userMission.user = user;
+        userMission.mission = mission;
+        return userMission;
+    }
 }

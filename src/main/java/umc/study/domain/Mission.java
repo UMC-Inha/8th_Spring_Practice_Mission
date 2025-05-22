@@ -20,6 +20,7 @@ import java.util.List;
 public class Mission extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "mission_id")
     private Long id;
 
    @Column(nullable = false)
@@ -34,6 +35,10 @@ public class Mission extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private MissionStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")

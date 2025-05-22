@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QFoodPrefer is a Querydsl query type for FoodPrefer
+ * QUserPrefer is a Querydsl query type for UserPrefer
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QFoodPrefer extends EntityPathBase<FoodPrefer> {
+public class QUserPrefer extends EntityPathBase<UserPrefer> {
 
-    private static final long serialVersionUID = -257100368L;
+    private static final long serialVersionUID = 1742196573L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QFoodPrefer foodPrefer = new QFoodPrefer("foodPrefer");
+    public static final QUserPrefer userPrefer = new QUserPrefer("userPrefer");
 
     public final umc.study.domain.common.QBaseEntity _super = new umc.study.domain.common.QBaseEntity(this);
 
@@ -36,23 +36,23 @@ public class QFoodPrefer extends EntityPathBase<FoodPrefer> {
 
     public final umc.study.domain.QUser user;
 
-    public QFoodPrefer(String variable) {
-        this(FoodPrefer.class, forVariable(variable), INITS);
+    public QUserPrefer(String variable) {
+        this(UserPrefer.class, forVariable(variable), INITS);
     }
 
-    public QFoodPrefer(Path<? extends FoodPrefer> path) {
+    public QUserPrefer(Path<? extends UserPrefer> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QFoodPrefer(PathMetadata metadata) {
+    public QUserPrefer(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QFoodPrefer(PathMetadata metadata, PathInits inits) {
-        this(FoodPrefer.class, metadata, inits);
+    public QUserPrefer(PathMetadata metadata, PathInits inits) {
+        this(UserPrefer.class, metadata, inits);
     }
 
-    public QFoodPrefer(Class<? extends FoodPrefer> type, PathMetadata metadata, PathInits inits) {
+    public QUserPrefer(Class<? extends UserPrefer> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.foodCategory = inits.isInitialized("foodCategory") ? new umc.study.domain.QFoodCategory(forProperty("foodCategory")) : null;
         this.user = inits.isInitialized("user") ? new umc.study.domain.QUser(forProperty("user")) : null;
