@@ -23,6 +23,6 @@ public class UserRestController {
     @PostMapping("/")
     public ResponseEntity<ApiResponse<?>> join(@RequestBody @Valid UserRequestDTO.JoinDto request) {
         return ResponseEntityUtil.buildResponseEntityWithStatus(
-                ApiResponse.onSuccess(UserConverter.toJoinResultDto(userCommandService.joinUser(request))), HttpStatus.CREATED);
+                ApiResponse.onSuccess(userCommandService.joinUser(request)), HttpStatus.CREATED);
     }
 }

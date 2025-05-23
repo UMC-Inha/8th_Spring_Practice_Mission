@@ -13,6 +13,7 @@ import umc.infrastructure.persistence.entity.user.User;
 import umc.infrastructure.persistence.repository.category.CategoryRepository;
 import umc.infrastructure.persistence.repository.user.UserRepository;
 import umc.presentation.dto.user.UserRequestDTO;
+import umc.presentation.dto.user.UserResponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class UserCommandServiceImpl implements UserCommandService{
 
     @Override
     @Transactional
-    public User joinUser(UserRequestDTO.JoinDto request){
+    public UserResponseDTO.JoinResultDto joinUser(UserRequestDTO.JoinDto request){
         User newUser = UserConverter.toUser(request);
 
         //존재하는 Category Id만 들어온다고 가정했을 때, 굳이 에러체크를 할 필요가 없다면 다음과 같이 성능을 챙길 수 있다.
@@ -33,7 +34,7 @@ public class UserCommandServiceImpl implements UserCommandService{
         List<UserCategory> UserCategoryList = UserCategoryConverter.toUserCategoryList(categoryList);
         UserCategoryList.forEach(userCategory -> userCategory.setUser(newUser));
 
-        return userRepository.save(newUser);
+        return UserConverter.toJoinResultDto(userRepository.save(newUser));
     }
 
 }
