@@ -9,6 +9,7 @@ public class ReviewConverter {
         return Review.builder()
                 .content(requestDto.content())
                 .score(requestDto.score())
+                .title(requestDto.title())
                 .build();
     }
 

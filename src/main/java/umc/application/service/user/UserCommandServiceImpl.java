@@ -29,19 +29,19 @@ public class UserCommandServiceImpl implements UserCommandService{
         User newUser = UserConverter.toUser(request);
 
 
-        List<Category> categoryList = request.preferCategoryIdList().stream()
-                .map(preferCategory -> categoryRepository.findById(preferCategory).orElseThrow(()
-                                    -> new CategoryHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND))).toList();
-        List<UserCategory> UserCategoryList = UserCategoryConverter.toUserCategoryList(categoryList);
-        UserCategoryList.forEach(userCategory -> userCategory.setUser(newUser));
+//        List<Category> categoryList = request.preferCategoryIdList().stream()
+//                .map(preferCategory -> categoryRepository.findById(preferCategory).orElseThrow(()
+//                                    -> new CategoryHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND))).toList();
+//        List<UserCategory> UserCategoryList = UserCategoryConverter.toUserCategoryList(categoryList);
+//        UserCategoryList.forEach(userCategory -> userCategory.setUser(newUser));
 
-        /*
-        존재하는 Category Id만 들어온다고 가정했을 때, 굳이 에러체크를 할 필요가 없다면 다음과 같이 성능을 챙길 수 있다.
+
+        //존재하는 Category Id만 들어온다고 가정했을 때, 굳이 에러체크를 할 필요가 없다면 다음과 같이 성능을 챙길 수 있다.
 
         List<Category> categoryList = categoryRepository.findAllCategoryByIds(request.preferCategoryIdList());
         List<UserCategory> UserCategoryList = UserCategoryConverter.toUserCategoryList(categoryList);
         UserCategoryList.forEach(userCategory -> userCategory.setUser(newUser));
-        */
+
         return userRepository.save(newUser);
     }
 

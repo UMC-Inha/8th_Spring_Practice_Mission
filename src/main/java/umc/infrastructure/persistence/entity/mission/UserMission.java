@@ -1,10 +1,7 @@
 package umc.infrastructure.persistence.entity.mission;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import umc.infrastructure.persistence.entity.BaseTimeEntity;
 import umc.infrastructure.persistence.entity.user.User;
 
@@ -13,6 +10,7 @@ import umc.infrastructure.persistence.entity.user.User;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "user_mission")
+@Getter
 public class UserMission extends BaseTimeEntity {
     @EmbeddedId
     private UserMissionPK id;
@@ -29,5 +27,18 @@ public class UserMission extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
-    private MissionState state;
+    @Builder.Default
+    private MissionState state = MissionState.ING;
+
+    public void setUser(User user) {
+        if (this.user != null) {
+            this.user.getUserMissions().remove(this);
+        }
+        this.user = user;
+        user.getUserMissions().add(this);
+    }
+
+    public void setMission(Mission mission) {
+        this.mission = mission;
+    }
 }

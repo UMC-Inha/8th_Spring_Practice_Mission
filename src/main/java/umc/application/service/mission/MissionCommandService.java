@@ -6,4 +6,6 @@ import umc.presentation.dto.mission.MissionResponseDto;
 
 public interface MissionCommandService {
     MissionResponseDto.MissionCreateResponseDto createMission(MissionRequestDto.MissionCreateDto request);
+
+    MissionResponseDto.AddMissionToUserResponseDto addMissionToUser(MissionRequestDto.AddMissionToUserDto request);
 }

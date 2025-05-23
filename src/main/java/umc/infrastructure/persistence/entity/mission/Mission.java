@@ -32,6 +32,8 @@ public class Mission extends BaseTimeEntity {
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
+
+
     public void setStore(Store store) {
         if (this.store != null) {
             this.store.getMissions().remove(this);

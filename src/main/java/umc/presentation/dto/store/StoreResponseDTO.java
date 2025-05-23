@@ -7,4 +7,7 @@ public class StoreResponseDTO {
     public record StoreLocationResultDto(
             Long storeId,
             String location){ }
+
+    @Builder
+    public record StoreCreateResultDto(Long storeId) {}
 }

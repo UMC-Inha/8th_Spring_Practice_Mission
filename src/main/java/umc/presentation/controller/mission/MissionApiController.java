@@ -22,4 +22,9 @@ public class MissionApiController {
         return ResponseEntityUtil.buildResponseEntityWithStatus(ApiResponse.onSuccess(missionCommandService.createMission(request)), HttpStatus.CREATED);
 
     }
+
+    @PostMapping("/add-mission")
+    public ResponseEntity<ApiResponse<?>> addMissionToUser(@RequestBody MissionRequestDto.AddMissionToUserDto request) {
+        return ResponseEntityUtil.buildResponseEntityWithStatus(ApiResponse.onSuccess(missionCommandService.addMissionToUser(request)), HttpStatus.CREATED);
+    }
 }

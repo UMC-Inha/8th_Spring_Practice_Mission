@@ -16,6 +16,11 @@ public class StoreCommandServiceImpl implements StoreCommandService {
     private final StoreRepository storeRepository;
 
     @Override
+    public StoreResponseDTO.StoreCreateResultDto createStore(StoreRequestDTO.StoreCreateDto request) {
+        Store store = StoreConverter.toStore(request);
+        return StoreConverter.toStoreCreateResultDto(storeRepository.save(store));
+    }
+    @Override
     public StoreResponseDTO.StoreLocationResultDto modifyStoreLocation(StoreRequestDTO.StoreLocationDTO storeLocationDTO){
         Store store = storeRepository.findById(storeLocationDTO.storeId())
                 .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));

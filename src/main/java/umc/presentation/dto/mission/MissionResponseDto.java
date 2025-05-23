@@ -9,7 +9,9 @@ public class MissionResponseDto {
     public record MissionCreateResponseDto(Long missionId,
                                            String content,
                                            LocalDateTime dueDate,
-                                           LocalDateTime createdAt) {
+                                           LocalDateTime createdAt) { }
 
-    }
+    @Builder
+    public record AddMissionToUserResponseDto(Long userId, Long missionId) { }
+
 }
