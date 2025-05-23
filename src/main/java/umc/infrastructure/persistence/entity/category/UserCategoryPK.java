@@ -2,10 +2,7 @@ package umc.infrastructure.persistence.entity.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -16,6 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class UserCategoryPK implements Serializable {
 
+    @Setter
     @Column(name = "user_id")
     private Long userId;
 

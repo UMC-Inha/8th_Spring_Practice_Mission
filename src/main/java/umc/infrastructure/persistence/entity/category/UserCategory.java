@@ -26,11 +26,18 @@ public class UserCategory {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public void setUser(User user){
-        if(this.user != null)
-            user.getUserCategories().remove(this);
+    public void setUser(User user) {
+        if (this.user != null) {
+            this.user.getUserCategories().remove(this);
+        }
         this.user = user;
         user.getUserCategories().add(this);
+
+        // ★ 복합키에 userId 채워 넣기
+        if (this.id == null) {
+            this.id = new UserCategoryPK();
+        }
+        this.id.setUserId(user.getId());   // setter 추가 또는 새 PK로 교체
     }
 
     public void setFoodCategory(Category foodCategory){

@@ -2,6 +2,7 @@ package umc.application.service.review;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import umc.application.converter.ReviewConverter;
 import umc.common.ApiPayload.code.status.ErrorStatus;
 import umc.common.ApiPayload.exception.handler.StoreHandler;
@@ -22,6 +23,8 @@ public class ReviewCommandServiceImpl implements ReviewCommandService{
     private final UserRepository userRepository;
     private final StoreRepository storeRepository;
 
+    @Transactional
+    @Override
     public ReviewResponseDto.CreateReviewResponseDto createReview(ReviewRequestDto.CreateReviewRequestDto request){
         User user = userRepository.findById(request.userId()).orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
         Store store = storeRepository.findById(request.storeId()).orElseThrow(() -> new UserHandler(ErrorStatus.MEMBER_NOT_FOUND));

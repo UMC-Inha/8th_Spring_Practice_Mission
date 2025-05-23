@@ -28,7 +28,7 @@ public class User extends BaseTimeEntity {
     @Column(name = "email", nullable = true, unique = true, length = 50)
     private String email;
 
-    @Column(name = "name", nullable = false, unique = true, length = 30)
+    @Column(name = "name", nullable = false, length = 30)
     private String name;
 
     @Column(name = "pw", nullable = false, length = 100)
@@ -63,7 +63,7 @@ public class User extends BaseTimeEntity {
     private List<UserCategory> userCategories = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<UserMission> userMissions = new HashSet<>();
 
     @Builder.Default

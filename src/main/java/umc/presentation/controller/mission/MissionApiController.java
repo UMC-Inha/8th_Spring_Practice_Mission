@@ -1,5 +1,6 @@
 package umc.presentation.controller.mission;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +19,13 @@ import umc.presentation.dto.mission.MissionRequestDto;
 public class MissionApiController {
     private final MissionCommandService missionCommandService;
     @PostMapping("/")
-    public ResponseEntity<ApiResponse<?>> createMission(@RequestBody MissionRequestDto.MissionCreateDto request){
+    public ResponseEntity<ApiResponse<?>> createMission(@RequestBody @Valid MissionRequestDto.MissionCreateDto request){
         return ResponseEntityUtil.buildResponseEntityWithStatus(ApiResponse.onSuccess(missionCommandService.createMission(request)), HttpStatus.CREATED);
 
     }
 
     @PostMapping("/add-mission")
-    public ResponseEntity<ApiResponse<?>> addMissionToUser(@RequestBody MissionRequestDto.AddMissionToUserDto request) {
+    public ResponseEntity<ApiResponse<?>> addMissionToUser(@RequestBody @Valid MissionRequestDto.AddMissionToUserDto request) {
         return ResponseEntityUtil.buildResponseEntityWithStatus(ApiResponse.onSuccess(missionCommandService.addMissionToUser(request)), HttpStatus.CREATED);
     }
 }

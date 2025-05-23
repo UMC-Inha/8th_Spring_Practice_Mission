@@ -1,5 +1,6 @@
 package umc.presentation.controller.review;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class ReviewRestController {
 
     @PostMapping("/")
     public ResponseEntity<ApiResponse<ReviewResponseDto.CreateReviewResponseDto>> CreateReview(
-            @RequestBody ReviewRequestDto.CreateReviewRequestDto requestDto) {
+            @RequestBody @Valid ReviewRequestDto.CreateReviewRequestDto requestDto) {
 
         return ResponseEntityUtil.buildResponseEntityWithStatus(
                 ApiResponse.onSuccess( reviewCommandService.createReview(requestDto)), HttpStatus.CREATED);
