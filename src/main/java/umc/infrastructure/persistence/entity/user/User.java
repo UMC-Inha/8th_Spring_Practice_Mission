@@ -19,7 +19,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "user")
 @Builder
-@Setter
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

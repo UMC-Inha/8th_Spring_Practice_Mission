@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "store")
 @Builder
-@Setter
 public class Store extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +31,7 @@ public class Store extends BaseTimeEntity {
     @Column(name = "address", nullable = false, length = 255)
     private String address;
 
-
+    @Setter
     @Column(name = "location", nullable = false, length = 20)
     private String location;
 
