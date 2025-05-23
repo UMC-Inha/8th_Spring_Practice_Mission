@@ -21,7 +21,7 @@ import umc.presentation.dto.user.UserResponseDTO;
 public class UserRestController {
     private final UserCommandService userCommandService;
     @PostMapping("/")
-    public ResponseEntity<ApiResponse<UserResponseDTO.JoinResultDto>> join(@RequestBody @Valid UserRequestDTO.JoinDto request) {
+    public ResponseEntity<ApiResponse<?>> join(@RequestBody @Valid UserRequestDTO.JoinDto request) {
         return ResponseEntityUtil.buildResponseEntityWithStatus(
                 ApiResponse.onSuccess(UserConverter.toJoinResultDto(userCommandService.joinUser(request))), HttpStatus.CREATED);
     }

@@ -21,9 +21,7 @@ public class ReviewRestController {
     private final ReviewCommandService reviewCommandService;
 
     @PostMapping("/")
-    public ResponseEntity<ApiResponse<ReviewResponseDto.CreateReviewResponseDto>> CreateReview(
-            @RequestBody @Valid ReviewRequestDto.CreateReviewRequestDto requestDto) {
-
+    public ResponseEntity<ApiResponse<?>> CreateReview(@RequestBody @Valid ReviewRequestDto.CreateReviewRequestDto requestDto) {
         return ResponseEntityUtil.buildResponseEntityWithStatus(
                 ApiResponse.onSuccess( reviewCommandService.createReview(requestDto)), HttpStatus.CREATED);
     }

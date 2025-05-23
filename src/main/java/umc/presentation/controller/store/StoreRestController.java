@@ -19,8 +19,7 @@ public class StoreRestController {
     private final StoreCommandService storeCommandService;
 
     @PatchMapping("/location")
-    public ResponseEntity<ApiResponse<StoreResponseDTO.StoreLocationResultDto>> modifyStoreLocation(
-            @RequestBody @Valid StoreRequestDTO.StoreLocationDTO storeLocationDTO) {
+    public ResponseEntity<ApiResponse<?>> modifyStoreLocation(@RequestBody @Valid StoreRequestDTO.StoreLocationDTO storeLocationDTO) {
 
         return ResponseEntityUtil.buildDefaultResponseEntity(ApiResponse.onSuccess(storeCommandService.modifyStoreLocation(storeLocationDTO)));
     }
