@@ -8,6 +8,7 @@ import umc.study.domain.member.Member;
 @Entity
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class MemberCategory {

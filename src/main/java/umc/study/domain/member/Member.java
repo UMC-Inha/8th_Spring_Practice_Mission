@@ -26,23 +26,23 @@ public class Member extends BaseTime {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = true, length = 100)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = true, unique = true, length = 100)
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Gender gender;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate birth;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = true, length = 255)
     private String address;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(nullable = true, unique = true, length = 20)
     private String phoneNumber;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -55,13 +55,7 @@ public class Member extends BaseTime {
     private List<Agreement> agreementList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberCategory> memberCategoryList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<Review> reviewList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAlarm> memberAlarmList = new ArrayList<>();
@@ -81,6 +75,3 @@ public class Member extends BaseTime {
         return this.deletedAt != null;
     }
 }
-
-
-//했음

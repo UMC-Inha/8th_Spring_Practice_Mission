@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.study.domain.Image;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -16,6 +17,6 @@ public class ReviewSaveRequestDto {
     private Long storeId;
     private Long memberId;
     private String body;
-    private float score;
-    private List<Image> imageList;
+    private BigDecimal score;
+    private List<String> imageList;
 }

@@ -32,5 +32,9 @@ public class MemberMission extends BaseTime {
     @Column(columnDefinition = "DECIMAL(5,1)")
     private Double distanceFromMember;
 
+    public void setMemberMission(Member member, Mission mission) {
+        this.member = member;
+        this.mission = mission;
+    }
 
 }

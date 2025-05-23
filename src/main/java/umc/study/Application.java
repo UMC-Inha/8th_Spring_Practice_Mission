@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import umc.study.service.store.StoreQueryService;
 
+import java.math.BigDecimal;
+
 @SpringBootApplication
 public class Application {
 
@@ -22,7 +24,7 @@ public class Application {
 
 			// 파라미터 값 설정
 			String name = "요아정";
-			Float score = 4.0f;
+			BigDecimal score = BigDecimal.valueOf(4.0);
 
 			// 쿼리 메서드 호출 및 쿼리 문자열과 파라미터 출력
 			System.out.println("Executing findStoresByNameAndScore with parameters:");
