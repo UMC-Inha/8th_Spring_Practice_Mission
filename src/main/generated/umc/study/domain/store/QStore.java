@@ -26,7 +26,7 @@ public class QStore extends EntityPathBase<Store> {
 
     public final StringPath address = createString("address");
 
-    public final NumberPath<Float> averageRate = createNumber("averageRate", Float.class);
+    public final NumberPath<java.math.BigDecimal> averageRate = createNumber("averageRate", java.math.BigDecimal.class);
 
     public final QFoodCategory category;
 

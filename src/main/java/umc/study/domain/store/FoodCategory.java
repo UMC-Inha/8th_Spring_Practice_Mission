@@ -3,6 +3,7 @@ package umc.study.domain.store;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.study.domain.common.BaseEntity;
+import umc.study.domain.user.User;
 
 @Entity
 @Getter

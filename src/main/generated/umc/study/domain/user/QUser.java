@@ -45,6 +45,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final NumberPath<Integer> point = createNumber("point", Integer.class);
 
+    public final ListPath<umc.study.domain.mapping.PreferFood, umc.study.domain.mapping.QPreferFood> preferFoods = this.<umc.study.domain.mapping.PreferFood, umc.study.domain.mapping.QPreferFood>createList("preferFoods", umc.study.domain.mapping.PreferFood.class, umc.study.domain.mapping.QPreferFood.class, PathInits.DIRECT2);
+
     public final ListPath<umc.study.domain.review.Review, umc.study.domain.review.QReview> reviews = this.<umc.study.domain.review.Review, umc.study.domain.review.QReview>createList("reviews", umc.study.domain.review.Review.class, umc.study.domain.review.QReview.class, PathInits.DIRECT2);
 
     public final EnumPath<umc.study.domain.enums.UserStatus> status = createEnum("status", umc.study.domain.enums.UserStatus.class);

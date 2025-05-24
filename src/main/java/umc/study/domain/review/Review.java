@@ -6,6 +6,8 @@ import umc.study.domain.common.BaseEntity;
 import umc.study.domain.store.Store;
 import umc.study.domain.user.User;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Builder
@@ -24,7 +26,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private Float score;
+    private BigDecimal score;
 
     @Column(name = "review_content", columnDefinition = "TEXT")
     private String reviewContent;

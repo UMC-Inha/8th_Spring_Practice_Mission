@@ -1,4 +1,4 @@
-package umc.study.repository;
+package umc.study.repository.store;
 
 import umc.study.domain.store.Store;
 
