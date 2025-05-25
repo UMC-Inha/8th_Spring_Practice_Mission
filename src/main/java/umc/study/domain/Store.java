@@ -24,7 +24,7 @@ public class Store extends BaseEntity {
     @Column(nullable = false, length = 40)
     private String address;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private BigDecimal score;
 
     @Builder.Default
