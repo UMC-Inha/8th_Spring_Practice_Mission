@@ -26,7 +26,7 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
         Mission mission = missionRepository.getReferenceById(request.getMissionId());
 
         MemberMission memberMission = MemberMissionConverter.toMemberMission(member);
-        memberMission.setMission(mission);
+        memberMission.changeMission(mission);
         memberMissionRepository.save(memberMission);
 
         return memberMission;

@@ -50,8 +50,9 @@ public class Member extends BaseEntity {
     private String specAddress;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 10, columnDefinition = "VARCHAR(10) DEFAULT 'ACTIVE'")
-    private MemberStatus status;
+    @Column(length = 10, columnDefinition = "VARCHAR(10)")
+    @Builder.Default
+    private MemberStatus status = MemberStatus.ACTIVE;
 
     private LocalDateTime inactiveDate;
 
