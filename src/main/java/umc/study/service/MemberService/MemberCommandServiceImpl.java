@@ -12,6 +12,7 @@ import umc.study.converter.MemberMissionConverter;
 import umc.study.converter.MemberPreferConverter;
 import umc.study.domain.FoodCategory;
 import umc.study.domain.Member;
+import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.MemberMission;
 import umc.study.domain.mapping.MemberPrefer;
 import umc.study.repository.FoodCategoryRepository;
@@ -48,8 +49,8 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     }
 
     @Override
-    public Page<MemberMissionResponseDto.JoinResultDTO> findMemberMissions(Long memberId, Pageable pageable) {
-        Page<MemberMission> memberMissions = memberRepository.findMissionsByMember(memberId, pageable);
+    public Page<MemberMissionResponseDto.JoinResultDTO> findMemberMissions(Long memberId, MissionStatus status, Pageable pageable) {
+        Page<MemberMission> memberMissions = memberRepository.findMissionsByMember(memberId, status, pageable);
 
         return memberMissions.map(MemberMissionConverter::toJoinResultDTO);
     }

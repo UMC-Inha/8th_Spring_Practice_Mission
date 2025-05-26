@@ -43,6 +43,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     @Override
     public Page<MemberMission> findMissionsByMember(
             Long memberId,
+            MissionStatus status,
             Pageable pageable
     ) {
         List<MemberMission> content = jpaQueryFactory
@@ -50,7 +51,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                 .join(memberMission.member).fetchJoin()
                 .where(
                         memberMission.id.eq(memberId),
-                        memberMission.status.eq(MissionStatus.CHALLENGING)
+                        memberMission.status.eq(status)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
