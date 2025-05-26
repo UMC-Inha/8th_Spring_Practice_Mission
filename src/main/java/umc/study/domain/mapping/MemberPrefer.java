@@ -26,4 +26,15 @@ public class MemberPrefer extends BaseEntity {
     @JoinColumn(name = "type_id")
     private FoodType foodType;
 
+    //연관관계 편의 메서드 -> member와 memberPrefer에 양방향 맵핑
+    public void setMember(Member member) {
+        if (this.member != null)
+            member.getMemberPreferList().remove(this);
+        this.member = member;
+        member.getMemberPreferList().add(this);
+    }
+
+    public void setFoodCategory(FoodType foodType) {
+        this.foodType = foodType;
+    }
 }
