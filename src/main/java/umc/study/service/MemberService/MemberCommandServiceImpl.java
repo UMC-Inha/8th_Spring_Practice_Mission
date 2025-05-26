@@ -12,7 +12,7 @@ import umc.study.domain.Member;
 import umc.study.domain.mapping.MemberPrefer;
 import umc.study.repository.FoodTypeRepository;
 import umc.study.repository.MemberRepository;
-import umc.study.web.dto.MemberRequestDTO;
+import umc.study.web.dto.request.MemberRequestDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;

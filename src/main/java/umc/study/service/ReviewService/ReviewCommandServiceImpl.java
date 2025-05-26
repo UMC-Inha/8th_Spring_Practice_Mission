@@ -2,6 +2,7 @@ package umc.study.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import umc.study.converter.ReviewConverter;
 import umc.study.domain.Review;
 import umc.study.domain.ReviewPicture;
@@ -9,7 +10,7 @@ import umc.study.domain.Store;
 import umc.study.repository.ReviewPictureRepository;
 import umc.study.repository.ReviewRepository;
 import umc.study.repository.StoreRepository.StoreRepository;
-import umc.study.web.dto.ReviewRequestDTO;
+import umc.study.web.dto.request.ReviewRequestDTO;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
     private final StoreRepository storeRepository;
 
     @Override
+    @Transactional
     public Review save(Long storeId, ReviewRequestDTO.createReviewDto request) {
         Store store = storeRepository.getReferenceById(storeId);
 

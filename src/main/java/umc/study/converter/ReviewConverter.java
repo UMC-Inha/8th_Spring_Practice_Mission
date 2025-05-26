@@ -3,8 +3,8 @@ package umc.study.converter;
 import umc.study.domain.Review;
 import umc.study.domain.ReviewPicture;
 import umc.study.domain.Store;
-import umc.study.web.dto.ReviewRequestDTO;
-import umc.study.web.dto.ReviewResponseDTO;
+import umc.study.web.dto.request.ReviewRequestDTO;
+import umc.study.web.dto.response.ReviewResponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
