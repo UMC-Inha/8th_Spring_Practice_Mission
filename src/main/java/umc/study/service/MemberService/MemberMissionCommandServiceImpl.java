@@ -8,6 +8,7 @@ import umc.study.apiPayload.exception.GeneralException;
 import umc.study.converter.MemberMissionConverter;
 import umc.study.domain.Member;
 import umc.study.domain.Mission;
+import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.MemberMission;
 import umc.study.repository.MemberRepository.MemberMissionRepository;
 import umc.study.repository.MemberRepository.MemberRepository;
@@ -35,5 +36,12 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
         memberMission.setMission(mission);
 
         return memberMissionRepository.save(memberMission);
+    }
+
+    @Override
+    public void changeMemberMissionStatus(Long memberMissionId, MissionStatus status) {
+        MemberMission memberMission = memberMissionRepository.findById(memberMissionId).orElseThrow(() -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND));
+        memberMission.updateMissionStatus(status);
+        memberMissionRepository.save(memberMission);
     }
 }
