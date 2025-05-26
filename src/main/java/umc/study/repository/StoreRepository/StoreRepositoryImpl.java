@@ -42,8 +42,6 @@ public class StoreRepositoryImpl implements StoreRepositoryCustom{
     @Override
     public Page<Mission> findMissionsByStore(
             Long storeId,
-            String name,
-            Float minScore,
             Pageable pageable
     ) {
         List<Mission> content = jpaQueryFactory
