@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import umc.study.domain.QMember;
+import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.MemberMission;
 import umc.study.web.dto.Member.MemberDetailResponseDto;
 
@@ -48,7 +49,8 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
                 .selectFrom(memberMission)
                 .join(memberMission.member).fetchJoin()
                 .where(
-                        memberMission.id.eq(memberId)
+                        memberMission.id.eq(memberId),
+                        memberMission.status.eq(MissionStatus.CHALLENGING)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
