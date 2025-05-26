@@ -26,17 +26,13 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService {
 	@Override
 	@Transactional
 	public Restaurant joinRestaurant(RestaurantRequestDto.JoinDto request) {
-
-		Restaurant newRestaurant = RestaurantConverter.toRestaurant(request);
 		Region region = regionRepository.findByName(request.getRegionName()).orElseThrow(() -> new GeneralException(
 			ErrorStatus.REGION_NOT_FOUND));
 		Category category = categoryRepository.findById(request.getFoodCategory()).orElseThrow(() -> new GeneralException(
 			ErrorStatus.FOOD_CATEGORY_NOT_FOUND
 		));
 
-		// 연관 관계 설정
-		newRestaurant.setRegion(region);
-		newRestaurant.setCategory(category);
+		Restaurant newRestaurant = RestaurantConverter.toRestaurant(request, region, category);
 
 		return restaurantRepository.save(newRestaurant);
 	}

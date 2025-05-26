@@ -25,10 +25,13 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
 	@Override
 	public Review joinReview(ReviewRequestDto.JoinDto request) {
 		Review newReview = ReviewConverter.toReview(request);
+
 		User user = userRepository.findByEmail(request.getUserEmail()).orElseThrow(() -> new GeneralException(
 			ErrorStatus.USER_NOT_FOUND));
 		Restaurant restaurant = restaurantRepository.findById(request.getRestaurantId()).orElseThrow(() -> new GeneralException(
 			ErrorStatus.RESTAURANT_NOT_FOUND));
+
+		// 연관관계 설정,,,
 
 		return reviewRepository.save(newReview);
 	}

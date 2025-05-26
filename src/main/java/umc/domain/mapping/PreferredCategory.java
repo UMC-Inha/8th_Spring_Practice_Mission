@@ -34,7 +34,7 @@ public class PreferredCategory extends BaseEntity {
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	public void setUser(User user) {
+	public void changeUser(User user) {
 		if(this.user != null) {
 			user.getUserTermList().remove(this);
 		}

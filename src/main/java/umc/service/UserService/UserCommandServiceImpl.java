@@ -55,15 +55,13 @@ public class UserCommandServiceImpl implements UserCommandService{
 	@Override
 	@Transactional
 	public UserResponseDto.JoinResultDTO joinUser(UserRequestDto.JoinDto request) {
-		// 유저 생성
-		User newUser = UserConverter.toUser(request);
 
 		// 지역 검색
 		Region region = regionRepository.findByName(request.getAddress())
 			.orElseThrow(() -> new GeneralException(ErrorStatus.REGION_NOT_FOUND));
 
-		// 지역 설정
-		newUser.setRegion(region);
+		// 유저 생성
+		User newUser = UserConverter.toUser(request, region);
 		
 		// 해당되는 카테고리 추출
 		List<Category> categoryList = request.getPreferCategory().stream()
@@ -76,7 +74,7 @@ public class UserCommandServiceImpl implements UserCommandService{
 			categoryList);
 
 		// 연관 관계 설정
-		preferredCategoryList.forEach(userPrefer -> {userPrefer.setUser(newUser);});
+		preferredCategoryList.forEach(userPrefer -> {userPrefer.changeUser(newUser);});
 
 		return UserConverter.toJoinResultDto(userRepository.save(newUser));
 	}

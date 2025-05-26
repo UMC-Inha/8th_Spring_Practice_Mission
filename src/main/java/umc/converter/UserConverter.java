@@ -2,6 +2,7 @@ package umc.converter;
 
 import java.time.LocalDateTime;
 
+import umc.domain.Region;
 import umc.domain.User;
 import umc.domain.enums.Gender;
 import umc.dto.UserRequestDto;
@@ -16,7 +17,7 @@ public class UserConverter {
 			.build();
 	}
 
-	public static User toUser(UserRequestDto.JoinDto request) {
+	public static User toUser(UserRequestDto.JoinDto request, Region region) {
 
 		Gender gender = null;
 
@@ -38,6 +39,7 @@ public class UserConverter {
 			.gender(request.getGender())
 			.birth(request.getBirthDate())
 			.addressDetail(request.getAddressDetail())
+			.region(region)
 			.build();
 	}
 }

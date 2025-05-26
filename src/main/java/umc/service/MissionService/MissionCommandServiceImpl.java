@@ -29,13 +29,9 @@ public class MissionCommandServiceImpl implements MissionCommandService {
 	@Override
 	@Transactional
 	public Mission joinMission(MissionRequestDto.JoinMissionDto request) {
-		Mission newMission = MissionConverter.toMission(request);
 		Restaurant restaurant = restaurantRepository.findById((request.getRestaurantId())).orElseThrow(() -> new GeneralException(
 			ErrorStatus.RESTAURANT_NOT_FOUND));
-
-		// 연관 관계 설정
-		newMission.setRestaurant(restaurant);
-		newMission.setRegion(restaurant.getRegion());
+		Mission newMission = MissionConverter.toMission(request, restaurant);
 
 		return missionRepository.save(newMission);
 	}
@@ -43,13 +39,10 @@ public class MissionCommandServiceImpl implements MissionCommandService {
 	@Override
 	@Transactional
 	public UserMission challengeMission(MissionRequestDto.ChallengeDto request) {
-		UserMission newUserMission = MissionConverter.toUserMission(request);
 		User user = userRepository.findByEmail(request.getUserEmail()).orElseThrow(() -> new GeneralException(ErrorStatus.USER_NOT_FOUND));
 		Mission mission = missionRepository.findById(request.getMissionId()).orElseThrow(() -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND));
 
-		// 연관 관계 설정
-		newUserMission.setUser(user);
-		newUserMission.setMission(mission);
+		UserMission newUserMission = MissionConverter.toUserMission(request, user, mission);
 
 		return userMissionRepository.save(newUserMission);
 	}
