@@ -30,7 +30,7 @@ public class UserMission extends BaseTimeEntity {
     @Builder.Default
     private MissionState state = MissionState.ING;
 
-    public void setUser(User user) {
+    public void changeUser(User user) {
         if (this.user != null) {
             this.user.getUserMissions().remove(this);
         }
@@ -38,7 +38,7 @@ public class UserMission extends BaseTimeEntity {
         user.getUserMissions().add(this);
     }
 
-    public void setMission(Mission mission) {
+    public void changeMission(Mission mission) {
         this.mission = mission;
     }
 }

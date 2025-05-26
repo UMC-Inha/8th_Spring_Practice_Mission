@@ -1,6 +1,5 @@
 package umc.application.service.mission;
 
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +20,6 @@ import umc.infrastructure.persistence.repository.user.UserRepository;
 import umc.presentation.dto.mission.MissionRequestDto;
 import umc.presentation.dto.mission.MissionResponseDto;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class MissionCommandServiceImpl implements MissionCommandService{
@@ -35,7 +32,7 @@ public class MissionCommandServiceImpl implements MissionCommandService{
     public MissionResponseDto.MissionCreateResponseDto createMission(MissionRequestDto.MissionCreateDto request){
         Store store = storeRepository.findById(request.storeId()).orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
         Mission mission = MissionConverter.toMission(request);
-        mission.setStore(store);
+        mission.changeStore(store);
         return MissionConverter.toResponse(missionRepository.save(mission));
     }
 

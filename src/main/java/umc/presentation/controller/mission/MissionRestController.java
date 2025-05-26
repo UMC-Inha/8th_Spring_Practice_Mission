@@ -16,7 +16,7 @@ import umc.presentation.dto.mission.MissionRequestDto;
 @RestController
 @RequestMapping("/api/missions")
 @RequiredArgsConstructor
-public class MissionApiController {
+public class MissionRestController {
     private final MissionCommandService missionCommandService;
     @PostMapping("/")
     public ResponseEntity<ApiResponse<?>> createMission(@RequestBody @Valid MissionRequestDto.MissionCreateDto request){

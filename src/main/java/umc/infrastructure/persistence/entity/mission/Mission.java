@@ -34,7 +34,7 @@ public class Mission extends BaseTimeEntity {
 
 
 
-    public void setStore(Store store) {
+    public void changeStore(Store store) {
         if (this.store != null) {
             this.store.getMissions().remove(this);
         }

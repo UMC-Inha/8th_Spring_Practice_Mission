@@ -20,7 +20,7 @@ import umc.presentation.dto.review.ReviewResponseDto;
 public class ReviewRestController {
     private final ReviewCommandService reviewCommandService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<ApiResponse<?>> CreateReview(@RequestBody @Valid ReviewRequestDto.CreateReviewRequestDto requestDto) {
         return ResponseEntityUtil.buildResponseEntityWithStatus(
                 ApiResponse.onSuccess( reviewCommandService.createReview(requestDto)), HttpStatus.CREATED);

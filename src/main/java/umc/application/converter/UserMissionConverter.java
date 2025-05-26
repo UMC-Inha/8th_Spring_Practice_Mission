@@ -9,8 +9,8 @@ import umc.presentation.dto.mission.MissionResponseDto;
 public class UserMissionConverter {
     public static UserMission toUserMission(UserMissionPK pk, User user, Mission mission) {
         UserMission userMission = UserMission.builder().id(pk).build();
-        userMission.setUser(user);
-        userMission.setMission(mission);
+        userMission.changeUser(user);
+        userMission.changeMission(mission);
         return userMission;
     }
 

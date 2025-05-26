@@ -24,7 +24,7 @@ public class StoreRestController {
         return ResponseEntityUtil.buildDefaultResponseEntity(ApiResponse.onSuccess(storeCommandService.modifyStoreLocation(storeLocationDTO)));
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<ApiResponse<?>> createStore(@RequestBody @Valid StoreRequestDTO.StoreCreateDto request) {
         return ResponseEntityUtil.buildResponseEntityWithStatus(ApiResponse.onSuccess(storeCommandService.createStore(request)), HttpStatus.CREATED);
     }

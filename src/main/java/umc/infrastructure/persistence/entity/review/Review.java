@@ -43,14 +43,14 @@ public class Review extends BaseTimeEntity {
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ReviewImage> reviewImages = new HashSet<>();
 
-    public void setStore(Store store) {
+    public void changeStore(Store store) {
         this.store = store;
         if(!store.getReviews().contains(this)) {
             store.getReviews().add(this);
         }
     }
 
-    public void setUser(User user) {
+    public void changeUser(User user) {
         this.user = user;
         if(!user.getReviews().contains(this)) {
             user.getReviews().add(this);
