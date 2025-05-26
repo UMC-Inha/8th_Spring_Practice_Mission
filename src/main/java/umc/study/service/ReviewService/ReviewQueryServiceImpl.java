@@ -15,6 +15,7 @@ import umc.study.repository.MemberRepository.MemberRepository;
 import umc.study.repository.ReviewRepository.ReviewRepository;
 import umc.study.repository.StoreRepository.StoreRepository;
 import umc.study.web.dto.Review.ReviewRequestDto;
+import umc.study.web.dto.Review.ReviewResponseDto;
 
 @Service
 @RequiredArgsConstructor
@@ -28,8 +29,9 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     private final MemberRepository memberRepository;
 
     @Override
-    public Page<Review> registerReview(Long memberId, Pageable pageable) {
-        return reviewRepository.findByMemberReviews(memberId, pageable);
+    public Page<ReviewResponseDto.JoinResultDTO> findUserReviews(Long memberId, Pageable pageable) {
+        Page<Review> reviews = reviewRepository.findByMemberReviews(memberId, pageable);
+        return reviews.map(ReviewConverter::toJoinResultDTO);
     }
 
 
