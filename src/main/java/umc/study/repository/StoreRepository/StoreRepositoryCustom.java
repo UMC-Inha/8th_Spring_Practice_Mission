@@ -12,8 +12,6 @@ public interface StoreRepositoryCustom {
 
     Page<Mission> findMissionsByStore(
             Long storeId,
-            String name,
-            Float minScore,
             Pageable pageable
     );
 }

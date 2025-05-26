@@ -2,8 +2,10 @@ package umc.study.service.StoreService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import umc.study.converter.StoreConverter;
+import umc.study.domain.Mission;
 import umc.study.domain.Store;
 import umc.study.repository.StoreRepository.StoreRepository;
 import umc.study.web.dto.Store.StoreRequestDto;
@@ -25,6 +27,16 @@ public class StoreQueryServiceImpl implements StoreQueryService{
 
     @Override
     public List<Store> findStoresByNameAndScore(String name, Float score) {
+        List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, score);
+
+        filteredStores.forEach(store -> System.out.println("Store: " + store));
+
+        return filteredStores;
+    }
+
+    @Override
+    public List<Store> findStoreMissions(Long storeId, Pageable pageable) {
+        List<Mission> storeMissions = storeRepository.findMissionsByStore(storeId, pageable);
         List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, score);
 
         filteredStores.forEach(store -> System.out.println("Store: " + store));
