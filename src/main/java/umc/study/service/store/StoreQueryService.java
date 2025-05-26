@@ -1,6 +1,10 @@
 package umc.study.service.store;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import umc.study.domain.member.Member;
 import umc.study.domain.store.Store;
+import umc.study.web.controller.store.dto.StoreReponseDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,4 +16,6 @@ public interface StoreQueryService {
     Optional<Store> findStore(Long id);
 
     List<Store> findStoresByNameAndScore(String name, BigDecimal score);
+
+    Page<StoreReponseDTO.ReviewPreViewDTO> getReviewList(Long storeId, Pageable pageable, Member member);
 }

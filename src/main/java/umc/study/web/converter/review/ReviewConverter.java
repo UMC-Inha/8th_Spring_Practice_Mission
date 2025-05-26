@@ -1,8 +1,13 @@
 package umc.study.web.converter.review;
 
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.data.domain.Page;
 import umc.study.domain.review.Review;
 import umc.study.web.controller.review.dto.ReviewRequestDTO;
 import umc.study.web.controller.review.dto.ReviewResponseDTO;
+import umc.study.web.controller.review.dto.ReviewResponseDTO.getReviewListResultDto;
+
+import java.util.List;
 
 
 public class ReviewConverter {
@@ -26,4 +31,16 @@ public class ReviewConverter {
                 .build();
 
     }
+
+    public static Page<getReviewListResultDto> toGetReviewResultDTO(Page<Review> reviewList) {
+        return reviewList.map(review -> getReviewListResultDto.builder()
+                .reviewId(review.getId())
+                .comment(review.getBody())
+                .score(review.getScore())
+                .build()
+        );
+    }
+
+
+
 }

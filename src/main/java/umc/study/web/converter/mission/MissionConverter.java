@@ -1,5 +1,6 @@
 package umc.study.web.converter.mission;
 
+import org.springframework.data.domain.Page;
 import umc.study.domain.mapping.MemberMission;
 import umc.study.domain.mission.Mission;
 import umc.study.web.controller.mission.dto.MissionRequestDTO;
@@ -28,5 +29,19 @@ public class MissionConverter {
         return MemberMission.builder()
                 .status(request.getMissionStatus())
                 .build();
+    }
+
+    public static MissionResponseDTO.MissionPreViewDTO toMissionPreViewDTO(Mission mission) {
+        return MissionResponseDTO.MissionPreViewDTO.builder()
+                .missionId(mission.getId())
+                .missionSpec(mission.getMissionSpec())
+                .local(mission.getLocal())
+                .deadline(mission.getDeadline())
+                .createdAt(mission.getCreatedAt())
+                .build();
+    }
+
+    public static Page<MissionResponseDTO.MissionPreViewDTO> toMissionPreViewDTOList(Page<Mission> missionList) {
+        return missionList.map(MissionConverter::toMissionPreViewDTO);
     }
 }

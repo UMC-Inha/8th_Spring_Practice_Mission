@@ -3,6 +3,9 @@ package umc.study.repository.member;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import umc.study.domain.category.QCategory;
 import umc.study.domain.enums.MissionStatus;
@@ -24,16 +27,29 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<MemberMissionIsCompletedResponseDto> findByMemberIdAndMissionStatus(Long memberId, MissionStatus status, int page) {
+    public Page<MemberMissionIsCompletedResponseDto> findByMemberIdAndMissionStatus(Long memberId, MissionStatus status, Pageable pageable) {
 
         QMemberMission memberMission = QMemberMission.memberMission;
         QMission mission = QMission.mission;
         QStore store = QStore.store;
         QPointMission pointMission = QPointMission.pointMission;
         QPoint point = QPoint.point;
-        int pageSize = 7; //가져올 요소 수
-        int offset = (page - 1) * pageSize; //건너뛸 페이지 수
-        return jpaQueryFactory
+
+
+        long total = jpaQueryFactory
+                .select(memberMission.count())
+                .from(memberMission)
+                .join(memberMission.mission, mission)
+                .join(mission.store, store)
+                .join(pointMission.point, point)
+                .where(
+                        memberMission.member.id.eq(memberId),
+                        memberMission.status.eq(status)
+                )
+                .fetchOne();
+
+
+        List<MemberMissionIsCompletedResponseDto> content = jpaQueryFactory
                 .select(Projections.constructor(MemberMissionIsCompletedResponseDto.class,
                         mission.missionSpec,
                         point.coin,
@@ -48,9 +64,11 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
                         memberMission.status.eq(status)
                 )
                 .orderBy(memberMission.updatedAt.desc())
-                .limit(pageSize)
-                .offset(offset)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
+
+        return new PageImpl<>(content, pageable, total);
     }
 
     @Override
