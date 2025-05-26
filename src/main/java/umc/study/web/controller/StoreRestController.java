@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.study.apiPayload.ApiResponse;
+import umc.study.apiPayload.validation.annotation.ValidPageableIndex;
 import umc.study.converter.StoreConverter;
 import umc.study.domain.Store;
 import umc.study.service.StoreService.StoreQueryService;
@@ -25,6 +26,7 @@ public class StoreRestController {
 
     @GetMapping("/{storeId}/missions")
     public ApiResponse<Page<MissionResponseDto.JoinResultDTO>> getStoreMissions(
+            @ValidPageableIndex
             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC)
             Pageable pageable,
             @PathVariable("storeId") Long storeId

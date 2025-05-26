@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.study.apiPayload.ApiResponse;
+import umc.study.apiPayload.validation.annotation.ValidPageableIndex;
 import umc.study.converter.ReviewConverter;
 import umc.study.domain.Review;
 import umc.study.service.ReviewService.ReviewQueryService;
@@ -24,6 +25,7 @@ public class ReviewRestController {
 
     @GetMapping("/{memberId}")
     public ApiResponse<Page<ReviewResponseDto.JoinResultDTO>> getUserReviews(
+            @ValidPageableIndex
             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC)
             Pageable pageable,
             @PathVariable("memberId") Long memberId

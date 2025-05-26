@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.study.apiPayload.ApiResponse;
+import umc.study.apiPayload.validation.annotation.ValidPageableIndex;
 import umc.study.converter.MemberConverter;
 import umc.study.domain.Member;
 import umc.study.service.MemberService.MemberCommandService;
@@ -26,6 +27,7 @@ public class MemberRestController {
 
     @GetMapping("/{memberId}/missions")
     public ApiResponse<Page<MemberMissionResponseDto.JoinResultDTO>> getMemberMissions(
+            @ValidPageableIndex
             @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC)
             Pageable pageable,
             @PathVariable("memberId") Long memberId
