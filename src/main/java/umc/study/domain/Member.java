@@ -2,7 +2,6 @@ package umc.study.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import umc.study.domain.common.BaseEntity;
 import umc.study.domain.enums.Gender;
@@ -40,8 +39,9 @@ public class Member extends BaseEntity {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 6, columnDefinition = "VARCHAR(6) DEFAULT 'NONE'")
-    private Gender gender;
+    @Column(length = 6)
+    @Builder.Default
+    private Gender gender = Gender.NONE;
 
     @Column(length = 20)
     private String address;
@@ -55,14 +55,15 @@ public class Member extends BaseEntity {
 
     private LocalDateTime inactiveDate;
 
-    @ColumnDefault("0")
-    private Integer point;
+    @Builder.Default
+    private Integer point = 0;
 
     @Column(length = 12, unique = true)
     private String phoneNumber;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 1")
-    private Boolean isAuth;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    @Builder.Default
+    private Boolean isAuth = true;
 
     private LocalDateTime authDate;
 

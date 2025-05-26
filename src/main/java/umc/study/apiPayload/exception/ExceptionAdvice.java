@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
+//컨트롤러 예외 (GeneralException) 발생 → ExceptionAdvice 호출 & onThrowException 메서드 실행 → 에러 응답 객체 생성 및 반환
 @Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
