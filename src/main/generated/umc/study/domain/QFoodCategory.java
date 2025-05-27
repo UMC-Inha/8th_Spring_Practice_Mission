@@ -25,7 +25,7 @@ public class QFoodCategory extends EntityPathBase<FoodCategory> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
-    public final ListPath<umc.study.domain.mapping.FoodPrefer, umc.study.domain.mapping.QFoodPrefer> foodPreferenceList = this.<umc.study.domain.mapping.FoodPrefer, umc.study.domain.mapping.QFoodPrefer>createList("foodPreferenceList", umc.study.domain.mapping.FoodPrefer.class, umc.study.domain.mapping.QFoodPrefer.class, PathInits.DIRECT2);
+    public final ListPath<umc.study.domain.mapping.UserPrefer, umc.study.domain.mapping.QUserPrefer> foodPreferenceList = this.<umc.study.domain.mapping.UserPrefer, umc.study.domain.mapping.QUserPrefer>createList("foodPreferenceList", umc.study.domain.mapping.UserPrefer.class, umc.study.domain.mapping.QUserPrefer.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

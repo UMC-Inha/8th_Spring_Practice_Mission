@@ -33,8 +33,7 @@ public class StudyApplication {
 			storeService.findStoresByNameAndScore(name, score)
 					.forEach(System.out::println);
 		};
-	}*/
-
+	}
 
 			storeService.findStoresByNameAndScore(name, score)
 					.forEach(System.out::println);

@@ -29,4 +29,8 @@ public class Region {
     @Builder.Default
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<Store> storeList = new ArrayList<>();
+
+    public void setStore(Store store) {
+        storeList.add(store);
+    }
 }

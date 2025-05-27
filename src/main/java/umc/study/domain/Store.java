@@ -5,6 +5,7 @@ import lombok.*;
 
 import umc.study.domain.common.BaseEntity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Store extends BaseEntity {
 
     private String address;
 
-    private Float score;
+    private BigDecimal rating;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
@@ -49,8 +50,12 @@ public class Store extends BaseEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", score=" + score +
+                ", score=" + rating +
                 ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
                 '}';
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 }
