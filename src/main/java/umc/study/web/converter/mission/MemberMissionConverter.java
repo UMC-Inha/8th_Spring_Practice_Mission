@@ -14,7 +14,7 @@ public class MemberMissionConverter {
 
     public static List<MemberMissionResponseDTO.MissionInProgressDTO> toMissionInProgressDTOList(
             List<MemberMissionIsCompletedResponseDto> memberMissionList) {
-        
+
         return memberMissionList.stream()
                 .map(mm -> MemberMissionResponseDTO.MissionInProgressDTO.builder()
                         .missionSpec(mm.getMissionSpec())
@@ -23,5 +23,14 @@ public class MemberMissionConverter {
                         .status(MissionStatus.IN_PROGRESS)
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public static MemberMissionResponseDTO.MissionCompletedDTO toMissionCompletedDTO(MemberMission memberMission) {
+        return MemberMissionResponseDTO.MissionCompletedDTO.builder()
+                .memberMissionId(memberMission.getId())
+                .missionSpec(memberMission.getMission().getMissionSpec())
+                .status(memberMission.getStatus())
+                .message("미션이 완료되었습니다.")
+                .build();
     }
 }

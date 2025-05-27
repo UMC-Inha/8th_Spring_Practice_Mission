@@ -25,4 +25,15 @@ public class MemberMissionResponseDTO {
         private MissionStatus status;
         private LocalDateTime createdAt;
     }
+
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class MissionCompletedDTO {
+        private Long memberMissionId;
+        private String missionSpec;
+        private MissionStatus status;
+        private String message;
+    }
 }
