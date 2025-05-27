@@ -32,10 +32,10 @@ public class UserMission extends BaseEntity {
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
-    public static UserMission create(User user, Mission mission, MissionStatus missionStatus) {
-        UserMission userMission = new UserMission();
-        userMission.user = user;
-        userMission.mission = mission;
-        return userMission;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_mission_id")
+    UserMission userMission = UserMission.builder()
+            .user(user)
+            .mission(mission)
+            .build();
 }

@@ -30,6 +30,8 @@ public class UserMissionCommandServiceImpl implements UserMissionCommandService 
                 .user(user)
                 .mission(mission)
                 .build();
+        // 빓더 사용 안하는게 좋음 (코드가 길어짐)
+        // 도메인 dto로 던지는게 좋음
 
         return userMissionRepository.save(userMission);
     }

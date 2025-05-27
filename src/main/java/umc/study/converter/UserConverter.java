@@ -1,5 +1,7 @@
 package umc.study.converter;
 
+import umc.study.apiPayload.code.status.ErrorStatus;
+import umc.study.apiPayload.exceptition.GeneralException;
 import umc.study.domain.User;
 import umc.study.domain.enums.Gender;
 import umc.study.domain.enums.UserStatus;
@@ -13,7 +15,7 @@ public class UserConverter {
     public static UserResponseDto.JoinResultDTO toJoinResultDTO(User user){
         return UserResponseDto.JoinResultDTO.builder()
                 .userId(user.getId())
-                .createdAt(LocalDateTime.now())
+                .createdAt(user.getCreatedAt())
                 .build();
     }
     public static User toUser(UserRequestDto.JoinDto request){
@@ -21,15 +23,10 @@ public class UserConverter {
         Gender gender = null;
 
         switch (request.getGender()){
-            case MALE:
-                gender = Gender.MALE;
-                break;
-            case FEMALE:
-                gender = Gender.FEMALE;
-                break;
-            case NONE:
-                gender = Gender.NONE;
-                break;
+            case MALE -> gender = Gender.MALE;
+            case FEMALE -> gender = Gender.FEMALE;
+            case NONE -> gender = Gender.NONE;
+            default -> throw new GeneralException(ErrorStatus.INVALID_GENDER);
         }
 
         return User.builder()

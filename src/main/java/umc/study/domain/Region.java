@@ -5,6 +5,7 @@ import lombok.*;
 
 import umc.study.domain.common.BaseEntity;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,8 @@ public class Region {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @Getter
     @Builder.Default
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<Store> storeList = new ArrayList<>();
-
-    public void setStore(Store store) {
-        storeList.add(store);
-    }
 }

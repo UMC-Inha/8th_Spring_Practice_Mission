@@ -29,16 +29,28 @@ public class StoreCommandServiceImpl implements StoreCommandService {
     @Transactional
     @Override
     public Store addStore(StoreRequestDto request) {
-        Store newStore = StoreConverter.toStore(request);
         Region region = regionRepository.findById(request.getRegionId())
                 .orElseThrow(() -> new GeneralException(ErrorStatus.REGION_NOT_FOUND));
-        region.setStore(newStore);
-        newStore.setRegion(region);
+
         List<FoodCategory> foodCategoryList = request.getFoodCategoryId().stream()
                 .map(id -> foodCategoryRepository.findById(id)
                         .orElseThrow(() -> new GeneralException(ErrorStatus.FOOD_CATEGORY_NOT_FOUND)))
+                .map(category -> FoodCategory.builder()
+                        .id(category.getId()) // 실제 값 복사
+                        .name(category.getName())
+                        .build())
                 .collect(Collectors.toList());
-        foodCategoryList.forEach(newFoodCategory -> newFoodCategory.setStore(newStore));
+
+        Store newStore = Store.builder()
+                .name(request.getName())
+                .region(region)
+                .foodCategories(foodCategoryList)
+                .build();
+
+        region.getStoreList().add(newStore);
+        foodCategoryList.forEach(cat -> newStore.getFoodCategories().add(cat));
+
         return storeRepository.save(newStore);
     }
+    // dto로 던지는게 좋음 (명확성)
 }
