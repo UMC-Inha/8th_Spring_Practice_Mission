@@ -29,7 +29,7 @@ public class AgreeSet extends BaseEntity {
 
     private Boolean isMarketing;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

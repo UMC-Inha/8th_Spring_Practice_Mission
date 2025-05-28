@@ -29,7 +29,7 @@ public class Mission extends BaseEntity {
 
     private LocalDateTime doneAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 }

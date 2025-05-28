@@ -1,6 +1,8 @@
 package umc.service.memberMission;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.apiPayload.code.status.ErrorStatus;
@@ -11,6 +13,7 @@ import umc.converter.memberMission.MemberMissionConverter;
 import umc.domain.Member;
 import umc.domain.Mission;
 import umc.domain.Restaurant;
+import umc.domain.enums.MissionStatus;
 import umc.domain.mapping.MemberMission;
 import umc.dto.mission.MissionRequestDTO;
 import umc.repository.RestaurantRepository.RestaurantRepository;
@@ -51,7 +54,27 @@ public class MemberMissionService {
         memberMissionRepository.save(newMemberMission);
 
         return newMemberMission;
+    }
 
+    public Page<MemberMission> previewMissionByMemberAndStatus(Long memberId, MissionStatus missionStatus, Integer page) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
+        Page<MemberMission> memberMissionList = memberMissionRepository.findAllByMemberAndMissionStatus(member, missionStatus, PageRequest.of(page, 10));
+        return memberMissionList;
+    }
+
+    @Transactional
+    public MemberMission changeMissionStatusByMember(Long missionId, Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+
+        Mission mission = missionRepository.findById(missionId)
+                .orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
+
+        MemberMission memberMission = memberMissionRepository.findByMemberAndMission(member, mission);
+        memberMission.changeMissionStatus();
+        memberMissionRepository.save(memberMission);
+        return memberMission;
     }
 }

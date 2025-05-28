@@ -1,9 +1,13 @@
 package umc.repository.review;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import umc.domain.Member;
+import umc.domain.Restaurant;
 import umc.domain.Review;
 
 import java.util.List;
@@ -18,4 +22,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     void deleteAllByReviewIds(@Param("reviewIds") List<Long> reviewIds);
 
     Optional<List<Review>> findAllByRestaurantId(Long restaurantId);
+    Page<Review> findAllByRestaurant(Restaurant restaurant, PageRequest pageRequest);
+    Page<Review> findAllByMember(Member member, PageRequest pageRequest);
 }

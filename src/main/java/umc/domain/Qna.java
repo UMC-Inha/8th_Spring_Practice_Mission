@@ -23,7 +23,7 @@ public class Qna extends BaseEntity {
 
     private String content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member; // qna -> member 단방향 연결
 }

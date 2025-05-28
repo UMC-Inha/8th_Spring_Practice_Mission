@@ -25,7 +25,7 @@ public class Alarm extends BaseEntity {
 
     private Boolean isCheck;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 }
