@@ -8,6 +8,7 @@ import lombok.Getter;
 import umc.domain.enums.MissionStatus;
 import umc.validation.annotation.ExistChallenge;
 import umc.validation.annotation.ExistRestaurant;
+import umc.validation.annotation.ExistUser;
 
 public class MissionRequestDto {
 	@Getter
@@ -31,5 +32,13 @@ public class MissionRequestDto {
 		String userEmail;
 		@NotNull
 		MissionStatus status;
+	}
+
+	@Getter
+	public static class CompleteRequestDto {
+		@NotNull
+		Long userMissionId;
+		@ExistUser
+		String userEmail;
 	}
 }

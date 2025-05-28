@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import umc.domain.enums.MissionStatus;
 
 public class MissionResponseDto {
 	@Builder
@@ -68,5 +69,13 @@ public class MissionResponseDto {
 		String content;
 		Integer point;
 		LocalDate deadline;
+	}
+
+	@Builder
+	@Getter
+	@AllArgsConstructor
+	public static class CompleteResultDto {
+		Long userMissionId;
+		MissionStatus status;
 	}
 }

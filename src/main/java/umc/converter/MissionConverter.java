@@ -97,4 +97,11 @@ public class MissionConverter {
 			.deadline(mission.getMission().getDeadline())
 			.build();
 	}
+
+	public static MissionResponseDto.CompleteResultDto toCompleteResultDto(UserMission request) {
+		return MissionResponseDto.CompleteResultDto.builder()
+			.userMissionId(request.getId())
+			.status(request.getStatus())
+			.build();
+	}
 }

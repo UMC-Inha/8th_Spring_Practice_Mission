@@ -39,4 +39,8 @@ public class UserMission extends BaseEntity {
 
 	@Enumerated(EnumType.STRING)
 	private MissionStatus status;
+
+	public void changeStatus(MissionStatus newStatus) {
+		this.status = newStatus;
+	}
 }

@@ -39,6 +39,7 @@ public enum ErrorStatus implements BaseErrorCode {
 	// 미션 관련 에러
 	MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION4001", "미션이 존재하지 않습니다."),
 	ALREADY_CHALLENGE(HttpStatus.BAD_REQUEST, "MISSION4002", "이미 수행 중인 미션입니다."),
+	USER_MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION4003", "수행 중인 미션이 존재하지 않습니다."),
 
 	// 페이징 관련 에러
 	PAGE_NOT_VALID(HttpStatus.BAD_REQUEST, "PAGE4001", "페이징 번호가 유효하지 않습니다.");

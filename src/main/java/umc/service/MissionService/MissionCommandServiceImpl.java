@@ -10,6 +10,7 @@ import umc.converter.MissionConverter;
 import umc.domain.Mission;
 import umc.domain.Restaurant;
 import umc.domain.User;
+import umc.domain.enums.MissionStatus;
 import umc.domain.mapping.UserMission;
 import umc.dto.MissionRequestDto;
 import umc.repository.MissionRepository.MissionRepository;
@@ -45,5 +46,15 @@ public class MissionCommandServiceImpl implements MissionCommandService {
 		UserMission newUserMission = MissionConverter.toUserMission(request, user, mission);
 
 		return userMissionRepository.save(newUserMission);
+	}
+
+	@Override
+	public UserMission completeMission(MissionRequestDto.CompleteRequestDto request) {
+		UserMission userMission = userMissionRepository.findById(request.getUserMissionId())
+			.orElseThrow(() -> new GeneralException(ErrorStatus.USER_MISSION_NOT_FOUND));
+
+		userMission.changeStatus(MissionStatus.COMPLETED);
+
+		return userMission;
 	}
 }
