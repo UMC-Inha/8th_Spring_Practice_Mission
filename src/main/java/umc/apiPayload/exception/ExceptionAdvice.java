@@ -19,9 +19,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import umc.apiPayload.ApiResponse;
 import umc.apiPayload.code.ErrorReasonDTO;
 import umc.apiPayload.code.status.ErrorStatus;
-import umc.thirdParty.discord.DiscordRequestDTO;
-import umc.thirdParty.discord.DiscordWebhookService;
-
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -31,11 +28,6 @@ import java.util.Optional;
 @RestControllerAdvice(annotations = {RestController.class})
 @RequiredArgsConstructor
 public class ExceptionAdvice extends ResponseEntityExceptionHandler{
-
-    private final DiscordWebhookService discordWebhookService;
-
-    @Value("${data.server}")
-    private String server;
 
     @ExceptionHandler(Exception.class)
     public void handle500ErrTestException(Exception ex, WebRequest request) {
@@ -52,10 +44,6 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler{
 
 
         log.error(sb.toString());
-
-        if (server.equals("onService")) {
-            discordWebhookService.sendAlarmMessage(DiscordRequestDTO.RequestForAlarm.builder().content(sb.toString()).build());
-        }
     }
 
     @ExceptionHandler
