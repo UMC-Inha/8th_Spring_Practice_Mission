@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import umc.spring.domain.enums.StoreStatus;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,10 +29,24 @@ public class Store extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String address;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private Location location;
+
     @Enumerated(EnumType.STRING)
     private StoreStatus status;
 
     private BigDecimal score;
+
+    @ManyToOne
+    @JoinColumn(name = "food_category_id")
+    private FoodCategory foodCategory;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Mission> missionList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
 
     @Override
     public String toString() {

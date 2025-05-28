@@ -1,5 +1,8 @@
 package umc.spring.domain;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.enums.Gender;
 import umc.spring.domain.enums.MemberStatus;
@@ -10,13 +13,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.spring.domain.mapping.MemberAlarm;
-import umc.spring.domain.mapping.PreferFoodCategory;
+import umc.spring.domain.mapping.MemberPrefer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@DynamicInsert
+@DynamicUpdate
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +34,7 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String name;
 
-    @Column(nullable = false, length = 30)
+    @Column(length = 30)
     private String email;
 
     @Column(nullable = false, length = 20)
@@ -41,17 +46,19 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String birth;
 
+    @ColumnDefault("0")
     private Integer point;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
     private MemberStatus status;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     @Builder.Default
-    private List<PreferFoodCategory> memberPreferList = new ArrayList<>();
+    private List<MemberPrefer> memberPreferList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     @Builder.Default
