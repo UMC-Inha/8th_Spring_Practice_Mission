@@ -24,8 +24,8 @@ public class ReviewResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class ReviewPreViewListDTO {
-        List<ReviewPreViewDTO> reviewList;
+    public static class ReviewPreViewListDTO<T> {
+        List<T> reviewList;
         Integer listSize;
         Integer totalPage;
         Long totalElements;
@@ -39,6 +39,18 @@ public class ReviewResponseDTO {
     @AllArgsConstructor
     public static class ReviewPreViewDTO {
         String ownerNickname;
+        BigDecimal score;
+        String body;
+        LocalDate createdAt;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MyReviewPreViewDTO {
+        String ownerNickname;
+        String storeName;
         BigDecimal score;
         String body;
         LocalDate createdAt;

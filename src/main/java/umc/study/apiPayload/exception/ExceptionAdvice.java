@@ -72,7 +72,6 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(generalException, errorReasonHttpStatus, null, request);
     }
 
-
     /**
      * 아래 handleExceptionInternal... 메서드 모두
      * 알맞은 부모 클래스의 handleExceptionInternal을 통해 ResponseEntity<Object>를 반환하는 메서드이다.
