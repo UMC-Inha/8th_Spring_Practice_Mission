@@ -24,7 +24,7 @@ public class MissionService {
     @Transactional
     public Mission CreateMission(MissionRequestDTO.CreateMissionDTO request, Long storeId){
         Store findStore = storeRepository.findById(storeId)
-                .orElseThrow(() -> new StoreHandler(ErrorStatus.Store_NOT_FOUND));
+                .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 
         Mission newMission = MissionConverter.toMission(request, findStore);
 

@@ -28,7 +28,7 @@ public class ReviewService {
     public Review writeReview(ReviewRequestDTO.CreateReviewDTO request, Long storeId) {
 
         Store findStore = storeRepository.findById(storeId)
-                .orElseThrow(() -> new StoreHandler(ErrorStatus.Store_NOT_FOUND));
+                .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 
         Member findMember = memberRepository.findById(request.getMemberId())
                 .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
