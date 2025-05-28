@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.domain.enums.MissionStatus;
-import umc.study.repository.MemberMissionRepository;
+import umc.study.repository.MemberMissionRepository.MemberMissionRepository;
 import umc.study.validation.annotation.AlreadyMissionChallenge;
 import umc.study.web.dto.request.MemberMissionRequestDTO;
 

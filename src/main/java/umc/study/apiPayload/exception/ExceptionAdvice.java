@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import umc.study.apiPayload.ApiResponse;
 import umc.study.apiPayload.code.ErrorReasonDTO;
@@ -20,6 +21,7 @@ import umc.study.apiPayload.code.status.ErrorStatus;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 //컨트롤러 예외 (GeneralException) 발생 → ExceptionAdvice 호출 & onThrowException 메서드 실행 → 에러 응답 객체 생성 및 반환
@@ -57,12 +59,14 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         return handleExceptionInternalArgs(e, HttpHeaders.EMPTY, ErrorStatus.valueOf("_BAD_REQUEST"), request, errors);
     }
 
-    //예상하지 못한 모든 예외를 일괄 처리하는 메서드
-    @ExceptionHandler
-    public ResponseEntity<Object> exception(Exception e, WebRequest request) {
-        e.printStackTrace();
 
-        return handleExceptionInternalFalse(e, ErrorStatus._INTERNAL_SERVER_ERROR, HttpHeaders.EMPTY, ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(), request, e.getMessage());
+    @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Object> handleTypeMismatch(MethodArgumentTypeMismatchException e, WebRequest request) {
+        String paramName = e.getName();
+        String value = Objects.toString(e.getValue(), "null");
+        String errorMessage = String.format("파라미터 [%s]의 값 '%s'는 형식이 잘못되었습니다.", paramName, value);
+
+        return handleExceptionInternalFalse(e, ErrorStatus.valueOf("_TYPE_MISMATCH"), HttpHeaders.EMPTY, HttpStatus.BAD_REQUEST, request, errorMessage);
     }
 
     //개발자의 커스텀 예외(GeneratlException) 처리 메서드
@@ -70,6 +74,14 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity onThrowException(GeneralException generalException, HttpServletRequest request) {
         ErrorReasonDTO errorReasonHttpStatus = generalException.getErrorReasonHttpStatus();
         return handleExceptionInternal(generalException, errorReasonHttpStatus, null, request);
+    }
+
+    //예상하지 못한 모든 예외를 일괄 처리하는 메서드
+    @ExceptionHandler
+    public ResponseEntity<Object> exception(Exception e, WebRequest request) {
+        e.printStackTrace();
+
+        return handleExceptionInternalFalse(e, ErrorStatus._INTERNAL_SERVER_ERROR, HttpHeaders.EMPTY, ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(), request, e.getMessage());
     }
 
     /**
