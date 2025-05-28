@@ -66,7 +66,7 @@ public class ReviewConverter {
 
         return ReviewResponseDTO.ReviewPreViewListDTO.<T>builder()
                 .reviewList(dtoList)
-                .listSize(dtoList.size())
+                .listSize(reviewPage.getNumberOfElements())
                 .totalPage(reviewPage.getTotalPages())
                 .totalElements(reviewPage.getTotalElements())
                 .isFirst(reviewPage.isFirst())

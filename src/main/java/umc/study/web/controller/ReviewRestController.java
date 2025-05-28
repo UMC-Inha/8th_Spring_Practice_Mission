@@ -21,7 +21,7 @@ import umc.study.web.dto.response.ReviewResponseDTO;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "리뷰 API", description = "사용자가 작성한 리뷰 목록 조회")
+@Tag(name = "리뷰 API")
 public class ReviewRestController {
     private final ReviewCommandService reviewCommandService;
     private final ReviewQueryService reviewQueryService;
