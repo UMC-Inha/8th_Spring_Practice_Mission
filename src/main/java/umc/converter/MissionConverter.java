@@ -1,5 +1,9 @@
 package umc.converter;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+
 import umc.domain.Mission;
 import umc.domain.Restaurant;
 import umc.domain.User;
@@ -38,6 +42,32 @@ public class MissionConverter {
 			.status(request.getStatus())
 			.user(user)
 			.mission(mission)
+			.build();
+	}
+
+	public static MissionResponseDto.MissionListDto toMissionListDto(Page<Mission> missionList) {
+
+		List<MissionResponseDto.MissionDto> missionDtoList = missionList.stream()
+			.map(mission -> toMissionDto(mission))
+			.toList();
+
+		return MissionResponseDto.MissionListDto.builder()
+			.missionList(missionDtoList)
+			.listSize(missionDtoList.size())
+			.totalPage(missionList.getTotalPages())
+			.totalElements(missionList.getTotalElements())
+			.isFirst(missionList.isFirst())
+			.isLast(missionList.isLast())
+			.build();
+	}
+
+	private static MissionResponseDto.MissionDto toMissionDto(Mission mission) {
+
+		return MissionResponseDto.MissionDto.builder()
+			.missionId(mission.getId())
+			.content(mission.getContent())
+			.point(mission.getPoint())
+			.deadline(mission.getDeadline())
 			.build();
 	}
 
