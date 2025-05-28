@@ -3,15 +3,19 @@ package umc.study.service.StoreService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exceptition.GeneralException;
 import umc.study.converter.StoreConverter;
 import umc.study.domain.FoodCategory;
 import umc.study.domain.Region;
+import umc.study.domain.Review;
 import umc.study.domain.Store;
 import umc.study.repository.FoodCategoryRepository.FoodCategoryRepository;
 import umc.study.repository.RegionRepository.RegionRepository;
+import umc.study.repository.ReviewRepository.ReviewRepository;
 import umc.study.repository.StoreRepository.StoreRepository;
 import umc.study.web.dto.StoreRequestDto;
 
@@ -25,6 +29,7 @@ public class StoreCommandServiceImpl implements StoreCommandService {
     private final StoreRepository storeRepository;
     private final FoodCategoryRepository foodCategoryRepository;
     private final RegionRepository regionRepository;
+    private final ReviewRepository reviewRepository;
 
     @Transactional
     @Override
@@ -53,4 +58,12 @@ public class StoreCommandServiceImpl implements StoreCommandService {
         return storeRepository.save(newStore);
     }
     // dto로 던지는게 좋음 (명확성)
+
+    @Override
+    public Page<Review> getReviewList(Long StoreId, Integer page) {
+        Store store = storeRepository.findById(StoreId).get();
+
+        Page<Review> StorePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return StorePage;
+    }
 }

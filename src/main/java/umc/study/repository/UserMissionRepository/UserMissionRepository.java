@@ -3,6 +3,7 @@ package umc.study.repository.UserMissionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import umc.study.domain.User;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.UserMission;
 
@@ -15,6 +16,7 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long>,
 
     // 회원-미션 관계 조회
     Optional<UserMission> findByUserIdAndMissionId(Long userId, Long missionId);
-    // 특정 회원의 진행 중인 미션 목록 조회
-    Page<UserMission> findByUserIdAndStatus(Long userId, MissionStatus status, Pageable pageable);
+    // 내가 진행 중인 미션 목록 조회
+    Page<UserMission> findAllByUserAndStatus(User user, MissionStatus status, Pageable pageable);
+
 }

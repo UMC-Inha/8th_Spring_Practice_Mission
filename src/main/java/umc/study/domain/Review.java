@@ -3,6 +3,7 @@ package umc.study.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import org.springframework.data.annotation.CreatedDate;
 import umc.study.domain.common.BaseEntity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,7 +13,6 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-
 public class Review extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,6 @@ public class Review extends BaseEntity {
     // 미션 확인을 위한 라뷰 작성 여부
     @Builder.Default
     private boolean reviewed = false;
-
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)

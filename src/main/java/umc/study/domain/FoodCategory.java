@@ -23,6 +23,10 @@ public class FoodCategory extends BaseEntity {
     @Column(nullable = false, length = 30)
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
     /*@Builder.Default
     @OneToMany(mappedBy = "foodCategory", cascade = CascadeType.PERSIST)
     private List<Store> storeList = new ArrayList<>();

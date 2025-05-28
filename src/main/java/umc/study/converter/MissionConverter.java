@@ -1,5 +1,6 @@
 package umc.study.converter;
 
+import org.springframework.data.domain.Page;
 import umc.study.domain.Mission;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.domain.mapping.UserMission;
@@ -21,4 +22,6 @@ public class MissionConverter {
                 .status(MissionStatus.CHALLENGING)
                 .build();
     }
+
+
 }

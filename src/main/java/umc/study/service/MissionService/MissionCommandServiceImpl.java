@@ -2,9 +2,13 @@ package umc.study.service.MissionService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exceptition.GeneralException;
 import umc.study.domain.Mission;
+import umc.study.domain.Review;
 import umc.study.domain.Store;
 import umc.study.domain.User;
 import umc.study.domain.enums.MissionStatus;
@@ -72,7 +76,18 @@ public class MissionCommandServiceImpl {
         }
 
         // 3. UserMission 객체 생성 및 저장
-        UserMission userMission = UserMission.create(user, mission, MissionStatus.CHALLENGING);
+        UserMission userMission = UserMission.builder()
+                .user(user)
+                .mission(mission)
+                .status(MissionStatus.CHALLENGING)
+                .build();
         userMissionRepository.save(userMission);
+    }
+
+    public Page<Mission> getMissionsByStore(Long storeId, Integer page) {
+        Store store = storeRepository.findById(storeId).get();
+
+        Page<Mission> MissionPage = missionRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return MissionPage;
     }
 }
