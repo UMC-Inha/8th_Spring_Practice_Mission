@@ -46,4 +46,27 @@ public class MissionResponseDto {
 		Integer point;
 		LocalDate deadline;
 	}
+
+	@Builder
+	@Getter
+	@AllArgsConstructor
+	public static class UserMissionListDto {
+		List<UserMissionDto> missionList;
+		Integer listSize;
+		Integer totalPage;
+		Long totalElements;
+		Boolean isFirst;
+		Boolean isLast;
+	}
+
+	@Builder
+	@Getter
+	@AllArgsConstructor
+	public static class UserMissionDto {
+		Long missionId;
+		Long restaurantId;
+		String content;
+		Integer point;
+		LocalDate deadline;
+	}
 }

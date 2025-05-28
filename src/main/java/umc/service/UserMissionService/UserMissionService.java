@@ -1,4 +1,4 @@
-package umc.service;
+package umc.service.UserMissionService;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

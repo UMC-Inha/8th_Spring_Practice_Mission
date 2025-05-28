@@ -71,4 +71,30 @@ public class MissionConverter {
 			.build();
 	}
 
+	public static MissionResponseDto.UserMissionListDto toUserMissionListDto(Page<UserMission> userMissionList) {
+
+		List<MissionResponseDto.UserMissionDto> userMissionDtoList = userMissionList.stream()
+			.map(userMisson -> toUserMissionDto(userMisson))
+			.toList();
+
+		return MissionResponseDto.UserMissionListDto.builder()
+			.missionList(userMissionDtoList)
+			.listSize(userMissionDtoList.size())
+			.totalPage(userMissionList.getTotalPages())
+			.totalElements(userMissionList.getTotalElements())
+			.isFirst(userMissionList.isFirst())
+			.isLast(userMissionList.isLast())
+			.build();
+	}
+
+	public static MissionResponseDto.UserMissionDto toUserMissionDto(UserMission mission) {
+
+		return MissionResponseDto.UserMissionDto.builder()
+			.missionId(mission.getId())
+			.restaurantId(mission.getMission().getRestaurant().getId())
+			.content(mission.getMission().getContent())
+			.point(mission.getMission().getPoint())
+			.deadline(mission.getMission().getDeadline())
+			.build();
+	}
 }
