@@ -5,6 +5,7 @@ package umc.infrastructure.persistence.repository.mission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import umc.infrastructure.persistence.entity.mission.Mission;
+import umc.infrastructure.persistence.entity.mission.MissionState;
 import umc.infrastructure.persistence.entity.mission.UserMission;
 import umc.infrastructure.persistence.entity.mission.UserMissionPK;
 import umc.infrastructure.persistence.entity.store.Store;
@@ -24,6 +25,6 @@ public interface MissionRepository {
 
     Page<Mission> findAllByStore(Store store, PageRequest pageRequest);
 
-    Page<Mission> findAllByUser(User user, PageRequest pageRequest);
+    Page<Mission> findAllByUserAndState(User user, MissionState missionState, PageRequest pageRequest);
 
 }

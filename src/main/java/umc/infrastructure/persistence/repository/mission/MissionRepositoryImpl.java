@@ -52,8 +52,8 @@ public class MissionRepositoryImpl implements MissionRepository {
     }
 
     @Override
-    public Page<Mission> findAllByUser(User user, PageRequest pageRequest) {
-        Page<UserMission> userMissions = jpaUserMissionRepository.findByUserAndState(user, MissionState.ING, pageRequest);
+    public Page<Mission> findAllByUserAndState(User user, MissionState missionState, PageRequest pageRequest) {
+        Page<UserMission> userMissions = jpaUserMissionRepository.findByUserAndState(user, missionState, pageRequest);
         return userMissions.map(UserMission::getMission);
     }
 }

@@ -8,6 +8,7 @@ import umc.common.ApiPayload.code.status.ErrorStatus;
 import umc.common.ApiPayload.exception.handler.StoreHandler;
 import umc.common.ApiPayload.exception.handler.UserHandler;
 import umc.infrastructure.persistence.entity.mission.Mission;
+import umc.infrastructure.persistence.entity.mission.MissionState;
 import umc.infrastructure.persistence.entity.store.Store;
 import umc.infrastructure.persistence.entity.user.User;
 import umc.infrastructure.persistence.repository.mission.MissionRepository;
@@ -28,8 +29,8 @@ public class MissionQueryServiceImpl implements MissionQueryService{
     }
 
     @Override
-    public Page<Mission> getMissionsByUserId(Long userId, Integer page){
+    public Page<Mission> getMissionsByUserId(Long userId, MissionState missionState, Integer page){
         User user = userRepository.findById(userId).orElseThrow(() -> new UserHandler(ErrorStatus.MEMBER_NOT_FOUND));
-        return missionRepository.findAllByUser(user, PageRequest.of(page, 10));
+        return missionRepository.findAllByUserAndState(user,missionState, PageRequest.of(page, 10));
     }
 }

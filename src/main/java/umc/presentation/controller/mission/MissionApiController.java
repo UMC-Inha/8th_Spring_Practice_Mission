@@ -17,6 +17,8 @@ import umc.application.service.mission.MissionQueryService;
 import umc.common.ApiPayload.ApiResponse;
 import umc.common.validation.annotation.ExistStore;
 import umc.common.validation.annotation.ExistUser;
+import umc.common.validation.annotation.ValidEnum;
+import umc.infrastructure.persistence.entity.mission.MissionState;
 import umc.presentation.dto.ResponseEntityUtil;
 import umc.presentation.dto.mission.MissionRequestDto;
 
@@ -65,13 +67,14 @@ public class MissionApiController {
     @Parameters({
             @Parameter(name = "userId", description = "유저의 아이디, 로그인 구현 이후에는 해당 내용을 제거하고 JWT Token, 혹은 ContextHolder를 통해 유저 정보를 가져올 예정입니다.")
     })
-    @GetMapping("/{userId}/missions") //원래라면 context holder의 유저정보, 혹은 jwt token의 유저정보를 가져올 것 . .
-    public ResponseEntity<ApiResponse<?>> getMissionByUserId(@ExistUser @PathVariable(name = "userId") Long userId, @RequestParam(name = "page") Integer page) {
+    @GetMapping("/{userId}/missions/{missionState}") //원래라면 context holder의 유저정보, 혹은 jwt token의 유저정보를 가져올 것 . .
+    public ResponseEntity<ApiResponse<?>> getMissionByUserId(@ExistUser @PathVariable(name = "userId") Long userId,
+                                                             @PathVariable(name="missionState") @ValidEnum(enumClass = MissionState.class) String state,
+                                                             @RequestParam(name = "page") Integer page) {
         return ResponseEntityUtil.buildDefaultResponseEntity(ApiResponse.onSuccess(
-                MissionConverter.toMissionPreviewListDto(missionQueryService.getMissionsByUserId(userId, page))
+                MissionConverter.toMissionPreviewListDto(missionQueryService.getMissionsByUserId(userId, MissionState.valueOf(state), page))
         ));
     }
-
 
 
 }
