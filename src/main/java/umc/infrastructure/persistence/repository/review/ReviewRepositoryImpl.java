@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import umc.infrastructure.persistence.entity.review.Review;
 import umc.infrastructure.persistence.entity.store.Store;
+import umc.infrastructure.persistence.entity.user.User;
 import umc.infrastructure.persistence.repository.store.StoreRepository;
 
 @Repository
@@ -21,6 +22,11 @@ public class ReviewRepositoryImpl implements ReviewRepository{
     @Override
     public Page<Review> findAllByStore(Store store, PageRequest pageRequest) {
         return jpaReviewRepository.findAllByStore(store, pageRequest);
+    }
+
+    @Override
+    public Page<Review> findAllByUser(User user, PageRequest pageRequest) {
+        return jpaReviewRepository.findAllByUser(user, pageRequest);
     }
 
 }

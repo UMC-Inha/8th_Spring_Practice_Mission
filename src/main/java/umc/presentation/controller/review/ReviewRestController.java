@@ -16,6 +16,7 @@ import umc.application.service.review.ReviewCommandService;
 import umc.application.service.review.ReviewQueryService;
 import umc.common.ApiPayload.ApiResponse;
 import umc.common.validation.annotation.ExistStore;
+import umc.common.validation.annotation.ExistUser;
 import umc.presentation.dto.ResponseEntityUtil;
 import umc.presentation.dto.review.ReviewRequestDto;
 import umc.presentation.dto.review.ReviewResponseDto;
@@ -41,6 +42,12 @@ public class ReviewRestController {
     public ResponseEntity<ApiResponse<?>> getReviewList(@ExistStore @PathVariable(name="storeId") Long storeId, @RequestParam(name = "page") Integer page){
         return ResponseEntityUtil.buildDefaultResponseEntity(ApiResponse.onSuccess(
                 ReviewConverter.toReviewPreviewListDto(reviewQueryService.getReviewList(storeId, page))
+        ));
+    }
+    @GetMapping("/{userId}/reviews")
+    public ResponseEntity<ApiResponse<?>> getReviewByUserId(@ExistUser @PathVariable(name = "userId") Long userId, @RequestParam(name = "page") Integer page) {
+        return ResponseEntityUtil.buildDefaultResponseEntity(ApiResponse.onSuccess(
+                ReviewConverter.toReviewPreviewListDto(reviewQueryService.getReviewListByUserId(userId, page))
         ));
     }
 
