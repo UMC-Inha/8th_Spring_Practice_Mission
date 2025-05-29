@@ -56,4 +56,5 @@ public class MissionRepositoryImpl implements MissionRepository {
         Page<UserMission> userMissions = jpaUserMissionRepository.findByUserAndState(user, missionState, pageRequest);
         return userMissions.map(UserMission::getMission);
     }
+
 }

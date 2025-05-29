@@ -27,6 +27,4 @@ public interface MissionRepository {
 
     Page<Mission> findAllByUserAndState(User user, MissionState missionState, PageRequest pageRequest);
 
-    UserMission updateStateOfUserMission(Long userId, Long missionId);
-
 }

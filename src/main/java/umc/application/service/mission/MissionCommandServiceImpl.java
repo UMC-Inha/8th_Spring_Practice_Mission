@@ -57,7 +57,7 @@ public class MissionCommandServiceImpl implements MissionCommandService{
     @Override
     @Transactional
     public MissionResponseDto.MissionStateChangeResponseDto changeMissionState(Long userId, Long missionId){
-        UserMission userMission = missionRepository.findUserMissionById(new UserMissionPK(userId, missionId))
+        UserMission userMission = missionRepository.findUserMissionById(UserMissionPK.builder().userId(userId).missionId(missionId).build())
                 .orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
         userMission.setState(MissionState.COMPLETE);
         return UserMissionConverter.toMissionStateChangeResponseDto(userMission);
