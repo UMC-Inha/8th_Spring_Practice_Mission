@@ -44,4 +44,19 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
 
         return MemberMissionConverter.missionChallengeJoinResultDTO(memberMission);
     }
+
+    @Override
+    @Transactional
+    public void completeMission(Long memberMissionId) {
+        MemberMission memberMission = memberMissionRepository.findById(memberMissionId)
+                .orElseThrow(() -> new MemberMissionHandler(ErrorStatus.MISSION_NOT_FOUND));
+
+        if (memberMission.getStatus() != MissionStatus.IN_PROGRESS) {
+            throw new IllegalStateException("진행 중인 미션만 완료할 수 있습니다.");
+        }
+
+        memberMission.markAsDone();
+
+
+    }
 }

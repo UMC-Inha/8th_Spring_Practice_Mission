@@ -36,7 +36,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
         List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPreferList(foodCategoryList);
 
-        memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
+        memberPreferList.forEach(memberPrefer -> {memberPrefer.addMember(newMember);});
 
         return memberRepository.save(newMember);
     }

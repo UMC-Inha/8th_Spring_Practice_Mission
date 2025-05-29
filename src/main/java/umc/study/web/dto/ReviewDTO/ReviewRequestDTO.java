@@ -3,9 +3,7 @@ package umc.study.web.dto.ReviewDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.Setter;
 import umc.study.validation.annotation.ExistStores;
-
 import java.math.BigDecimal;
 import java.util.List;
 

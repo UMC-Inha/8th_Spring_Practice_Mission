@@ -1,30 +1,20 @@
-package umc.study.web.dto.MissionDTO;
+package umc.study.web.dto.MemberMissionDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
-public class MissionResponseDTO {
+public class MemberMissionResponseDTO {
 
     @Getter
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class MissionJoinResultDTO {
-        Long missionId;
-        LocalDateTime createdAt;
-    }
-
-    @Getter
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class MissionPreViewListDTO {
-        List<MissionPreViewDTO> missionList;
+    public static class MemberMissionPreViewListDTO {
+        List<MemberMissionPreViewDTO> memberMissionList;
         Integer listSize;
         Integer totalPage;
         Long totalElements;
@@ -36,7 +26,7 @@ public class MissionResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class MissionPreViewDTO {
+    public static class MemberMissionPreViewDTO {
         String body;
         Integer reward;
         LocalDate deadline;

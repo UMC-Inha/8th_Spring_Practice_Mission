@@ -11,7 +11,7 @@ public class MissionConverter {
     public static MissionResponseDTO.MissionJoinResultDTO toMissionJoinResultDTO(Mission mission) {
         return MissionResponseDTO.MissionJoinResultDTO.builder()
                 .missionId(mission.getId())
-                .createdAt(LocalDateTime.now())
+                .createdAt(mission.getCreatedAt())
                 .build();
     }
 

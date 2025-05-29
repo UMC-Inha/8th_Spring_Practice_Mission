@@ -1,11 +1,10 @@
 package umc.study.converter;
 
+import org.springframework.data.domain.Page;
 import umc.study.domain.Review;
 import umc.study.domain.Store;
 import umc.study.web.dto.ReviewDTO.ReviewRequestDTO;
 import umc.study.web.dto.ReviewDTO.ReviewResponseDTO;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ReviewConverter {
@@ -13,7 +12,7 @@ public class ReviewConverter {
         return ReviewResponseDTO.ReviewJoinResultDTO.builder()
                 .reviewId(review.getId())
                 .storeId(review.getStore().getId())
-                .createdAt(LocalDateTime.now())
+                .createdAt(review.getCreatedAt())
                 .build();
     }
 
