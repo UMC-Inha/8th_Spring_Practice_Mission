@@ -3,10 +3,13 @@ package umc.infrastructure.persistence.repository.mission;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import umc.infrastructure.persistence.entity.mission.Mission;
 import umc.infrastructure.persistence.entity.mission.UserMission;
 import umc.infrastructure.persistence.entity.mission.UserMissionPK;
+import umc.infrastructure.persistence.entity.store.Store;
 
 
 import java.util.List;
@@ -39,5 +42,10 @@ public class MissionRepositoryImpl implements MissionRepository {
     @Override
     public Optional<UserMission> findUserMissionById(UserMissionPK userMissionPK) {
         return jpaUserMissionRepository.findById(userMissionPK);
+    }
+
+    @Override
+    public Page<Mission> findAllByStore(Store store, PageRequest pageRequest){
+        return jpaMissionRepository.findAllByStore(store, pageRequest);
     }
 }
