@@ -10,4 +10,5 @@ import umc.infrastructure.persistence.entity.store.Store;
 @Repository
 public interface JpaMissionRepository extends JpaRepository<Mission, Long> {
     Page<Mission> findAllByStore(Store store, PageRequest pageRequest);
+
 }

@@ -8,6 +8,7 @@ import umc.infrastructure.persistence.entity.mission.Mission;
 import umc.infrastructure.persistence.entity.mission.UserMission;
 import umc.infrastructure.persistence.entity.mission.UserMissionPK;
 import umc.infrastructure.persistence.entity.store.Store;
+import umc.infrastructure.persistence.entity.user.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,5 +23,7 @@ public interface MissionRepository {
     Optional<UserMission> findUserMissionById(UserMissionPK userMissionPK);
 
     Page<Mission> findAllByStore(Store store, PageRequest pageRequest);
+
+    Page<Mission> findAllByUser(User user, PageRequest pageRequest);
 
 }
