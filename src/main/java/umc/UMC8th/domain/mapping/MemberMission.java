@@ -32,4 +32,13 @@ public class MemberMission {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
+
+    public void changeStatus(MissionStatus status) {
+        this.status = status; // 상태 변경 메서드 추가
+    }
+
+    public void completeMission() {
+        this.status = MissionStatus.COMPLETE;
+        this.completedDate = java.time.LocalDateTime.now(); // LocalDate → LocalDateTime 맞게 수정
+    }
 }

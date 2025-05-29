@@ -116,4 +116,30 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                 request
         );
     }
+
+    // IllegalArgumentException 예외가 발생 핸들러 (잘못된 파라미터 전달)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e, WebRequest request) {
+        ApiResponse<Object> body = ApiResponse.onFailure("MISSION404", e.getMessage(), null);
+        return super.handleExceptionInternal(
+                e, // 발생 예외 객체
+                body, // 직접 만든 응답 바디
+                HttpHeaders.EMPTY, // 헤더 부분
+                HttpStatus.BAD_REQUEST, // 400 에러
+                request // 요청 정보
+        );
+    }
+
+    // IllegalStateException 예외가 발생 핸들러 (현재 상태에서 해당 요청 처리 못하는 경우의 예외)
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Object> handleIllegalStateException(IllegalStateException e, WebRequest request) {
+        ApiResponse<Object> body = ApiResponse.onFailure("MISSION409", e.getMessage(), null);
+        return super.handleExceptionInternal(
+                e,
+                body,
+                HttpHeaders.EMPTY,
+                HttpStatus.CONFLICT, // 409 충돌 상태 번환
+                request
+        );
+    }
 }
