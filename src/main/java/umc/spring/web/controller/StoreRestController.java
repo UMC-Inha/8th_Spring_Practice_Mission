@@ -11,14 +11,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
+import umc.spring.converter.MissionConverter;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.converter.StoreConverter;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
+import umc.spring.service.missionService.MissionService;
 import umc.spring.service.storeService.StoreQueryService;
 import umc.spring.service.storeService.StoreService;
 import umc.spring.validation.annotation.ExistCategories;
 import umc.spring.validation.annotation.ExistStores;
+import umc.spring.web.dto.mission.MissionResponseDTO;
 import umc.spring.web.dto.review.ReviewResponseDTO;
 import umc.spring.web.dto.store.StoreRequestDTO;
 import umc.spring.web.dto.store.StoreResponseDTO;
@@ -30,6 +34,7 @@ public class StoreRestController {
 
     private final StoreService storeService;
     private final StoreQueryService storeQueryService;
+    private final MissionService missionService;
 
     @PostMapping("/")
     public ApiResponse<StoreResponseDTO.CreateStoreResultDto> create(@RequestBody @Valid StoreRequestDTO.CreateStoreDto request) {
@@ -51,6 +56,13 @@ public class StoreRestController {
     public ApiResponse<ReviewResponseDTO.PreviewReviewListResultDto> getReviewList(@ExistStores @PathVariable(name = "storeId") Long storeId, @RequestParam(name = "page") Integer page) {
         Page<Review> reviewList = storeQueryService.getReviewList(storeId, page);
         return ApiResponse.onSuccess(ReviewConverter.previewReviewListResultDto(reviewList));
+
+    }
+    @GetMapping("/{storesId}/missions")
+    @Operation(summary = "특정 가게 미션 조회")
+    public ApiResponse<MissionResponseDTO.MissionPreviewListResultDto> getMissionList(@RequestParam(name = "storeId") Long storeId, @RequestParam(name = "page") Integer page) {
+        Page<Mission> missionList = missionService.getMissionList(storeId, page);
+        return ApiResponse.onSuccess(MissionConverter.missionPreviewListResultDto(missionList));
 
     }
 }

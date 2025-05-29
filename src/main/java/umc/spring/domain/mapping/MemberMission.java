@@ -34,4 +34,9 @@ public class MemberMission extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Mission mission;
+
+    public void changeMissionStatus(){
+        if (this.status.equals(MissionStatus.IN_PROGRESS)) this.status = MissionStatus.COMPLETED;
+        else this.status = MissionStatus.IN_PROGRESS;
+    }
 }

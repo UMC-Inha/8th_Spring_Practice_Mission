@@ -44,4 +44,31 @@ public class ReviewResponseDTO {
         String content;
         LocalDate createdAt;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PreviewMyReviewListResultDto {
+        List<PreviewMyReviewDto> reviewList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PreviewMyReviewDto {
+        String storeName;
+        String ownerNickname;
+        BigDecimal starRating;
+        String content;
+        LocalDate createdAt;
+    }
+
+
 }
