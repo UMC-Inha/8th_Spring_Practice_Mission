@@ -5,6 +5,7 @@ import umc.UMC8th.domain.Member;
 import umc.UMC8th.domain.Review;
 import umc.UMC8th.domain.enums.Gender;
 import umc.UMC8th.domain.enums.MemberStatus;
+import umc.UMC8th.domain.mapping.MemberMission;
 import umc.UMC8th.dto.MemberRequestDTO;
 import umc.UMC8th.dto.MemberResponseDTO;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemberConverter {
 
@@ -71,6 +73,30 @@ public class MemberConverter {
                 .totalElements(reviewPage.getTotalElements())
                 .isFirst(reviewPage.isFirst())
                 .isLast(reviewPage.isLast())
+                .build();
+    }
+
+    public static MemberResponseDTO.MissionPreviewDTO toMissionPreviewDTO(MemberMission memberMission) {
+        return MemberResponseDTO.MissionPreviewDTO.builder()
+                .title(memberMission.getMission().getTitle())
+                .explanation(memberMission.getMission().getExplanation())
+                .deadline(memberMission.getMission().getDeadline())
+                .storeName(memberMission.getMission().getStore().getName())
+                .build();
+    }
+
+    public static MemberResponseDTO.MissionPreviewListDTO toMissionPreviewListDTO(Page<MemberMission> page) {
+        List<MemberResponseDTO.MissionPreviewDTO> list = page.getContent().stream()
+                .map(MemberConverter::toMissionPreviewDTO)
+                .collect(Collectors.toList());
+
+        return MemberResponseDTO.MissionPreviewListDTO.builder()
+                .isFirst(page.isFirst())
+                .isLast(page.isLast())
+                .totalPage(page.getTotalPages())
+                .totalElements(page.getTotalElements())
+                .listSize(list.size())
+                .missionList(list)
                 .build();
     }
 

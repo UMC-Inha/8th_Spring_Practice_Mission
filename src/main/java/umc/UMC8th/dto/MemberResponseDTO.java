@@ -48,4 +48,28 @@ public class MemberResponseDTO {
         String content;
         LocalDate createdAt;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MissionPreviewDTO {
+        private String title;
+        private String explanation;
+        private LocalDate deadline;
+        private String storeName;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MissionPreviewListDTO {
+        private boolean isFirst;
+        private boolean isLast;
+        private int totalPage;
+        private long totalElements;
+        private int listSize;
+        private List<MissionPreviewDTO> missionList;
+    }
 }

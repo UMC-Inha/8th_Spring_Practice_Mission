@@ -61,4 +61,23 @@ public class MemberRestController {
         var dto = MemberConverter.toMyReviewListDTO(reviewPage);
         return ApiResponse.onSuccess(dto);
     }
+
+    @GetMapping("/{memberId}/missions/ongoing")
+    @Operation(summary = "내가 진행중인 미션 목록 조회 API", description = "진행중인 미션 목록을 조회합니다. page 번호를 query string으로 주세요.(1부터 시작)")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "MEMBER404", description = "해당 유저가 존재하지 않습니다.")
+    })
+    @Parameters({
+            @Parameter(name = "memberId", description = "회원 ID"),
+            @Parameter(name = "page", description = "1 이상의 페이지 번호")
+    })
+    public ApiResponse<MemberResponseDTO.MissionPreviewListDTO> getOngoingMissions(
+            @ExistMember @PathVariable(name = "memberId") Long memberId,
+            @PositivePage @RequestParam(name = "page") int page
+    ) {
+        var missionPage = memberQueryService.getOngoingMissions(memberId, page - 1);
+        var dto = MemberConverter.toMissionPreviewListDTO(missionPage);
+        return ApiResponse.onSuccess(dto);
+    }
 }
