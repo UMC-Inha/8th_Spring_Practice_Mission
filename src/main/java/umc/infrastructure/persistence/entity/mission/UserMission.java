@@ -25,6 +25,7 @@ public class UserMission extends BaseTimeEntity {
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     @Builder.Default

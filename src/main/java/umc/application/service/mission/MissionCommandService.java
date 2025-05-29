@@ -8,4 +8,6 @@ public interface MissionCommandService {
     MissionResponseDto.MissionCreateResponseDto createMission(MissionRequestDto.MissionCreateDto request);
 
     MissionResponseDto.AddMissionToUserResponseDto addMissionToUser(MissionRequestDto.AddMissionToUserDto request);
+
+    MissionResponseDto.MissionStateChangeResponseDto changeMissionState(Long userId, Long missionId);
 }

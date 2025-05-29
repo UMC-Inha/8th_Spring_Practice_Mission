@@ -1,6 +1,7 @@
 package umc.presentation.dto.mission;
 
 import lombok.Builder;
+import umc.infrastructure.persistence.entity.mission.MissionState;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,4 +30,9 @@ public class MissionResponseDto {
                                         Long totalElements,
                                         Boolean isFirst,
                                         Boolean isLast){}
+
+    @Builder
+    public record MissionStateChangeResponseDto(Long missionId, MissionState missionState) {
+    }
+
 }

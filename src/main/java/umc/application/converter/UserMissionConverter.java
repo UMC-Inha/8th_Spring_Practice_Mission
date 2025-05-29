@@ -27,4 +27,11 @@ public class UserMissionConverter {
                 .missionId(mission.getId())
                 .build();
     }
+
+    public static MissionResponseDto.MissionStateChangeResponseDto toMissionStateChangeResponseDto(UserMission userMission) {
+        return MissionResponseDto.MissionStateChangeResponseDto.builder()
+                .missionId(userMission.getId().getMissionId())
+                .missionState(userMission.getState())
+                .build();
+    }
 }
