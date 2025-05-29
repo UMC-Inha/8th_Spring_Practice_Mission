@@ -35,7 +35,7 @@ public class ReviewRestController {
     })
     public ApiResponse<ReviewResponseDTO.PreviewReviewListResultDto> getReviewList(@PathVariable(name = "restaurantId") Long restaurantId,
                                                                                    @RequestParam(name = "page") Integer page) {
-        Page<Review> reviewPage = reviewService.getReviewList(restaurantId, page);
+        Page<Review> reviewPage = reviewService.getReviewList(restaurantId, page  - 1);
         return ApiResponse.onSuccess(ReviewConverter.previewReviewListResultDto(reviewPage));
     }
 
@@ -43,7 +43,7 @@ public class ReviewRestController {
     @Operation(summary = "내가 작성한 리뷰 목록 조회 API")
     public ApiResponse<ReviewResponseDTO.PreviewMyReviewListResultDto> getMyReviewList(@RequestParam(name = "memberId") Long memberId,
                                                                                        @RequestParam(name = "page") Integer page) {
-        Page<Review> reviewPage = reviewService.getReviewListByMember(memberId, page);
+        Page<Review> reviewPage = reviewService.getReviewListByMember(memberId, page  - 1);
         return ApiResponse.onSuccess(ReviewConverter.previewMyReviewListResultDto(reviewPage));
     }
 }

@@ -48,7 +48,7 @@ public class MissionRestController {
     })
     public ApiResponse<MissionResponseDTO.PreviewRestaurantMissionListDto> previewMissionByRestaurant(@PathVariable("restaurantId") Long restaurantId,
                                                                                                       @RequestParam("page") Integer page) {
-        Page<Mission> missionList = missionService.previewMissionByRestaurant(restaurantId, page);
+        Page<Mission> missionList = missionService.previewMissionByRestaurant(restaurantId, page - 1);
         return ApiResponse.onSuccess(MissionConverter.previewRestaurantMissionListDto(missionList));
     }
 
@@ -57,7 +57,7 @@ public class MissionRestController {
     public ApiResponse<MissionResponseDTO.PreviewMemberMissionListDto> previewMissionByMember(@RequestParam("memberId") Long memberId,
                                                                                               @RequestParam("missionStatus") MissionStatus missionStatus,
                                                                                               @RequestParam("page") Integer page) {
-        Page<MemberMission> memberMissionList = memberMissionService.previewMissionByMemberAndStatus(memberId, missionStatus, page);
+        Page<MemberMission> memberMissionList = memberMissionService.previewMissionByMemberAndStatus(memberId, missionStatus, page  - 1);
         return ApiResponse.onSuccess(MemberMissionConverter.previewMemberMissionListDto(memberMissionList));
     }
 
