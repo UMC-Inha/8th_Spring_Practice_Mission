@@ -5,8 +5,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import umc.UMC8th.domain.Mission;
 import umc.UMC8th.domain.Review;
 import umc.UMC8th.domain.Store;
+import umc.UMC8th.repository.MissionRepository.MissionRepository;
 import umc.UMC8th.repository.ReviewRepository;
 import umc.UMC8th.repository.StoreRepository.StoreRepository;
 
@@ -20,6 +22,7 @@ public class StoreQueryServiceImpl implements StoreQueryService{
 
     private final StoreRepository storeRepository;
     private final ReviewRepository reviewRepository;
+    private final MissionRepository missionRepository;
 
     @Override
     public Optional<Store> findStore(Long id) {
@@ -40,5 +43,12 @@ public class StoreQueryServiceImpl implements StoreQueryService{
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new IllegalArgumentException("가게를 찾을 수 없습니다.")); // 가게가 존재하지 않을때 발생하는 예외처리 추가
         return reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+    }
+
+    @Override
+    public Page<Mission> getMissionList(Long storeId, int page) {
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 가게가 존재하지 않습니다."));
+        return missionRepository.findAllByStore(store, PageRequest.of(page, 10));
     }
 }

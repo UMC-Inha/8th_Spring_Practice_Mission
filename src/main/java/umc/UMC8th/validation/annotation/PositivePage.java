@@ -6,6 +6,7 @@ import umc.UMC8th.validation.validator.PositivePageValidator;
 
 import java.lang.annotation.*;
 
+// 커스텀 어노테이션 구현
 @Documented
 @Constraint(validatedBy = PositivePageValidator.class)
 @Target({ElementType.PARAMETER})

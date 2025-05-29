@@ -1,6 +1,7 @@
 package umc.UMC8th.converter;
 
 import org.springframework.data.domain.Page;
+import umc.UMC8th.domain.Mission;
 import umc.UMC8th.domain.Review;
 import umc.UMC8th.domain.Store;
 import umc.UMC8th.dto.StoreResponse;
@@ -42,6 +43,29 @@ public class StoreConverter {
                 .totalElements(reviewPage.getTotalElements()) // 전체 요소 개수
                 .isFirst(reviewPage.isFirst())  // 현재 페이지가 첫 페이지인지 여부
                 .isLast(reviewPage.isLast())   // 현재 페이지가 마지막 페이지인지 여부
+                .build();
+    }
+
+    public static StoreResponseDTO.MissionPreviewDTO toMissionPreviewDTO(Mission mission) {
+        return StoreResponseDTO.MissionPreviewDTO.builder()
+                .title(mission.getTitle())
+                .description(mission.getExplanation())
+                .deadline(mission.getDeadline())
+                .build();
+    }
+
+    public static StoreResponseDTO.MissionPreviewListDTO toMissionPreviewListDTO(Page<Mission> missionPage) {
+        List<StoreResponseDTO.MissionPreviewDTO> dtoList = missionPage.getContent().stream()
+                .map(StoreConverter::toMissionPreviewDTO)
+                .collect(Collectors.toList());
+
+        return StoreResponseDTO.MissionPreviewListDTO.builder()
+                .missionList(dtoList)
+                .listSize(dtoList.size())
+                .totalPage(missionPage.getTotalPages())
+                .totalElements(missionPage.getTotalElements())
+                .isFirst(missionPage.isFirst())
+                .isLast(missionPage.isLast())
                 .build();
     }
 }
