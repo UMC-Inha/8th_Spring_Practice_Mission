@@ -28,4 +28,9 @@ public class UserMission extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public void changeIsCompleted(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+
+
 }

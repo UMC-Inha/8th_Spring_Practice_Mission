@@ -1,11 +1,12 @@
 package umc.service.mission;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.apiPayload.code.status.ErrorStatus;
 import umc.apiPayload.exception.GeneralException;
-import umc.converter.MissionConverter;
 import umc.domain.Mission;
 import umc.domain.Restaurant;
 import umc.domain.User;
@@ -14,53 +15,39 @@ import umc.repository.mission.MissionRepository;
 import umc.repository.restaurant.RestaurantRepository;
 import umc.repository.user.UserMissionRepository;
 import umc.repository.user.UserRepository;
-import umc.web.dto.mission.MissionRequestDTO;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
-public class MissionCommandServiceImpl implements MissionCommandService {
+@Transactional(readOnly = true)
+public class MissionQueryServiceImpl implements MissionQueryService {
 
     private final MissionRepository missionRepository;
     private final RestaurantRepository restaurantRepository;
-    private final UserMissionRepository userMissionRepository;
     private final UserRepository userRepository;
+    private final UserMissionRepository userMissionRepository;
 
     @Override
-    public void createMission(MissionRequestDTO.createMissionDTO request, Long restaurantId) {
+    public Page<Mission> getMissionListByRestaurantId(Long restaurantId, Integer page) {
 
-        // @Validated로 앞에서 미리 유효성 검사 진행
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(
                 () -> new GeneralException(ErrorStatus.RESTAURANT_NOT_FOUND)
         );
 
-        Mission mission = MissionConverter.toMission(request, restaurant);
-
-        missionRepository.save(mission);
-
+        Page<Mission> missionPage = missionRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
+        return missionPage;
     }
 
     @Override
-    public void changeMissionStatus(Long userId, Long missionId) {
-
-        Mission mission = missionRepository.findById(missionId).orElseThrow(
-                () -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND)
-        );
+    public Page<UserMission> getMissionListByUserId(Long userId, Integer page) {
 
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new GeneralException(ErrorStatus.USER_NOT_FOUND)
         );
 
-        UserMission userMission = userMissionRepository.findByUserAndMission(user, mission).orElseThrow(
-                () -> new GeneralException(ErrorStatus.USERMISSION_NOT_FOUND)
-        );
+        Page<UserMission> userMissionPage = userMissionRepository.findOngoingByUserId(userId, PageRequest.of(page, 10));
 
-        if(userMission.getIsCompleted()){
-            userMission.changeIsCompleted(false);
-        }else{
-            userMission.changeIsCompleted(true);
-        }
-
-        userMissionRepository.save(userMission);
+        return userMissionPage;
     }
+
+
 }
