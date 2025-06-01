@@ -4,6 +4,7 @@ import umc.infrastructure.persistence.entity.mission.Mission;
 import umc.infrastructure.persistence.entity.mission.UserMission;
 import umc.infrastructure.persistence.entity.mission.UserMissionPK;
 import umc.infrastructure.persistence.entity.user.User;
+import umc.presentation.dto.mission.MissionRequestDto;
 import umc.presentation.dto.mission.MissionResponseDto;
 
 public class UserMissionConverter {
@@ -32,6 +33,13 @@ public class UserMissionConverter {
         return MissionResponseDto.MissionStateChangeResponseDto.builder()
                 .missionId(userMission.getId().getMissionId())
                 .missionState(userMission.getState())
+                .build();
+    }
+
+    public static UserMissionPK toUserMissionPK(MissionRequestDto.MissionStateChangeDto request){
+        return UserMissionPK.builder()
+                .userId(request.userId())
+                .missionId(request.missionId())
                 .build();
     }
 }

@@ -76,11 +76,10 @@ public class MissionApiController {
         ));
     }
 
-    @PatchMapping("/{missionId}/complete")
-    public ResponseEntity<ApiResponse<?>> completeMission(@PathVariable(name = "missionId") Long missionId){
-        Long userId = 1L; // TODO: ContextHolder를 통해 유저 정보를 가져올 것
+    @PatchMapping("/complete")
+    public ResponseEntity<ApiResponse<?>> completeMission(@RequestBody MissionRequestDto.MissionStateChangeDto request){
         return ResponseEntityUtil.buildDefaultResponseEntity(
-                ApiResponse.onSuccess(missionCommandService.changeMissionState(userId, missionId))
+                ApiResponse.onSuccess(missionCommandService.changeMissionState(request))
         );
     }
 }

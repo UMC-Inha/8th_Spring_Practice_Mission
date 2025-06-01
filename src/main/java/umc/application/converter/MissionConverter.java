@@ -2,6 +2,7 @@ package umc.application.converter;
 
 import org.springframework.data.domain.Page;
 import umc.infrastructure.persistence.entity.mission.Mission;
+import umc.infrastructure.persistence.entity.mission.UserMissionPK;
 import umc.presentation.dto.mission.MissionRequestDto;
 import umc.presentation.dto.mission.MissionResponseDto;
 
@@ -47,5 +48,7 @@ public class MissionConverter {
                 .missionList(missionPreviewDtoList)
                 .build();
     }
+
+
 
 }

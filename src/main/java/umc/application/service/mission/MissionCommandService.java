@@ -9,5 +9,5 @@ public interface MissionCommandService {
 
     MissionResponseDto.AddMissionToUserResponseDto addMissionToUser(MissionRequestDto.AddMissionToUserDto request);
 
-    MissionResponseDto.MissionStateChangeResponseDto changeMissionState(Long userId, Long missionId);
+    MissionResponseDto.MissionStateChangeResponseDto changeMissionState(MissionRequestDto.MissionStateChangeDto request);
 }
