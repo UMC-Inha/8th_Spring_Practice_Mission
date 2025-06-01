@@ -2,10 +2,8 @@ package umc.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.domain.CuisineType;
-import umc.domain.PriceRange;
+import umc.domain.FoodCategory;
 import umc.domain.User;
-import umc.domain.VisitPurpose;
 import umc.domain.common.BaseEntity;
 
 @Entity
@@ -16,20 +14,26 @@ import umc.domain.common.BaseEntity;
 public class UserPreference extends BaseEntity {
 
     @Id
-    @OneToOne(fetch = FetchType.LAZY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;   // UserPreference 자체 PK
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @Setter
     private User user;
 
-    @OneToOne(fetch = FetchType.LAZY) // FK를 갖고 있으므로 연관관계의 주인
-    @JoinColumn(name = "cuisine_type")
-    private CuisineType cuisineType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private FoodCategory foodCategory;
 
-    @OneToOne(fetch = FetchType.LAZY) // FK를 갖고 있으므로 연관관계의 주인
-    @JoinColumn(name = "price_range")
-    private PriceRange priceRange;
+    public void setUser(User user){
+        if(this.user != null)
+            user.getUserPreferenceList().remove(this);
+        this.user = user;
+       user.getUserPreferenceList().add(this);
+    }
 
-    @OneToOne(fetch = FetchType.LAZY) // FK를 갖고 있으므로 연관관계의 주인
-    @JoinColumn(name = "visit_purpose")
-    private VisitPurpose visitPurpose;
-
+    public void setFoodCategory(FoodCategory foodCategory){
+        this.foodCategory = foodCategory;
+    }
 }
