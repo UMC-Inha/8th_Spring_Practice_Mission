@@ -21,7 +21,7 @@ public class QnaImg extends BaseEntity {
 
     private String imgUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "qna_id")
     private Qna qna; // qnaImg -> qna 단방향 연결
 }

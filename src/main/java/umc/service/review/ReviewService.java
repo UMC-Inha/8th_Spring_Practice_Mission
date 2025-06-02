@@ -1,6 +1,8 @@
 package umc.service.review;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.apiPayload.code.status.ErrorStatus;
@@ -59,5 +61,21 @@ public class ReviewService {
         restaurantService.updateScoreAvg(findRestaurant);
 
         return newReview;
+    }
+
+    public Page<Review> getReviewList(Long restaurantId, Integer page) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new RestaurantHandler(ErrorStatus.RESTAURANT_NOT_FOUND));
+
+        Page<Review> reviewPage = reviewRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
+        return reviewPage;
+    }
+
+    public Page<Review> getReviewListByMember(Long memberId, Integer page) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+
+        Page<Review> reviewPage = reviewRepository.findAllByMember(member, PageRequest.of(page, 10));
+        return reviewPage;
     }
 }

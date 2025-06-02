@@ -14,4 +14,5 @@ public class ReviewRequestDTO {
         @NotNull
         Double score;
     }
+
 }

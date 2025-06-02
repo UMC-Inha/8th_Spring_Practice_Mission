@@ -21,7 +21,7 @@ public class RestaurantImg extends BaseEntity {
 
     private String imgUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 }
