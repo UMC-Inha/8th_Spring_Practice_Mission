@@ -1,14 +1,19 @@
 package umc.UMC8th.converter;
 
+import org.springframework.data.domain.Page;
 import umc.UMC8th.domain.Member;
+import umc.UMC8th.domain.Review;
 import umc.UMC8th.domain.enums.Gender;
 import umc.UMC8th.domain.enums.MemberStatus;
+import umc.UMC8th.domain.mapping.MemberMission;
 import umc.UMC8th.dto.MemberRequestDTO;
 import umc.UMC8th.dto.MemberResponseDTO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemberConverter {
 
@@ -47,5 +52,52 @@ public class MemberConverter {
         };
     }
 
+    public static MemberResponseDTO.MyReviewDTO toMyReviewDTO(Review review) {
+        return MemberResponseDTO.MyReviewDTO.builder()
+                .storeName(review.getStore().getName())
+                .rating(review.getRating().floatValue())
+                .content(review.getReviewText())
+                .createdAt(review.getCreatedAt().toLocalDate())
+                .build();
+    }
+
+    public static MemberResponseDTO.MyReviewListDTO toMyReviewListDTO(Page<Review> reviewPage) {
+        List<MemberResponseDTO.MyReviewDTO> reviewDTOs = reviewPage.getContent().stream()
+                .map(MemberConverter::toMyReviewDTO)
+                .toList();
+
+        return MemberResponseDTO.MyReviewListDTO.builder()
+                .reviewList(reviewDTOs)
+                .listSize(reviewDTOs.size())
+                .totalPage(reviewPage.getTotalPages())
+                .totalElements(reviewPage.getTotalElements())
+                .isFirst(reviewPage.isFirst())
+                .isLast(reviewPage.isLast())
+                .build();
+    }
+
+    public static MemberResponseDTO.MissionPreviewDTO toMissionPreviewDTO(MemberMission memberMission) {
+        return MemberResponseDTO.MissionPreviewDTO.builder()
+                .title(memberMission.getMission().getTitle())
+                .explanation(memberMission.getMission().getExplanation())
+                .deadline(memberMission.getMission().getDeadline())
+                .storeName(memberMission.getMission().getStore().getName())
+                .build();
+    }
+
+    public static MemberResponseDTO.MissionPreviewListDTO toMissionPreviewListDTO(Page<MemberMission> page) {
+        List<MemberResponseDTO.MissionPreviewDTO> list = page.getContent().stream()
+                .map(MemberConverter::toMissionPreviewDTO)
+                .collect(Collectors.toList());
+
+        return MemberResponseDTO.MissionPreviewListDTO.builder()
+                .isFirst(page.isFirst())
+                .isLast(page.isLast())
+                .totalPage(page.getTotalPages())
+                .totalElements(page.getTotalElements())
+                .listSize(list.size())
+                .missionList(list)
+                .build();
+    }
 
 }
