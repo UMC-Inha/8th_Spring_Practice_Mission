@@ -28,5 +28,7 @@ public class UserMission extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MissionStatus status;
 
-    // getters & setters...
+    public void completeUserMission() {
+        this.status = MissionStatus.COMPLETED;
+    }
 }

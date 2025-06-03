@@ -33,7 +33,7 @@ public class QReview extends EntityPathBase<Review> {
 
     public final StringPath reviewContent = createString("reviewContent");
 
-    public final NumberPath<Float> score = createNumber("score", Float.class);
+    public final NumberPath<java.math.BigDecimal> score = createNumber("score", java.math.BigDecimal.class);
 
     public final umc.study.domain.store.QStore store;
 

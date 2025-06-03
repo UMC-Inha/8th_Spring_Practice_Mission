@@ -6,6 +6,7 @@ import umc.study.domain.common.BaseEntity;
 import umc.study.domain.mission.Mission;
 import umc.study.domain.review.Review;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Store extends BaseEntity {
@@ -29,7 +31,7 @@ public class Store extends BaseEntity {
     private String address;
 
     @Column(name = "average_rate")
-    private Float averageRate;
+    private BigDecimal averageRate;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import umc.study.apiPayload.ApiResponse;
-import umc.study.apiPayload.code.status.SuccessStatus;
 import umc.study.converter.TempConverter;
 import umc.study.service.temp.TempQueryService;
-import umc.study.web.dto.TempResponse;
+import umc.study.web.dto.response.TempResponse;
 
 @RestController
 @RequestMapping("/temp")
