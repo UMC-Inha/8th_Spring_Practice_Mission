@@ -38,7 +38,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService{
                         .build())
                 .collect(Collectors.toList());
 
-        newReview.setReviewImageList(reviewImageList);
+        newReview.getReviewImageList().addAll(reviewImageList);
 
         return reviewRepository.save(newReview);
     }

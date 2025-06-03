@@ -32,7 +32,6 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "store_id")
     private Store store;
 
-    @Setter
     @Builder.Default
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewImage> reviewImageList = new ArrayList<>();
