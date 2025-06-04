@@ -10,6 +10,7 @@ import umc.common.ApiPayload.exception.handler.MissionHandler;
 import umc.common.ApiPayload.exception.handler.StoreHandler;
 import umc.common.ApiPayload.exception.handler.UserHandler;
 import umc.infrastructure.persistence.entity.mission.Mission;
+import umc.infrastructure.persistence.entity.mission.MissionState;
 import umc.infrastructure.persistence.entity.mission.UserMission;
 import umc.infrastructure.persistence.entity.mission.UserMissionPK;
 import umc.infrastructure.persistence.entity.store.Store;
@@ -52,4 +53,14 @@ public class MissionCommandServiceImpl implements MissionCommandService{
 
         return UserMissionConverter.toResponse(newUserMission);
     }
+
+    @Override
+    @Transactional
+    public MissionResponseDto.MissionStateChangeResponseDto changeMissionState(MissionRequestDto.MissionStateChangeDto request){
+        UserMission userMission = missionRepository.findUserMissionById(UserMissionConverter.toUserMissionPK(request))
+                .orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
+        userMission.setState(MissionState.COMPLETE);
+        return UserMissionConverter.toMissionStateChangeResponseDto(userMission);
+    }
+
 }

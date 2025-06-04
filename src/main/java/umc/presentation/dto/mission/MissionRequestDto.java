@@ -13,4 +13,6 @@ public class MissionRequestDto {
 
     public record AddMissionToUserDto(@ExistUser Long userId, Long missionId) { }
 
+    public record MissionStateChangeDto(Long missionId, Long userId) {}
+
 }
