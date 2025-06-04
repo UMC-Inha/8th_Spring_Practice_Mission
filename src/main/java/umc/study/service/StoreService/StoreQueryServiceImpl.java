@@ -2,10 +2,15 @@ package umc.study.service.StoreService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import umc.study.converter.MissionConverter;
 import umc.study.converter.StoreConverter;
+import umc.study.domain.Mission;
 import umc.study.domain.Store;
 import umc.study.repository.StoreRepository.StoreRepository;
+import umc.study.web.dto.Mission.MissionResponseDto;
 import umc.study.web.dto.Store.StoreRequestDto;
 
 import java.util.List;
@@ -30,6 +35,13 @@ public class StoreQueryServiceImpl implements StoreQueryService{
         filteredStores.forEach(store -> System.out.println("Store: " + store));
 
         return filteredStores;
+    }
+
+    @Override
+    public Page<MissionResponseDto.JoinResultDTO> findStoreMissions(Long storeId, Pageable pageable) {
+        Page<Mission> storeMissions = storeRepository.findMissionsByStore(storeId, pageable);
+
+        return storeMissions.map(MissionConverter::toJoinResultDTO);
     }
 
     @Override

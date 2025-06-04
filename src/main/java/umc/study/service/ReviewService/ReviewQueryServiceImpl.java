@@ -2,6 +2,8 @@ package umc.study.service.ReviewService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exception.GeneralException;
@@ -13,6 +15,7 @@ import umc.study.repository.MemberRepository.MemberRepository;
 import umc.study.repository.ReviewRepository.ReviewRepository;
 import umc.study.repository.StoreRepository.StoreRepository;
 import umc.study.web.dto.Review.ReviewRequestDto;
+import umc.study.web.dto.Review.ReviewResponseDto;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +27,12 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     private final StoreRepository storeRepository;
 
     private final MemberRepository memberRepository;
+
+    @Override
+    public Page<ReviewResponseDto.JoinResultDTO> findUserReviews(Long memberId, Pageable pageable) {
+        Page<Review> reviews = reviewRepository.findByMemberReviews(memberId, pageable);
+        return reviews.map(ReviewConverter::toJoinResultDTO);
+    }
 
 
     @Override
