@@ -45,6 +45,8 @@ public class Restaurant extends BaseEntity {
 
 	private Boolean isOpened;
 
+	private Float score;
+
 	@ElementCollection
 	@Builder.Default
 	private List<String> restaurantImageList = new ArrayList<>();

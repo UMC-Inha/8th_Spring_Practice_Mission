@@ -64,7 +64,8 @@ public class User {
 
 	private String addressDetail;
 
-	private Integer point;
+	@Builder.Default
+	private Integer point = 0;
 
 	@Enumerated(EnumType.STRING)
 	private SocialType socialType;
