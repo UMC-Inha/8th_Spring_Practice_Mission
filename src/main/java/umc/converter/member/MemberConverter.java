@@ -32,4 +32,20 @@ public class MemberConverter {
                 .loginType(request.getLoginSort())
                 .build();
     }
+
+    public static MemberResponseDTO.LoginResultDTO toLoginResultDTO (Long memberId, String accessToken) {
+        return MemberResponseDTO.LoginResultDTO.builder()
+                .memberId(memberId)
+                .accessToken(accessToken)
+                .build();
+    }
+
+    public static MemberResponseDTO.MemberInfoDTO toMemberInfoDTO (Member member) {
+        return MemberResponseDTO.MemberInfoDTO.builder()
+                .name(member.getName())
+                .mail(member.getMail())
+                .gender(member.getGender())
+                .birth(member.getBirth())
+                .build();
+    }
 }

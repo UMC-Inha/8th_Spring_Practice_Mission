@@ -37,4 +37,11 @@ public class MemberRequestDTO {
         List<Long> preferCategory;
         Role role;
     }
+
+    @Getter
+    @Setter
+    public static class LoginRequestDTO {
+        private String mail;
+        private String password;
+    }
 }
