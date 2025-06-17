@@ -26,4 +26,14 @@ public class UserResponseDto {
 		Long userId;
 		String accessToken;
 	}
+
+	@Builder
+	@Getter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class UserInfoDTO{
+		String name;
+		String email;
+		String gender;
+	}
 }

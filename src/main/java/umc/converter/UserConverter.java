@@ -44,4 +44,21 @@ public class UserConverter {
 			.role(Role.valueOf(request.getRole()))
 			.build();
 	}
+
+	public static UserResponseDto.LoginResultDTO toLoginResultDto(Long userId, String accessToken) {
+
+		return UserResponseDto.LoginResultDTO.builder()
+			.userId(userId)
+			.accessToken(accessToken)
+			.build();
+	}
+
+	public static UserResponseDto.UserInfoDTO toUserInfoDTO(User user) {
+
+		return UserResponseDto.UserInfoDTO.builder()
+			.name(user.getName())
+			.email(user.getEmail())
+			.gender(user.getGender().getDescription())
+			.build();
+	}
 }

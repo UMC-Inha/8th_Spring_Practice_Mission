@@ -7,4 +7,5 @@ import umc.dto.WithdrawUserDto;
 public interface UserCommandService {
 	WithdrawUserDto withdrawUser(Long userId);
 	UserResponseDto.JoinResultDTO joinUser(UserRequestDto.JoinDto request);
+	UserResponseDto.LoginResultDTO loginUser(UserRequestDto.LoginRequestDto request);
 }

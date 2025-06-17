@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 import umc.dto.UserRequestDto;
@@ -13,10 +14,12 @@ import umc.service.UserService.UserCommandService;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserViewController {
 
 	private final UserCommandService userCommandService;
 
+	/*
 	@PostMapping("/signup")
 	public String joinUser(@ModelAttribute("joinDto") UserRequestDto.JoinDto request,
 		BindingResult bindingResult,
@@ -32,6 +35,7 @@ public class UserViewController {
 			return "/signup";
 		}
 	}
+	*/
 
 	@GetMapping("/login")
 	public String loginPage() {

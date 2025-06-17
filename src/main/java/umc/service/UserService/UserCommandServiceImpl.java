@@ -1,7 +1,10 @@
 package umc.service.UserService;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import umc.apiPayload.code.status.ErrorStatus;
 import umc.apiPayload.exception.GeneralException;
+import umc.config.jwt.JwtTokenProvider;
 import umc.converter.PreferredCategoryConverter;
 import umc.converter.UserConverter;
 import umc.domain.Category;
@@ -38,6 +42,7 @@ public class UserCommandServiceImpl implements UserCommandService{
 	private final CategoryRepository categoryRepository;
 	private final RegionRepository regionRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final JwtTokenProvider jwtTokenProvider;
 
 	@Override
 	@Transactional
@@ -82,4 +87,25 @@ public class UserCommandServiceImpl implements UserCommandService{
 		return UserConverter.toJoinResultDto(userRepository.save(newUser));
 	}
 
+	@Override
+	public UserResponseDto.LoginResultDTO loginUser(UserRequestDto.LoginRequestDto request) {
+		User user = userRepository.findByEmail(request.getEmail())
+			.orElseThrow(()-> new GeneralException(ErrorStatus.USER_NOT_FOUND));
+
+		if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+			throw new GeneralException(ErrorStatus.INVALID_PASSWORD);
+		}
+
+		Authentication authentication = new UsernamePasswordAuthenticationToken(
+			user.getEmail(), null,
+			Collections.singleton(() -> user.getRole().name())
+		);
+
+		String accessToken = jwtTokenProvider.generateToken(authentication);
+
+		return UserConverter.toLoginResultDto(
+			user.getId(),
+			accessToken
+		);
+	}
 }
