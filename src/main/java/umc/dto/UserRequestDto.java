@@ -47,4 +47,12 @@ public class UserRequestDto {
 		@NotBlank(message = "패스워드는 필수입니다.")
 		private String password;
 	}
+
+	@Getter
+	public static class ReissueDto {
+		@NotBlank
+		private String accessToken;
+		@NotBlank
+		private String refreshToken;
+	}
 }

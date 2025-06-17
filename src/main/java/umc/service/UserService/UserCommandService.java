@@ -8,4 +8,5 @@ public interface UserCommandService {
 	WithdrawUserDto withdrawUser(Long userId);
 	UserResponseDto.JoinResultDTO joinUser(UserRequestDto.JoinDto request);
 	UserResponseDto.LoginResultDTO loginUser(UserRequestDto.LoginRequestDto request);
+	UserResponseDto.ReissueDto reissue(UserRequestDto.ReissueDto request);
 }

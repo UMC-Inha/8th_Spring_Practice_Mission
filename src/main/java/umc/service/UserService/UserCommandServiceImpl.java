@@ -19,12 +19,14 @@ import umc.domain.Category;
 import umc.domain.Region;
 import umc.domain.User;
 import umc.domain.mapping.PreferredCategory;
+import umc.domain.security.RefreshToken;
 import umc.dto.UserRequestDto;
 import umc.dto.UserResponseDto;
 import umc.dto.WithdrawUserDto;
 import umc.repository.AlarmRepository.AlarmRepository;
 import umc.repository.CategoryRepository.CategoryRepository;
 import umc.repository.PreferredCategoryRepository.PreferredCategoryRepository;
+import umc.repository.RefreshTokenRepository.RefreshTokenRepository;
 import umc.repository.RegionRepository.RegionRepository;
 import umc.repository.ReviewRepository.ReviewRepository;
 import umc.repository.UserRepository.UserRepository;
@@ -43,6 +45,7 @@ public class UserCommandServiceImpl implements UserCommandService{
 	private final RegionRepository regionRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtTokenProvider jwtTokenProvider;
+	private final RefreshTokenRepository refreshTokenRepository;
 
 	@Override
 	@Transactional
@@ -88,6 +91,7 @@ public class UserCommandServiceImpl implements UserCommandService{
 	}
 
 	@Override
+	@Transactional
 	public UserResponseDto.LoginResultDTO loginUser(UserRequestDto.LoginRequestDto request) {
 		User user = userRepository.findByEmail(request.getEmail())
 			.orElseThrow(()-> new GeneralException(ErrorStatus.USER_NOT_FOUND));
@@ -102,10 +106,43 @@ public class UserCommandServiceImpl implements UserCommandService{
 		);
 
 		String accessToken = jwtTokenProvider.generateToken(authentication);
+		String refreshToken = jwtTokenProvider.generateRefreshToken();
+
+		refreshTokenRepository.save(UserConverter.toRefreshToken(user.getEmail(), refreshToken));
 
 		return UserConverter.toLoginResultDto(
 			user.getId(),
-			accessToken
+			accessToken,
+			refreshToken
 		);
+	}
+
+	@Override
+	@Transactional
+	public UserResponseDto.ReissueDto reissue(UserRequestDto.ReissueDto request) {
+
+		// 1. refreshToken 검증
+		if (!jwtTokenProvider.validateToken(request.getRefreshToken())) {
+			throw new GeneralException(ErrorStatus.INVALID_TOKEN);
+		}
+
+		// 2. accessToken 에서 Authentication 추출
+		Authentication authentication = jwtTokenProvider.getAuthentication(request.getAccessToken());
+
+		// 3. Authentication에서 사용자의 email로 refreshToken 가져오기
+		RefreshToken refreshToken = refreshTokenRepository.findByEmail(authentication.getName())
+			.orElseThrow(() -> new GeneralException(ErrorStatus.INVALID_TOKEN));
+
+		// 4. 입력 refreshToken, 찾은 refreshToken 일치성 검사
+		if (!refreshToken.getValue().equals(request.getRefreshToken())) {
+			throw new GeneralException(ErrorStatus.INVALID_TOKEN);
+		}
+
+		// 5. 새로운 토큰 생성
+		String newAccessToken = jwtTokenProvider.generateToken(authentication);
+		String newRefreshToken = !jwtTokenProvider.validateToken(refreshToken.getValue()) ?
+			jwtTokenProvider.generateRefreshToken() : request.getRefreshToken();
+
+		return UserConverter.toReissueDto(newAccessToken, newRefreshToken);
 	}
 }

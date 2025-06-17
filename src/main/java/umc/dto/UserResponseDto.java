@@ -25,6 +25,7 @@ public class UserResponseDto {
 	public static class LoginResultDTO {
 		Long userId;
 		String accessToken;
+		String refreshToken;
 	}
 
 	@Builder
@@ -35,5 +36,14 @@ public class UserResponseDto {
 		String name;
 		String email;
 		String gender;
+	}
+
+	@Builder
+	@Getter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class ReissueDto {
+		private String accessToken;
+		private String refreshToken;
 	}
 }

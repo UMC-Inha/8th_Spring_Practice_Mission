@@ -1,13 +1,13 @@
 package umc.config.jwt;
 
+import static java.time.LocalTime.*;
+
 import java.security.Key;
-import java.security.KeyStore;
 import java.util.Collections;
 import java.util.Date;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -23,7 +23,6 @@ import umc.apiPayload.code.status.ErrorStatus;
 import umc.apiPayload.exception.GeneralException;
 import umc.config.properties.Constants;
 import umc.config.properties.JwtProperties;
-import umc.domain.enums.Role;
 
 @Component
 @RequiredArgsConstructor
@@ -44,6 +43,14 @@ public class JwtTokenProvider {
 			.claim("role", authentication.getAuthorities().iterator().next().getAuthority()) // 권한 등 추가 정보
 			.setIssuedAt(new Date())
 			.setExpiration(new Date(System.currentTimeMillis() + jwtProperties.getExpiration().getAccess()))
+			.signWith(getSigningKey(), SignatureAlgorithm.HS256)
+			.compact();
+	}
+
+	// 리프레시 토큰 생성
+	public String generateRefreshToken() {
+		return Jwts.builder()
+			.setExpiration(new Date(System.currentTimeMillis() + jwtProperties.getExpiration().getRefresh()))
 			.signWith(getSigningKey(), SignatureAlgorithm.HS256)
 			.compact();
 	}

@@ -65,4 +65,11 @@ public class UserRestController {
 		UserResponseDto.JoinResultDTO response = userCommandService.joinUser(request);
 		return ResponseEntity.ok(ApiResponse.onSuccess(response));
 	}
+
+	@PostMapping("/reissue")
+	@Operation(summary = "액세스 토큰 재발급 API",description = "토큰 재발급 API입니다.")
+	public ResponseEntity<ApiResponse<UserResponseDto.ReissueDto>> reissue(@RequestBody @Valid UserRequestDto.ReissueDto request) {
+		UserResponseDto.ReissueDto response = userCommandService.reissue(request);
+		return ResponseEntity.ok(ApiResponse.onSuccess(response));
+	}
 }

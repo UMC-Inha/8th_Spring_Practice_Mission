@@ -6,6 +6,7 @@ import umc.domain.Region;
 import umc.domain.User;
 import umc.domain.enums.Gender;
 import umc.domain.enums.Role;
+import umc.domain.security.RefreshToken;
 import umc.dto.UserRequestDto;
 import umc.dto.UserResponseDto;
 
@@ -45,11 +46,12 @@ public class UserConverter {
 			.build();
 	}
 
-	public static UserResponseDto.LoginResultDTO toLoginResultDto(Long userId, String accessToken) {
+	public static UserResponseDto.LoginResultDTO toLoginResultDto(Long userId, String accessToken, String refreshToken) {
 
 		return UserResponseDto.LoginResultDTO.builder()
 			.userId(userId)
 			.accessToken(accessToken)
+			.refreshToken(refreshToken)
 			.build();
 	}
 
@@ -59,6 +61,22 @@ public class UserConverter {
 			.name(user.getName())
 			.email(user.getEmail())
 			.gender(user.getGender().getDescription())
+			.build();
+	}
+
+	public static UserResponseDto.ReissueDto toReissueDto(String accessToken, String refreshToken) {
+
+		return UserResponseDto.ReissueDto.builder()
+			.accessToken(accessToken)
+			.refreshToken(refreshToken)
+			.build();
+	}
+
+	public static RefreshToken toRefreshToken(String email, String refreshToken) {
+
+		return RefreshToken.builder()
+			.email(email)
+			.value(refreshToken)
 			.build();
 	}
 }
