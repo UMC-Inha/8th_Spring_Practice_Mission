@@ -25,6 +25,8 @@ public class MemberConverter {
                 .address(request.getAddress())
                 .birth(request.getBirth())
                 .mail(request.getMail())
+                .password(request.getPassword())
+                .role(request.getRole())
                 .isPhone(request.getIsPhone())
                 .phoneNum(request.getPhoneNum())
                 .loginType(request.getLoginSort())

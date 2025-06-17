@@ -1,6 +1,7 @@
 package umc.service.member;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.apiPayload.code.status.ErrorStatus;
@@ -34,6 +35,7 @@ public class MemberService {
     private final MemberMissionService memberMissionService;
     private final PreferCategoryService preferCategoryService;
     private final ReviewService reviewService;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public void deleteMember(Long memberId) {
@@ -56,6 +58,8 @@ public class MemberService {
     public Member joinMember(MemberRequestDTO.JoinDto request) {
 
         Member newMember = MemberConverter.toMember(request);
+
+        newMember.encodePassword(passwordEncoder.encode(request.getPassword()));
 
         List<FoodCategory> foodCategoryList = request.getPreferCategory().stream()
                 .map(categoryId -> {

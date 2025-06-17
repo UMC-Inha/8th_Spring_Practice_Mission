@@ -2,14 +2,17 @@ package umc.dto.member;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 import umc.domain.enums.Gender;
 import umc.domain.enums.LoginType;
+import umc.domain.enums.Role;
 
 import java.util.List;
 
 public class MemberRequestDTO {
 
     @Getter
+    @Setter
     public static class JoinDto {
         @NotNull
         String name;
@@ -22,6 +25,8 @@ public class MemberRequestDTO {
         @NotNull
         String mail;
         @NotNull
+        String password;
+        @NotNull
         LoginType loginSort;
         @NotNull
         String phoneNum;
@@ -30,5 +35,6 @@ public class MemberRequestDTO {
 
         @NotNull
         List<Long> preferCategory;
+        Role role;
     }
 }
