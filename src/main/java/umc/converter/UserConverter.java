@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import umc.domain.Region;
 import umc.domain.User;
 import umc.domain.enums.Gender;
+import umc.domain.enums.Role;
 import umc.dto.UserRequestDto;
 import umc.dto.UserResponseDto;
 
@@ -22,13 +23,13 @@ public class UserConverter {
 		Gender gender = null;
 
 		switch (request.getGender()) {
-			case MALE:
+			case "MALE":
 				gender = Gender.MALE;
 				break;
-			case FEMALE:
+			case "FEMALE":
 				gender = Gender.FEMALE;
 				break;
-			case NONE:
+			case "NONE":
 				gender = Gender.NONE;
 				break;
 		}
@@ -36,10 +37,11 @@ public class UserConverter {
 		return User.builder()
 			.name(request.getName())
 			.email(request.getEmail())
-			.gender(request.getGender())
+			.gender(Gender.valueOf(request.getGender()))
 			.birth(request.getBirthDate())
 			.addressDetail(request.getAddressDetail())
 			.region(region)
+			.role(Role.valueOf(request.getRole()))
 			.build();
 	}
 }

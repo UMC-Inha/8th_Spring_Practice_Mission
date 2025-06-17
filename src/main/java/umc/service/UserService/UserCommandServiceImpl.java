@@ -2,6 +2,7 @@ package umc.service.UserService;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,7 @@ public class UserCommandServiceImpl implements UserCommandService{
 	private final UserTermRepository userTermRepository;
 	private final CategoryRepository categoryRepository;
 	private final RegionRepository regionRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional
@@ -62,6 +64,7 @@ public class UserCommandServiceImpl implements UserCommandService{
 
 		// 유저 생성
 		User newUser = UserConverter.toUser(request, region);
+		newUser.encodePassword(passwordEncoder.encode(request.getPassword()));
 		
 		// 해당되는 카테고리 추출
 		List<Category> categoryList = request.getPreferCategory().stream()
