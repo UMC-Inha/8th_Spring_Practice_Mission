@@ -2,6 +2,7 @@ package umc.UMC8th.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import umc.UMC8th.apiPayload.code.status.ErrorStatus;
 import umc.UMC8th.converter.MemberConverter;
@@ -23,11 +24,13 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
     private final MemberRepository memberRepository;
     private final FoodCategoryRepository foodCategoryRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public Member joinMember(MemberRequestDTO.JoinDto request) {
         Member newMember = MemberConverter.toMember(request);
+        newMember.encodePassword(passwordEncoder.encode(request.getPassword())); // 비밀번호 암호화
 
         List<FoodCategories> foodCategoryList = request.getFoodCategories().stream()
                 .map(categoryId -> foodCategoryRepository.findById(categoryId)

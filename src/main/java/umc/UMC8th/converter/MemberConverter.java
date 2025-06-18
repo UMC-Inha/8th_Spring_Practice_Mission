@@ -21,10 +21,12 @@ public class MemberConverter {
         return Member.builder()
                 .email(request.getEmail())
                 .name(request.getUserName())
+                .password(request.getPassword()) // password 추가
                 .phoneNumber(request.getUserPhone())
                 .gender(convertGender(request.getUserGender()))
                 .address(request.getUserAddress())
-                .specAddress("상세주소 없음") // 분리 설계가 아니므로 임시 처리
+                .specAddress(request.getSpecAddress())
+                .role(request.getRole())
                 .region(request.getRegion())
                 .status(MemberStatus.ACTIVE)
                 .points(0)

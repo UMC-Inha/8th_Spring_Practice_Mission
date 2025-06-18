@@ -3,8 +3,10 @@ package umc.UMC8th.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import umc.UMC8th.domain.enums.Role;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,7 +21,7 @@ public class MemberRequestDTO {
         private String email;
 
         @NotBlank
-        private String password; // 현재 나의 엔티티 필드에는 없는데 저장은 하지 않아도 있어야할거같아서 넣음
+        private String password;
 
         @NotBlank
         private String userName;
@@ -47,5 +49,11 @@ public class MemberRequestDTO {
 
         @NotBlank
         private String region;
+
+        @NotNull
+        Role role;
+
+        @Size(min = 5, max = 40)
+        private String specAddress;
     }
 }
