@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import umc.UMC8th.domain.common.BaseEntity;
 import umc.UMC8th.domain.enums.Gender;
 import umc.UMC8th.domain.enums.MemberStatus;
+import umc.UMC8th.domain.enums.Role;
 import umc.UMC8th.domain.enums.SocialType;
 import umc.UMC8th.domain.mapping.MemberAgree;
 import umc.UMC8th.domain.mapping.MemberMission;
@@ -51,7 +52,7 @@ public class Member extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
     private MemberStatus status;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true, length = 50) // 이메일 중복 X 로직 추가
     private String email;
 
     @ColumnDefault("0")
@@ -62,6 +63,13 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false, length = 20)
     private String region; // 지역
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MemberAgree> memberAgrees = new ArrayList<>();
@@ -74,5 +82,9 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MemberMission> memberMissions = new ArrayList<>();
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 
 }
