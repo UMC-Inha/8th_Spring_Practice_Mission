@@ -38,7 +38,7 @@ public class MemberRestController {
         return ApiResponse.onSuccess(
                 MemberConverter.toJoinResultDto(
                         savedMember,
-                        request.getFoodCategories().toString() // List<Long> → String으로 변환
+                        request.getPreferCategory().toString() // List<Long> → String으로 변환
                 )
         );
     }

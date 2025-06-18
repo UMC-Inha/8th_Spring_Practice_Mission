@@ -29,10 +29,11 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     @Override
     @Transactional
     public Member joinMember(MemberRequestDTO.JoinDto request) {
+        System.out.println("joinMember 호출됨: " + request.getEmail());
         Member newMember = MemberConverter.toMember(request);
         newMember.encodePassword(passwordEncoder.encode(request.getPassword())); // 비밀번호 암호화
 
-        List<FoodCategories> foodCategoryList = request.getFoodCategories().stream()
+        List<FoodCategories> foodCategoryList = request.getPreferCategory().stream()
                 .map(categoryId -> foodCategoryRepository.findById(categoryId)
                         .orElseThrow(() -> new FoodCategoryHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND)))
                 .collect(Collectors.toList());

@@ -1,5 +1,6 @@
 package umc.UMC8th.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -38,10 +39,12 @@ public class MemberViewController {
     }
 
     @PostMapping("/members/signup")
-    public String joinMember(@ModelAttribute("memberJoinDto") MemberRequestDTO.JoinDto request,
+    public String joinMember(@ModelAttribute("memberJoinDto") @Valid MemberRequestDTO.JoinDto request,
                              BindingResult bindingResult,
                              Model model) {
+        System.out.println("POST /members/signup 진입함");
         if (bindingResult.hasErrors()) {
+            System.out.println("바인딩 에러 발생: " + bindingResult.getAllErrors());
             return "signup";
         }
 
@@ -49,6 +52,7 @@ public class MemberViewController {
             memberCommandService.joinMember(request); // 실제 회원가입 로직 호출
             return "redirect:/login"; // 성공 시 로그인 페이지로 이동
         } catch (Exception e) {
+            System.out.println("회원가입 중 예외 발생: " + e.getMessage());
             model.addAttribute("error", e.getMessage()); // 실패 시 에러 메시지 표시
             return "signup"; // 다시 회원가입 폼 보여줌
         }
