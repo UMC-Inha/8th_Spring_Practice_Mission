@@ -1,15 +1,28 @@
 package umc.study.domain.enums;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import umc.study.apiPayload.code.status.ErrorStatus;
+import umc.study.apiPayload.exceptition.GeneralException;
 
 @Getter
 @RequiredArgsConstructor
 public enum Gender {
     MALE("남자"),
     FEMALE("여자"),
-    NONE("선택 안함"); // 예시로 추가
+    NONE("선택 안함");
 
     private final String description;
+
+    public static Gender fromDescription(String description) {
+        for (Gender gender : Gender.values()) {
+            if (gender.description.equals(description)) {
+                return gender;
+            }
+        }
+        throw new GeneralException(ErrorStatus.INVALID_GENDER);
+    }
+
 }
 

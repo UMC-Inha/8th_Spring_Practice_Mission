@@ -87,7 +87,7 @@ public class MissionCommandServiceImpl {
     public Page<Mission> getMissionsByStore(Long storeId, Integer page) {
         Store store = storeRepository.findById(storeId).get();
 
-        Page<Mission> MissionPage = missionRepository.findAllByStore(store, PageRequest.of(page, 10));
+        Page<Mission> MissionPage = missionRepository.findAllByStore(storeId, PageRequest.of(page, 10));
         return MissionPage;
     }
 }

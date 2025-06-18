@@ -23,14 +23,7 @@ public class UserConverter {
     }
     public static User toUser(UserRequestDto.JoinDto request){
 
-        Gender gender = null;
-
-        switch (request.getGender()){
-            case MALE -> gender = Gender.MALE;
-            case FEMALE -> gender = Gender.FEMALE;
-            case NONE -> gender = Gender.NONE;
-            default -> throw new GeneralException(ErrorStatus.INVALID_GENDER);
-        }
+        Gender gender = Gender.fromDescription(String.valueOf(request.getGender()));
 
         return User.builder()
                 .address(request.getAddress())
