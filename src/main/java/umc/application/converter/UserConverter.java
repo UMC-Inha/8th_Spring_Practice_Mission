@@ -26,4 +26,19 @@ public class UserConverter {
                 .build();
 
     }
+
+    public static UserResponseDTO.LoginResultDto toLoginResultDto(User user, String accessToken) {
+        return UserResponseDTO.LoginResultDto.builder()
+                .userId(user.getId())
+                .accessToken(accessToken)
+                .build();
+    }
+
+    public static UserResponseDTO.UserInfoDto toUserInfoDto(User user) {
+        return UserResponseDTO.UserInfoDto.builder()
+                .name(user.getName())
+                .email(user.getEmail())
+                .gender(user.getGender().getDescription())
+                .build();
+    }
 }

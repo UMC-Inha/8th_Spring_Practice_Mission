@@ -6,4 +6,6 @@ import umc.presentation.dto.user.UserResponseDTO;
 
 public interface UserCommandService {
     UserResponseDTO.JoinResultDto joinUser(UserRequestDTO.JoinDto request);
+
+    UserResponseDTO.LoginResultDto loginUser(UserRequestDTO.LoginRequestDto request);
 }

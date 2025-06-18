@@ -1,6 +1,7 @@
 package umc.presentation.dto.user;
 
 import lombok.Builder;
+import umc.infrastructure.persistence.entity.user.Gender;
 
 import java.time.LocalDateTime;
 
@@ -14,4 +15,9 @@ public class UserResponseDTO {
 
     @Builder
     public record LoginResultDto(Long userId, String accessToken){}
+
+    @Builder
+    public record UserInfoDto(String name, String email, String gender) {
+    }
+
 }

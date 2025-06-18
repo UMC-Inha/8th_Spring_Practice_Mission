@@ -20,6 +20,8 @@ public enum ErrorStatus implements BaseErrorCode {
     MISSION_DUPLICATE_REGISTER(HttpStatus.BAD_REQUEST, "MISSION4002", "미션이 중복 등록되었습니다."),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "COMMON4011", "유효하지 않은 토큰입니다."),
 
+    INVALID_PW(HttpStatus.BAD_REQUEST, "USER4003", "비밀번호가 일치하지 않습니다."),
+
     // 멤버 관려 에러
     USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER4001", "사용자가 없습니다."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "USER4002", "닉네임은 필수 입니다."),
