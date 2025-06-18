@@ -33,7 +33,7 @@ public class MemberMission extends BaseEntity {
     @Column(length = 11, columnDefinition = "VARCHAR(11) DEFAULT 'CHALLENGING'")
     private MissionStatus status;
 
-    public void setMission(Mission mission) {
+    public void changeMission(Mission mission) {
         this.mission = mission;
         mission.getMemberMissionList().add(this);
     }

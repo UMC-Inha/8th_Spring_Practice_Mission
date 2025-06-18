@@ -7,7 +7,7 @@ import umc.study.converter.MemberMissionConverter;
 import umc.study.domain.Member;
 import umc.study.domain.Mission;
 import umc.study.domain.mapping.MemberMission;
-import umc.study.repository.MemberMissionRepository;
+import umc.study.repository.MemberMissionRepository.MemberMissionRepository;
 import umc.study.repository.MemberRepository;
 import umc.study.repository.MissionRepository;
 import umc.study.web.dto.request.MemberMissionRequestDTO;
@@ -26,7 +26,7 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
         Mission mission = missionRepository.getReferenceById(request.getMissionId());
 
         MemberMission memberMission = MemberMissionConverter.toMemberMission(member);
-        memberMission.setMission(mission);
+        memberMission.changeMission(mission);
         memberMissionRepository.save(memberMission);
 
         return memberMission;
