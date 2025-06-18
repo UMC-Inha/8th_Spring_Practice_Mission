@@ -1,11 +1,17 @@
 package umc.service.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.apiPayload.code.status.ErrorStatus;
 import umc.apiPayload.exception.GeneralException;
 import umc.apiPayload.exception.handler.FoodCategoryHandler;
+import umc.apiPayload.exception.handler.UserHandler;
+import umc.config.security.jwt.JwtTokenProvider;
 import umc.converter.user.UserConverter;
 import umc.converter.user.UserPreferenceConverter;
 import umc.domain.FoodCategory;
@@ -20,7 +26,9 @@ import umc.repository.user.UserMissionRepository;
 import umc.repository.user.UserPreferenceRepository;
 import umc.repository.user.UserRepository;
 import umc.web.dto.user.UserRequestDTO;
+import umc.web.dto.user.UserResponseDTO;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +45,8 @@ public class UserCommandServiceImpl implements UserCommandService{
 
     private final MissionRepository missionRepository;
 
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     @Transactional
@@ -74,6 +84,32 @@ public class UserCommandServiceImpl implements UserCommandService{
                 .build();
 
         userMissionRepository.save(userMission);
+
+    }
+
+    @Override
+    public UserResponseDTO.LoginResultDTO loginUser(UserRequestDTO.LoginRequestDTO request) {
+
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(()-> new UserHandler(ErrorStatus.USER_NOT_FOUND));
+
+
+        if(!request.getPassword().equals(user.getPassword())) {
+            throw new UserHandler(ErrorStatus.INVALID_PASSWORD);
+        }
+
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                user.getEmail(), null,
+                Collections.singleton(() -> user.getRole().name())
+        );
+
+        String accessToken = jwtTokenProvider.generateToken(authentication);
+
+        return UserConverter.toLoginResultDTO(
+                user.getId(),
+                accessToken
+        );
 
     }
 }
