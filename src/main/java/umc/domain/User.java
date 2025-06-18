@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import umc.domain.common.BaseEntity;
 import umc.domain.enums.Gender;
+import umc.domain.enums.Role;
 import umc.domain.enums.Status;
 import umc.domain.mapping.UserMission;
 import umc.domain.mapping.UserPreference;
@@ -40,8 +41,9 @@ public class User extends BaseEntity {
     @Column
     private String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
     @Column
-    private String role;
+    private Role role;
 
     @Column
     private LocalDateTime birthDate;
@@ -74,5 +76,12 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserPreference> userPreferenceList = new ArrayList<>();
+
+    /**
+     * 비즈니스 로직
+     * **/
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 
 }
