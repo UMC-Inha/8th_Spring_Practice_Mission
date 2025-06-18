@@ -79,4 +79,13 @@ public class UserConverter {
 			.value(refreshToken)
 			.build();
 	}
+
+	public static User toKakaoUser(String email, String name) {
+		return User.builder()
+			.email(email)
+			.password("")
+			.name(name)
+			.role(Role.USER)
+			.build();
+	}
 }

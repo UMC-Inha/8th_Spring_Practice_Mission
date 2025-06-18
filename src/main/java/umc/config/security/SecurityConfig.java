@@ -30,7 +30,7 @@ public class SecurityConfig {
 			)
 			.authorizeHttpRequests(
 				(requests) -> requests
-					.requestMatchers("/", "/users/signup", "/users/login", "/swagger-ui/**", "/v3/api-docs/**", "/users/reissue").permitAll()
+					.requestMatchers("/", "/users/signup", "/users/login", "/swagger-ui/**", "/v3/api-docs/**", "/users/reissue", "/auth/login/kakao/**").permitAll()
 					.requestMatchers("/admin/**").hasRole("ADMIN") // 인가 필요
 					.anyRequest().authenticated() // 인증 필요
 			)

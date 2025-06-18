@@ -1,7 +1,5 @@
 package umc.config.jwt;
 
-import static java.time.LocalTime.*;
-
 import java.security.Key;
 import java.util.Collections;
 import java.util.Date;
