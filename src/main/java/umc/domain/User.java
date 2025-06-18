@@ -26,6 +26,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.domain.enums.Gender;
+import umc.domain.enums.Role;
 import umc.domain.enums.SocialType;
 import umc.domain.enums.UserStatus;
 import umc.domain.mapping.PreferredCategory;
@@ -84,6 +85,9 @@ public class User {
 	private Boolean replyAlarmAccepted;
 	private Boolean inquiryAlarmAccepted;
 
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
 	@OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.REMOVE)
 	@Builder.Default
 	private List<Alarm> alarmList = new ArrayList<>();
@@ -99,4 +103,8 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@Builder.Default
 	private List<PreferredCategory> preferredCategoryList = new ArrayList<>();
+
+	public void encodePassword(String password) {
+		this.password = password;
+	}
 }

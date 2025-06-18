@@ -17,4 +17,33 @@ public class UserResponseDto {
 		Long userId;
 		LocalDateTime createdAt;
 	}
+
+	@Builder
+	@Getter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class LoginResultDTO {
+		Long userId;
+		String accessToken;
+		String refreshToken;
+	}
+
+	@Builder
+	@Getter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class UserInfoDTO{
+		String name;
+		String email;
+		String gender;
+	}
+
+	@Builder
+	@Getter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class ReissueDto {
+		private String accessToken;
+		private String refreshToken;
+	}
 }

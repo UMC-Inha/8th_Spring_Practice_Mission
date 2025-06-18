@@ -16,8 +16,20 @@ spring:
         use_sql_comments: true
         hbm2ddl:
           auto: update
+  kakao:
+    auth:
+      client:
+      redirect: http://localhost:8080/auth/login/kakao
+
 discord:
   webhook:
     url:
 springdoc:
   use-fqn: true
+
+jwt:
+  token:
+    secretKey: umceightfightingjwttokenauthentication
+    expiration:
+      access: 14400000
+      refresh: 86400000
