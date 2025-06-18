@@ -1,6 +1,8 @@
 package umc.spring.service.reviewService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.apiPayload.Exception.handler.MemberHandler;
@@ -28,7 +30,7 @@ public class ReviewService {
     public Review writeReview(ReviewRequestDTO.CreateReviewDTO request, Long storeId) {
 
         Store findStore = storeRepository.findById(storeId)
-                .orElseThrow(() -> new StoreHandler(ErrorStatus.Store_NOT_FOUND));
+                .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 
         Member findMember = memberRepository.findById(request.getMemberId())
                 .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
@@ -38,5 +40,14 @@ public class ReviewService {
         reviewRepository.save(newReview);
 
         return newReview;
+    }
+
+    @Transactional
+    public Page<Review> getReviewList(Long memberId, Integer page) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+
+        Page<Review> reviewPage = reviewRepository.findAllByMember(member, PageRequest.of(page, 10));
+        return reviewPage;
     }
 }
