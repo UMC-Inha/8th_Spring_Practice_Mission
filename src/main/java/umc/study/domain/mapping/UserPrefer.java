@@ -3,6 +3,7 @@ package umc.study.domain.mapping;
 import jakarta.persistence.*;
 import lombok.*;
 
+import umc.study.domain.Store;
 import umc.study.domain.User;
 import umc.study.domain.FoodCategory;
 import umc.study.domain.common.BaseEntity;
@@ -31,9 +32,5 @@ public class UserPrefer extends BaseEntity {
             user.getUserPreferList().remove(this);
         this.user = user;
         user.getUserPreferList().add(this);
-    }
-
-    public void setFoodCategory(FoodCategory foodCategory){
-        this.foodCategory = foodCategory;
     }
 }

@@ -32,9 +32,9 @@ public class Store extends BaseEntity {
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "food_category_id")
-    private FoodCategory foodCategory;
+    @Builder.Default
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<FoodCategory> foodCategories = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
@@ -53,9 +53,5 @@ public class Store extends BaseEntity {
                 ", score=" + rating +
                 ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
                 '}';
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
     }
 }

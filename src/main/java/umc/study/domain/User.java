@@ -56,7 +56,6 @@ public class User extends BaseEntity {
     //@Column(nullable = false, unique = true) // 중복 방지
     private String email;
 
-    @ColumnDefault("0")
     private Integer point;
 
     //@Column(nullable = false, length = 20)

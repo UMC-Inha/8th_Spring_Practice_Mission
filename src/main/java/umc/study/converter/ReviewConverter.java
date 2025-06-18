@@ -22,7 +22,7 @@ public class ReviewConverter {
     public static ReviewResponseDto toResultDto(Review review) {
         return ReviewResponseDto.builder()
                 .reviewId(review.getId())
-                .createdAt(LocalDateTime.now())
+                .createdAt(review.getCreatedAt())
                 .build();
     }
 }
