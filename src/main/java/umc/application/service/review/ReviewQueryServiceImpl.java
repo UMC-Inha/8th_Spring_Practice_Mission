@@ -22,14 +22,14 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
 
     @Override
     public Page<Review> getReviewList(Long StoreId, Integer page){
-        Store store = storeRepository.findById(StoreId).orElseThrow(() -> new UserHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        Store store = storeRepository.findById(StoreId).orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
 
         return reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
     }
 
     @Override
     public Page<Review> getReviewListByUserId(Long userId, Integer page) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
         return reviewRepository.findAllByUser(user, PageRequest.of(page, 10));
     }
 

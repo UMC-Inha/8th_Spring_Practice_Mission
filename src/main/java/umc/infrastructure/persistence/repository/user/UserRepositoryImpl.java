@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
     private final JpaUserRepository jpaUserRepository;
 
     @Override
@@ -25,5 +25,10 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public boolean existsById(Long id) {
         return jpaUserRepository.existsById(id);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return jpaUserRepository.findByEmail(email);
     }
 }

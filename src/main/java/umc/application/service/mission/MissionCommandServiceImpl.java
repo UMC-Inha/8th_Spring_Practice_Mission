@@ -41,7 +41,7 @@ public class MissionCommandServiceImpl implements MissionCommandService{
     @Transactional
     public MissionResponseDto.AddMissionToUserResponseDto addMissionToUser(MissionRequestDto.AddMissionToUserDto request){
         Mission mission = missionRepository.findById(request.missionId()).orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
-        User user = userRepository.findById(request.userId()).orElseThrow(() -> new UserHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        User user = userRepository.findById(request.userId()).orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
 
         UserMissionPK userMissionPK = UserMissionConverter.toUserMissionPK( user, mission);
         missionRepository.findUserMissionById(userMissionPK).ifPresent(userMission -> {

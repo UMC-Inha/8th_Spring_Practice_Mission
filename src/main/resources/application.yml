@@ -12,5 +12,11 @@ spring:
         format_sql: true
         use_sql_comments: true
         hbm2ddl:
-          auto: none
+          auto: update
         default_batch_fetch_size: 1000
+
+jwt:
+  token:
+    secretKey: 421cbf740fdb98697798484290e7a79833e431d4988ef83d1acb8f63182bbb1237ab8b1083878eafacad13b54d915edf8391980c5841fe8f8a231d653171ea94
+    expiration:
+      access: 14400000
