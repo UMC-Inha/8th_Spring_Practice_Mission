@@ -34,7 +34,10 @@ public enum ErrorStatus implements BaseErrorCode {
     MISSION_ALREADY_IN_PROGRESS(HttpStatus.CONFLICT, "MEMBERMISSION4001", "해당 미션은 이미 도전 중입니다."),
 
     // For test
-    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트");
+    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
+
+    INVALID_TOKEN(HttpStatus.BAD_REQUEST, "TOKEN4001", "유효하지 않은 토큰입니다."),
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "PASSWORD4001", "유효하지 않은 비밀번호입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
