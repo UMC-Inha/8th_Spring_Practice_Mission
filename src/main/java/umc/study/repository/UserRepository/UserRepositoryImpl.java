@@ -1,12 +1,14 @@
-/*package umc.study.repository.UserRepository;
+package umc.study.repository.UserRepository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import umc.study.domain.QUser;
-import umc.study.web.dto.UserRequestDto;
+import umc.study.domain.User;
 import umc.study.web.dto.UserResponseDto;
+
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 
 
     @Override
-    public UserRequestDto findUserInfoById(Long userId) {
+    public UserResponseDto findUserInfoById(Long userId) {
         return queryFactory
                 .select(Projections.constructor(UserResponseDto.class,
                         user.name,
@@ -29,4 +31,4 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
                 .where(user.id.eq(userId))
                 .fetchOne();
     }
-}*/
+}

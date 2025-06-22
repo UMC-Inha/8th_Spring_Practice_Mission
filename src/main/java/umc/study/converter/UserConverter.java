@@ -23,14 +23,14 @@ public class UserConverter {
     }
     public static User toUser(UserRequestDto.JoinDto request){
 
-        Gender gender = Gender.fromDescription(String.valueOf(request.getGender()));
-
         return User.builder()
                 .address(request.getAddress())
-                .gender(gender)
+                .gender(request.getGender())
                 .birth(request.getBirth())
                 .email(request.getEmail())
                 .name(request.getName())
+                .password(request.getPassword())
+                .role(request.getRole())
                 .phoneNumber(request.getPhoneNumber())
                 .userPreferList(new ArrayList<>())
                 .build();

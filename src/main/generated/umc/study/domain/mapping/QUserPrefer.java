@@ -54,7 +54,7 @@ public class QUserPrefer extends EntityPathBase<UserPrefer> {
 
     public QUserPrefer(Class<? extends UserPrefer> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.foodCategory = inits.isInitialized("foodCategory") ? new umc.study.domain.QFoodCategory(forProperty("foodCategory")) : null;
+        this.foodCategory = inits.isInitialized("foodCategory") ? new umc.study.domain.QFoodCategory(forProperty("foodCategory"), inits.get("foodCategory")) : null;
         this.user = inits.isInitialized("user") ? new umc.study.domain.QUser(forProperty("user")) : null;
     }
 
