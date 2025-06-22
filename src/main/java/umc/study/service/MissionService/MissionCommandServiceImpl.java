@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.apiPayload.exceptition.GeneralException;
+import umc.study.apiPayload.exception.GeneralException;
 import umc.study.domain.Mission;
-import umc.study.domain.Review;
 import umc.study.domain.Store;
 import umc.study.domain.User;
 import umc.study.domain.enums.MissionStatus;
@@ -87,7 +85,7 @@ public class MissionCommandServiceImpl {
     public Page<Mission> getMissionsByStore(Long storeId, Integer page) {
         Store store = storeRepository.findById(storeId).get();
 
-        Page<Mission> MissionPage = missionRepository.findAllByStore(store, PageRequest.of(page, 10));
+        Page<Mission> MissionPage = missionRepository.findAllByStore(storeId, PageRequest.of(page, 10));
         return MissionPage;
     }
 }

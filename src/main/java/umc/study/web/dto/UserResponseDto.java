@@ -18,6 +18,16 @@ public class UserResponseDto {
         LocalDateTime createdAt;
     }
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class UserInfoDTO{
+        String name;
+        String email;
+        String gender;
+    }
+
     @Getter
     @Builder
     @NoArgsConstructor
@@ -39,5 +49,14 @@ public class UserResponseDto {
         private Long totalElements;
         private Boolean isFirst;
         private Boolean isLast;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class LoginResultDTO {
+        Long userId;
+        String accessToken;
     }
 }

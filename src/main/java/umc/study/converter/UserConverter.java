@@ -1,16 +1,11 @@
 package umc.study.converter;
 
 import org.springframework.data.domain.Page;
-import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.apiPayload.exceptition.GeneralException;
 import umc.study.domain.User;
-import umc.study.domain.enums.Gender;
-import umc.study.domain.enums.UserStatus;
 import umc.study.domain.mapping.UserMission;
 import umc.study.web.dto.UserRequestDto;
 import umc.study.web.dto.UserResponseDto;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,23 +16,29 @@ public class UserConverter {
                 .createdAt(user.getCreatedAt())
                 .build();
     }
+    public static UserResponseDto.LoginResultDTO toLoginResultDTO(Long userId, String accessToken) {
+        return UserResponseDto.LoginResultDTO.builder()
+                .userId(userId)
+                .accessToken(accessToken)
+                .build();
+    }
+    public static UserResponseDto.UserInfoDTO toUserInfoDTO(User user){
+        return UserResponseDto.UserInfoDTO.builder()
+                .name(user.getName())
+                .email(user.getEmail())
+                .gender(user.getGender().name())
+                .build();
+    }
     public static User toUser(UserRequestDto.JoinDto request){
-
-        Gender gender = null;
-
-        switch (request.getGender()){
-            case MALE -> gender = Gender.MALE;
-            case FEMALE -> gender = Gender.FEMALE;
-            case NONE -> gender = Gender.NONE;
-            default -> throw new GeneralException(ErrorStatus.INVALID_GENDER);
-        }
 
         return User.builder()
                 .address(request.getAddress())
-                .gender(gender)
+                .gender(request.getGender())
                 .birth(request.getBirth())
                 .email(request.getEmail())
                 .name(request.getName())
+                .password(request.getPassword())
+                .role(request.getRole())
                 .phoneNumber(request.getPhoneNumber())
                 .userPreferList(new ArrayList<>())
                 .build();

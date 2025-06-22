@@ -37,17 +37,15 @@ public class StoreConverter {
                 .build();
     }
     public static StoreResponseDto.ReviewPreViewListDTO reviewPreViewListDTO(Page<Review> reviewList){
-
-        List<StoreResponseDto.ReviewPreViewDTO> reviewPreViewDTOList = reviewList.stream()
-                .map(StoreConverter::reviewPreViewDTO).collect(Collectors.toList());
+        Page<StoreResponseDto.ReviewPreViewDTO> reviewPreViewDTOPage = reviewList.map(StoreConverter::reviewPreViewDTO);
 
         return StoreResponseDto.ReviewPreViewListDTO.builder()
-                .isLast(reviewList.isLast())
-                .isFirst(reviewList.isFirst())
-                .totalPage(reviewList.getTotalPages())
-                .totalElements(reviewList.getTotalElements())
-                .listSize(reviewPreViewDTOList.size())
-                .reviewList(reviewPreViewDTOList)
+                .isLast(reviewPreViewDTOPage.isLast())
+                .isFirst(reviewPreViewDTOPage.isFirst())
+                .totalPage(reviewPreViewDTOPage.getTotalPages())
+                .totalElements(reviewPreViewDTOPage.getTotalElements())
+                .listSize(reviewPreViewDTOPage.getContent().size())
+                .reviewList(reviewPreViewDTOPage.getContent())
                 .build();
     }
 

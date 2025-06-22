@@ -1,8 +1,9 @@
 package umc.study.repository.UserRepository;
 
-import umc.study.web.dto.UserRequestDto;
+import umc.study.web.dto.UserResponseDto;
+
+import java.util.Optional;
 
 public interface UserRepositoryCustom {
-    //List<User> dynamicQueryWithBooleanBuilder(String name, Float score);
-    UserRequestDto findUserInfoById(Long userId);
+    UserResponseDto findUserInfoById(Long userId);
 }
