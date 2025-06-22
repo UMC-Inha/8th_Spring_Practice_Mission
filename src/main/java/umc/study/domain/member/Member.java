@@ -6,6 +6,7 @@ import umc.study.domain.BaseTime;
 import umc.study.domain.Image;
 import umc.study.domain.enums.AlarmType;
 import umc.study.domain.enums.Gender;
+import umc.study.domain.enums.Role;
 import umc.study.domain.inquiry.Inquiry;
 import umc.study.domain.mapping.*;
 import umc.study.domain.review.Review;
@@ -45,6 +46,14 @@ public class Member extends BaseTime {
     @Column(nullable = true, unique = true, length = 20)
     private String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(nullable = false)
+    private String password;
+
+
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Inquiry> inquiryList = new ArrayList<>();
 
@@ -74,4 +83,6 @@ public class Member extends BaseTime {
     public boolean isDeleted() {
         return this.deletedAt != null;
     }
+
+    public void encodePassword(String password) {this.password = password;}
 }

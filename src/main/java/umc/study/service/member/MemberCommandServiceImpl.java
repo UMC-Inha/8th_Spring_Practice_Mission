@@ -2,6 +2,7 @@ package umc.study.service.member;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import umc.study.apiPayload.code.status.ErrorStatus;
 import umc.study.apiPayload.exception.GeneralException;
@@ -24,15 +25,17 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     private final MemberJpaRepository memberJpaRepository;
     private final CategoryRepository categoryRepository;
     private final MemberCategoryJpaRepository memberCategoryJpaRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     @Override
     public Member joinMember(JoinDto request) {
         Member member = MemberConverter.toMember(request);
-        List<Category> foodCateogoryList = categoryRepository.findAllById(request.getPreferCategory());
-        if (foodCateogoryList.size() != request.getPreferCategory().size()) {
+        List<Category> foodCateogoryList = categoryRepository.findAllById(request.getPreferCategories());
+        if (foodCateogoryList.size() != request.getPreferCategories().size()) {
             throw new GeneralException(ErrorStatus.FOOD_CATEGORY_NOT_FOUND);
         }
+        member.encodePassword(passwordEncoder.encode(request.getPassword()));
         Member saveMember = memberJpaRepository.save(member);
         List<MemberCategory> memberCategoryList = MemberPreferConverter.toMemberPreferList(member, foodCateogoryList);
         memberCategoryJpaRepository.saveAll(memberCategoryList);
