@@ -1,4 +1,4 @@
-package umc.study.apiPayload.exceptition;
+package umc.study.apiPayload.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

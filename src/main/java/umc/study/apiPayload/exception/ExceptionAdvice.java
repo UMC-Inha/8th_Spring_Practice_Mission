@@ -1,4 +1,4 @@
-package umc.study.apiPayload.exceptition;
+package umc.study.apiPayload.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;

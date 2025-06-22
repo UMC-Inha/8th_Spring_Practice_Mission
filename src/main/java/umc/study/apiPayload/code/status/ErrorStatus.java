@@ -21,6 +21,10 @@ public enum ErrorStatus implements BaseErrorCode {
     USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER4001", "no user found."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "USER4002", "nickname is required."),
     INVALID_GENDER(HttpStatus.BAD_REQUEST, "USER4003", "Invalid gender."),
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "USER4003", "password is incorrect."),
+    DUPLICATE_JOIN_REQUEST(HttpStatus.BAD_REQUEST, "USER4004", "already exists with the same email address."),
+
+    INVALID_TOKEN(HttpStatus.BAD_REQUEST, "USER4005", "Invalid token."),
 
     // 게시글 에러
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "no articles."),

@@ -2,11 +2,10 @@ package umc.study.domain.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.apiPayload.exceptition.GeneralException;
+import umc.study.apiPayload.exception.GeneralException;
 
 @Getter
 @RequiredArgsConstructor

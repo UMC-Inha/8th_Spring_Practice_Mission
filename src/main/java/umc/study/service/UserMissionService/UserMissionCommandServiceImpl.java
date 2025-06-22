@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.study.apiPayload.code.status.ErrorStatus;
-import umc.study.apiPayload.exceptition.GeneralException;
+import umc.study.apiPayload.exception.GeneralException;
 import umc.study.domain.Mission;
 import umc.study.domain.User;
 import umc.study.domain.enums.MissionStatus;
