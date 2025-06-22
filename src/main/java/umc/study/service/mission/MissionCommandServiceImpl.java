@@ -16,6 +16,7 @@ import umc.study.repository.mission.MissionRepository;
 import umc.study.repository.store.StoreRepository;
 import umc.study.web.controller.mission.dto.MissionRequestDTO.AddMemberMission;
 import umc.study.web.controller.mission.dto.MissionRequestDTO.AddMission;
+import umc.study.web.controller.mission.dto.MissionRequestDTO.CompleteMission;
 import umc.study.web.converter.mission.MissionConverter;
 
 @Service
@@ -46,6 +47,14 @@ public class MissionCommandServiceImpl implements MissionCommandService{
         memberMission.setMemberMission(member, mission);
         memberMissionRepository.save(memberMission);
         return mission;
+    }
 
+    @Transactional
+    @Override
+    public MemberMission completeMission(CompleteMission request) {
+        MemberMission memberMission = memberMissionRepository.findById(request.getMemberMissionId())
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND));
+        memberMission.completeMission();
+        return memberMission;
     }
 }

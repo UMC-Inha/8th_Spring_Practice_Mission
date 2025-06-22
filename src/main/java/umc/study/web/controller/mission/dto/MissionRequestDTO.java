@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.study.domain.enums.MissionStatus;
 import umc.study.repository.member.MemberJpaRepository;
+import umc.study.repository.member.MemberMissionRepository;
 import umc.study.repository.mission.MissionRepository;
 import umc.study.repository.store.StoreRepository;
 import umc.study.validation.annotation.ExistsInDb;
@@ -55,4 +56,15 @@ public class MissionRequestDTO {
         private MissionStatus missionStatus = MissionStatus.IN_PROGRESS;
     }
 
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class CompleteMission {
+        @ExistsInDb(
+                message = "해당 미션이 존재하지 않습니다.",
+                repository = MemberMissionRepository.class
+        )
+        private Long memberMissionId;
+    }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import umc.study.service.mission.MissionCommandService;
 import umc.study.web.controller.mission.dto.MissionRequestDTO;
 import umc.study.web.controller.mission.dto.MissionRequestDTO.AddMemberMission;
+import umc.study.web.controller.mission.dto.MissionRequestDTO.CompleteMission;
+import umc.study.web.converter.mission.MemberMissionConverter;
 import umc.study.web.converter.mission.MissionConverter;
 
 @RestController
@@ -28,5 +30,11 @@ public class MissionCommandController {
     @PostMapping("/members")
     public ResponseEntity<?> addMemberMission(@RequestBody @Valid AddMemberMission request) {
         return ResponseEntity.ok(MissionConverter.toAddResultDTO(missionCommandService.addMemberMission(request)));
+    }
+
+    // 미션을 완료 상태로 변경
+    @PostMapping("/complete")
+    public ResponseEntity<?> completeMission(@RequestBody @Valid CompleteMission request) {
+        return ResponseEntity.ok(MemberMissionConverter.toMissionCompletedDTO(missionCommandService.completeMission(request)));
     }
 }

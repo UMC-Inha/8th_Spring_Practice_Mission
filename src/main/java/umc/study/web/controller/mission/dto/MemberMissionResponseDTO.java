@@ -8,28 +8,32 @@ import umc.study.domain.enums.MissionStatus;
 
 import java.time.LocalDateTime;
 
-public class MissionResponseDTO {
+public class MemberMissionResponseDTO {
 
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class AddResultDto {
+    public static class MissionInProgressDTO {
+        private Long memberMissionId;
         private Long missionId;
         private String missionSpec;
-        private LocalDateTime deadline;
-    }
-
-    @Getter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    public static class MissionPreViewDTO {
-        private Long missionId;
-        private String missionSpec;
+        private String storeName;
+        private Integer point;
         private String local;
         private LocalDateTime deadline;
+        private MissionStatus status;
         private LocalDateTime createdAt;
     }
 
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class MissionCompletedDTO {
+        private Long memberMissionId;
+        private String missionSpec;
+        private MissionStatus status;
+        private String message;
+    }
 }

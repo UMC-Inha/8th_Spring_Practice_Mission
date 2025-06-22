@@ -20,14 +20,22 @@ public class ReviewResponseDTO {
     @AllArgsConstructor
     public static class addResultDto{
         private Long reviewId;
-
         private String comment;
-
         private BigDecimal score;
 
         @Size
         private List<@NotBlank @URL String> imageList;
     }
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class getReviewListResultDto{
+        private Long reviewId;
+        private String comment;
+        private BigDecimal score;
+    }
+
 
 
 }

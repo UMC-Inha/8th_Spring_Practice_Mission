@@ -37,4 +37,7 @@ public class MemberMission extends BaseTime {
         this.mission = mission;
     }
 
+    public void completeMission() {
+        this.status = MissionStatus.COMPLETED;
+    }
 }

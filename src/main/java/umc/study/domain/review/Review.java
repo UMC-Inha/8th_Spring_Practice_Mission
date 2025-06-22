@@ -32,7 +32,15 @@ public class Review extends BaseTime {
     @JoinColumn(name = "store_id")
     private Store store;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

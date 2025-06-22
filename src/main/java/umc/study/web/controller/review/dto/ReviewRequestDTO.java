@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
 import org.jspecify.annotations.Nullable;
+import umc.study.repository.member.MemberJpaRepository;
 import umc.study.repository.store.StoreRepository;
 import umc.study.validation.annotation.ExistsInDb;
 
@@ -36,5 +37,6 @@ public class ReviewRequestDTO {
         @Size(max = 3, message = "이미지는 최대 3장까지 업로드할 수 있습니다.")
         private List<@NotBlank @URL String> imageList; //이미지 안 넣어도 됨, 근데 넣었을 경우 "" 빈 문자열 방지
     }
+
 
 }
