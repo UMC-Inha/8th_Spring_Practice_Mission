@@ -22,6 +22,8 @@ public enum ErrorStatus implements BaseErrorCode {
     // 멤버 관려 에러
     MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "사용자가 없습니다."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "닉네임은 필수 입니다."),
+    INVALID_TOKEN(HttpStatus.BAD_REQUEST, "MEMBER4003", "토큰없음"),
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "MEMBER4004", "비번틀림"),
 
     // Location Error
     LOCATION_NOT_FOUND(HttpStatus.NOT_FOUND, "LOCATION4001", "위치 데이터가 없습니다."),

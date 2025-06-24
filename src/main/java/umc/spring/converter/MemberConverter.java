@@ -17,6 +17,15 @@ public class MemberConverter {
                 .build();
     }
 
+    public static MemberResponseDTO.LoginResultDTO toLoginResultDTO(Member member, String accessToken){
+        return MemberResponseDTO.LoginResultDTO.builder()
+                .memberId(member.getId())
+                .accessToken(accessToken)
+                .build();
+    }
+
+
+
     public static Member toMember(MemberRequestDTO.JoinDto request){
 
         Gender gender = null;
@@ -34,9 +43,19 @@ public class MemberConverter {
                 .address(request.getAddress())
                 .gender(gender)
                 .name(request.getName())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .role(request.getRole())
                 .birth(request.getBirth())
                 .phoneNum(request.getPhoneNum())
                 .memberPreferList(new ArrayList<>())
+                .build();
+    }
+
+    public static MemberResponseDTO.MemberInfoDTO toMemberInfoDTO(Member member){
+        return MemberResponseDTO.MemberInfoDTO.builder()
+                .name(member.getName())
+                .email(member.getEmail())
                 .build();
     }
 }
