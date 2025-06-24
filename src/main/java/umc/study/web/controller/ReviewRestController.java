@@ -31,7 +31,6 @@ public class ReviewRestController {
         return ApiResponse.onSuccess(ReviewConverter.toUserReviewResultDto(reviewList));
     }
 
-
     @PostMapping("/")
     @Operation(summary = "사용자 리뷰 작성 API", description = "사용자가 특정 가게에 리뷰를 등록하는 API 입니다.")
     public ApiResponse<ReviewResponseDto.RegisterResultDto> postRegisterStore(
@@ -39,6 +38,5 @@ public class ReviewRestController {
         Review review = reviewCommandService.registerReview(request);
         return ApiResponse.onSuccess(ReviewConverter.toReviewRegisterResultDto(review));
     }
-
 
 }

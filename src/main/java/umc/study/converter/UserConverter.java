@@ -35,6 +35,8 @@ public class UserConverter {
                 .gender(gender)
                 .preferFoods(new ArrayList<>())
                 .email(request.getEmail())
+                .password(request.getPassword())
+                .role(request.getRole())
                 .birth(request.getBirthday())
                 .status(UserStatus.ACTIVE)
                 .point(0)
