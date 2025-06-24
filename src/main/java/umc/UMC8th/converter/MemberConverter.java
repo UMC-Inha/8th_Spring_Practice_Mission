@@ -20,11 +20,13 @@ public class MemberConverter {
     public static Member toMember(MemberRequestDTO.JoinDto request) {
         return Member.builder()
                 .email(request.getEmail())
-                .name(request.getUserName())
-                .phoneNumber(request.getUserPhone())
-                .gender(convertGender(request.getUserGender()))
-                .address(request.getUserAddress())
-                .specAddress("상세주소 없음") // 분리 설계가 아니므로 임시 처리
+                .name(request.getName())
+                .password(request.getPassword()) // password 추가
+                .phoneNumber(request.getPhoneNumber())
+                .gender(convertGender(request.getGender()))
+                .address(request.getAddress())
+                .specAddress(request.getSpecAddress())
+                .role(request.getRole())
                 .region(request.getRegion())
                 .status(MemberStatus.ACTIVE)
                 .points(0)
@@ -44,11 +46,11 @@ public class MemberConverter {
                 .build();
     }
 
-    private static Gender convertGender(String genderString) {
-        return switch (genderString.toUpperCase()) {
-            case "M" -> Gender.MALE;
-            case "F" -> Gender.FEMALE;
-            default -> throw new IllegalArgumentException("성별을 입력하세요: " + genderString); // M,F 선택 안하면 예외 던지기
+    private static Gender convertGender(Integer gender) {
+        return switch (gender) {
+            case 1 -> Gender.MALE;
+            case 2 -> Gender.FEMALE;
+            default -> throw new IllegalArgumentException("성별을 선택하세요"); // M,F 선택 안하면 예외 던지기
         };
     }
 
@@ -97,6 +99,21 @@ public class MemberConverter {
                 .totalElements(page.getTotalElements())
                 .listSize(list.size())
                 .missionList(list)
+                .build();
+    }
+
+    public static MemberResponseDTO.LoginResultDTO toLoginResultDTO(Long userId, String token) {
+        return MemberResponseDTO.LoginResultDTO.builder()
+                .userId(userId)
+                .accessToken(token)
+                .build();
+    }
+
+    public static MemberResponseDTO.MemberInfoDTO toMemberInfoDTO(Member member){
+        return MemberResponseDTO.MemberInfoDTO.builder()
+                .name(member.getName())
+                .email(member.getEmail())
+                .gender(member.getGender().name())
                 .build();
     }
 

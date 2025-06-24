@@ -2,7 +2,7 @@ package umc.UMC8th.service.TempService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import umc.UMC8th.handler.TempHandler;
+import umc.UMC8th.exception.handler.TempHandler;
 import umc.UMC8th.apiPayload.code.status.ErrorStatus;
 
 @Service

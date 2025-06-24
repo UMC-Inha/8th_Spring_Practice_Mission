@@ -72,4 +72,23 @@ public class MemberResponseDTO {
         private int listSize;
         private List<MissionPreviewDTO> missionList;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class LoginResultDTO {
+        Long userId;
+        String accessToken;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MemberInfoDTO{
+        String name;
+        String email;
+        String gender;
+    }
 }

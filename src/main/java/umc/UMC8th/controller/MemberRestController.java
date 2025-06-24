@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -28,6 +30,7 @@ public class MemberRestController {
     private final MemberCommandService memberCommandService;
     private final MemberQueryService memberQueryService;
 
+    /*
     @PostMapping
     public ApiResponse<MemberResponseDTO.JoinResultDto> join(
             @RequestBody @Valid MemberRequestDTO.JoinDto request) {
@@ -38,10 +41,11 @@ public class MemberRestController {
         return ApiResponse.onSuccess(
                 MemberConverter.toJoinResultDto(
                         savedMember,
-                        request.getFoodCategories().toString() // List<Long> → String으로 변환
+                        request.getPreferCategory().toString() // List<Long> → String으로 변환
                 )
         );
     }
+    */
 
     @GetMapping("/{memberId}/reviews")
     @Operation(summary = "내가 작성한 리뷰 목록 조회 API", description = "회원이 작성한 리뷰 목록을 조회하며, 페이징을 포함합니다.")
@@ -79,5 +83,32 @@ public class MemberRestController {
         var missionPage = memberQueryService.getOngoingMissions(memberId, page - 1);
         var dto = MemberConverter.toMissionPreviewListDTO(missionPage);
         return ApiResponse.onSuccess(dto);
+    }
+
+    @PostMapping("/join")
+    @Operation(summary = "유저 회원가입 API",description = "유저가 회원가입하는 API입니다.")
+    public ApiResponse<MemberResponseDTO.JoinResultDto> join(@RequestBody @Valid MemberRequestDTO.JoinDto request){
+        Member member = memberCommandService.joinMember(request);
+        return ApiResponse.onSuccess(
+                MemberConverter.toJoinResultDto(
+                        member,
+                        request.getPreferCategory().toString()
+                )
+        );
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "유저 로그인 API",description = "유저가 로그인하는 API입니다.")
+    public ApiResponse<MemberResponseDTO.LoginResultDTO> login(@RequestBody @Valid MemberRequestDTO.LoginRequestDTO request) {
+        return ApiResponse.onSuccess(memberCommandService.loginMember(request));
+    }
+
+    @GetMapping("/info")
+    @Operation(summary = "유저 내 정보 조회 API - 인증 필요",
+            description = "유저가 내 정보를 조회하는 API입니다.",
+            security = { @SecurityRequirement(name = "JWT TOKEN") }
+    )
+    public ApiResponse<MemberResponseDTO.MemberInfoDTO> getMyInfo(HttpServletRequest request) {
+        return ApiResponse.onSuccess(memberQueryService.getMemberInfo(request));
     }
 }
