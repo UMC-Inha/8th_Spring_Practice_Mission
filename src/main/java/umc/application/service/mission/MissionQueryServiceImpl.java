@@ -30,7 +30,7 @@ public class MissionQueryServiceImpl implements MissionQueryService{
 
     @Override
     public Page<Mission> getMissionsByUserId(Long userId, MissionState missionState, Integer page){
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
         return missionRepository.findAllByUserAndState(user,missionState, PageRequest.of(page, 10));
     }
 }

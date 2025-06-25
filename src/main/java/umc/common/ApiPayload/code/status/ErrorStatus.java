@@ -18,10 +18,13 @@ public enum ErrorStatus implements BaseErrorCode {
     FOOD_CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, "FOOD4001", "카테고리가 없습니다."),
 
     MISSION_DUPLICATE_REGISTER(HttpStatus.BAD_REQUEST, "MISSION4002", "미션이 중복 등록되었습니다."),
+    INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "COMMON4011", "유효하지 않은 토큰입니다."),
+
+    INVALID_PW(HttpStatus.BAD_REQUEST, "USER4003", "비밀번호가 일치하지 않습니다."),
 
     // 멤버 관려 에러
-    MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "사용자가 없습니다."),
-    NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "닉네임은 필수 입니다."),
+    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER4001", "사용자가 없습니다."),
+    NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "USER4002", "닉네임은 필수 입니다."),
 
     STORE_NOT_FOUND(HttpStatus.BAD_REQUEST, "STORE4001", "가게가 없습니다."),
 

@@ -58,6 +58,11 @@ public class User extends BaseTimeEntity {
     private Boolean phoneAuth = false;
 
     @Builder.Default
+    @Column( nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
+    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserCategory> userCategories = new ArrayList<>();
 
@@ -68,4 +73,8 @@ public class User extends BaseTimeEntity {
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
+
+    public void encodePassword(String password){
+        this.password = password;
+    }
 }
