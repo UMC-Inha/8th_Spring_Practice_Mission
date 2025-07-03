@@ -25,9 +25,27 @@ public class MemberConverter {
                 .address(request.getAddress())
                 .birth(request.getBirth())
                 .mail(request.getMail())
+                .password(request.getPassword())
+                .role(request.getRole())
                 .isPhone(request.getIsPhone())
                 .phoneNum(request.getPhoneNum())
                 .loginType(request.getLoginSort())
+                .build();
+    }
+
+    public static MemberResponseDTO.LoginResultDTO toLoginResultDTO (Long memberId, String accessToken) {
+        return MemberResponseDTO.LoginResultDTO.builder()
+                .memberId(memberId)
+                .accessToken(accessToken)
+                .build();
+    }
+
+    public static MemberResponseDTO.MemberInfoDTO toMemberInfoDTO (Member member) {
+        return MemberResponseDTO.MemberInfoDTO.builder()
+                .name(member.getName())
+                .mail(member.getMail())
+                .gender(member.getGender())
+                .birth(member.getBirth())
                 .build();
     }
 }

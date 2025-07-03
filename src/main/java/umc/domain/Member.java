@@ -11,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import umc.domain.common.BaseEntity;
 import umc.domain.enums.Gender;
 import umc.domain.enums.LoginType;
+import umc.domain.enums.Role;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +31,14 @@ public class Member extends BaseEntity {
 
     private String name;
 
+    @Column(nullable = false, unique = true)
     private String mail;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Enumerated(EnumType.STRING)
     private LoginType loginType;
@@ -60,5 +68,9 @@ public class Member extends BaseEntity {
     public void updateStatus() {
 
         this.status = !this.status;
+    }
+
+    public void encodePassword(String password) {
+        this.password = password;
     }
 }
